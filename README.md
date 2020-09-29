@@ -1,3 +1,20 @@
+
+# Knurling Sessions 2020 Q4
+
+## CO2 Sensor Project 
+
+## Building a CO2 Sensor 
+
+Release at least a small release every Friday
+releases can contain: 
+* new written instructions
+* new Video tutorials
+* explanation of embedded concepts as video or text
+
+
+
+---
+
 # `app-template`
 
 > Quickly set up a [`probe-run`] + [`defmt`] embedded project
