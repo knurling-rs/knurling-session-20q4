@@ -11,3 +11,4 @@ Releases can contain:
 * new written instructions
 * new Video tutorials
 * explanation of embedded concepts as video or text
+
