@@ -43,21 +43,21 @@ This gives us access to all the peripherals of the board. If you use a different
 let mut timer = Timer::new(board.TIMER0);
 ```
 
-5. Finding the resource for the onboard LEDs. Check the datasheet of your board. 
+5. If we want to use the onboard LEDs, we need to find out how to access them. Check the datasheet of your board. For the nrf52840-DK you'll find the information [here](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fug_nrf52840_dk%2FUG%2Fnrf52840_DK%2Fhw_buttons_leds.html).
 
-The onboard LEDs are part of the P0 Pins. To gain access this group of pins add this line:
+The onboard LEDs are part of the P0 Pins. LED1 is p0.13. To gain access this group of pins add this line:
 
 ```rust
 let pins = P0Parts::new(board.P0);
 ```
 
 ## Switching the Light on
-1. Configure the pin to be a push-pull-output with High Level:
+1. Configure pin p0.13 into a push-pull-output with High Level:
 
 ```rust
 let mut led_1 = pins.p0_13.into_push_pull_output(Level::High);
 ```
-2. Add the following dependencies:
+2. This HAL provides functionalities for the different resources, independant of board model. In our case we need to be able to set a pin high or low, or set delays for the Timer. Add the following dependency:
 
 ```rust
 use embedded_hal::{
@@ -65,7 +65,7 @@ use embedded_hal::{
     digital::v2::OutputPin,
 };
 ```
-This HAL provides functionalities for the different resources. In our case setting a pin high or low, or providing delays for the Timer. 
+
 
 3. Add a delay of 1000 miliseconds:
 
@@ -95,3 +95,5 @@ loop {
 ```
 
 3. Run the program.
+
+LED1 should blink continuously. 
