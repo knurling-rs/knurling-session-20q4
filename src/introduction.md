@@ -1,4 +1,4 @@
-![knurling-rs logo](horizontal_color_sessions.svg)
+![knurling-rs logo](horizontal_color_sessions_stacked.svg)
 
 ## Introduction
 This book is a collection of guided projects to help you get started with embedded Rust.
