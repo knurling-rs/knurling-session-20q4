@@ -18,7 +18,7 @@ embedded-hal = "0.2.4"
 
 ## Getting Access to Resources
 
-1. Go to `hello.rs`.
+1. In your generated app-template folder, go to `src/bin/hello.rs`.
 2. Add the following dependencies:
 
 ```rust
