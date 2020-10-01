@@ -1,6 +1,6 @@
 # Hello World
 
-This is a step by step guide expand the `hello.rs` example in the defmt app template from just logging `hello world` to blinking an onboard LED on the nrf52840-DK. This guide expects that you have generated the template according to our guide.
+This is a step by step guide expand the `hello.rs` example in the [`knurling app template`](https://github.com/knurling-rs/app-template) from just logging `hello world` to blinking an onboard LED on the nrf52840-DK. This guide expects that you have generated the template according to [our guide](https://ferrous-systems.com/blog/defmt/).
 
 <!-- 1. Set up with cargo generate according to defmt_setup. 
 2. TODO1 : Insert your name if it was not done automatically.
