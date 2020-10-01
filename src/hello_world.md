@@ -28,7 +28,7 @@ use nrf52840_hal::{
     Timer,
 };
 ```
-This HAL gives us access to the boards resources. 
+The `nrf52840_hal` crate is a Hardware Abstraction Layer (HAL), which helps us access the board's resources, e.g. GPIO pins or timers. 
 If you use a different microcontroller, you need to be able to gain access to a TIMER peripheral, pins for the onboard LEDs and Level of the pins.
 
 3. Initialize the board by adding the following line in `fn main()`:
