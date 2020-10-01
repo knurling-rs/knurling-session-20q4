@@ -19,7 +19,7 @@ embedded-hal = "0.2.4"
 ## Getting Access to Resources
 
 1. In your generated app-template folder, go to `src/bin/hello.rs`.
-2. Add the following dependencies:
+2. Bring the following modules into scope:
 
 ```rust
 use nrf52840_hal::{
@@ -31,11 +31,13 @@ use nrf52840_hal::{
 The `nrf52840_hal` crate is a Hardware Abstraction Layer (HAL), which helps us access the board's resources, e.g. GPIO pins or timers. 
 If you use a different microcontroller, you need to be able to gain access to a TIMER peripheral, pins for the onboard LEDs and Level of the pins.
 
-3. Initialize the board by adding the following line in `fn main()`:
+3. Gain access to all the peripherals of the board by adding the following line in `fn main()`:
+
 ```rust
 let board = hal::pac::Peripherals::take().unwrap();
 ```
-This gives us access to all the peripherals of the board. If you use a different board, check the crate's docs on how to get access to all peripherals.
+
+If you use a different board, check the crate's docs on how to get access to all peripherals.
 
 4. You need a timer to blink LEDs, as the LED is on and off for certain amounts of time. To access the timer peripheral add this line:
 
@@ -57,7 +59,7 @@ let pins = P0Parts::new(board.P0);
 ```rust
 let mut led_1 = pins.p0_13.into_push_pull_output(Level::High);
 ```
-2. This HAL provides functionalities for the different resources, independant of board model. In our case we need to be able to set a pin high or low, or set delays for the Timer. Add the following dependency:
+2. This HAL provides functionalities for the different resources, independent of board model. In our case we need to be able to set a pin high or low, or set delays for the Timer. Add the following dependency:
 
 ```rust
 use embedded_hal::{
@@ -74,7 +76,7 @@ timer.delay_ms(1000u32);
 ```
 4. Run the program!
 
-The one LED on your microcontroller should light up for a second. Then the program ends. 
+LED1 on your microcontroller should light up for a second. Then the program ends. 
 
 ## Blinking the LED
 
