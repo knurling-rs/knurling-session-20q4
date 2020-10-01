@@ -1,4 +1,4 @@
 [[headers]]
 for = "/*"
 [headers.values]
-Basic-Auth = "KR2ucJjiloJ5P"
+Basic-Auth = "sessions:KR2ucJjiloJ5P"
