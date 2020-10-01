@@ -37,7 +37,7 @@ let board = hal::pac::Peripherals::take().unwrap();
 ```
 This gives us access to all the peripherals of the board. If you use a different board, check the crate's docs on how to get access to all peripherals.
 
-4. Blinking LEDs needs a timer, as the LED is on and of for certain amounts of time. To access the timer peripheral add this line:
+4. You need a timer to blink LEDs, as the LED is on and off for certain amounts of time. To access the timer peripheral add this line:
 
 ```rust
 let mut timer = Timer::new(board.TIMER0);
