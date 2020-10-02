@@ -8,6 +8,20 @@ Go to [https://rustup.rs](https://rustup.rs/) and follow the instructions.
 
 **Windows**: *Do* install the optional components of the [C++ build tools package](https://visualstudio.microsoft.com/visual-cpp-build-tools/). The installation size may take up to 2 GB of disk space.
 
+### `probe-run`
+
+Install the **git** version of `probe-run`, [a custom Cargo runner that lets you run embedded apps as if they were native apps][probe-run-post], with the `defmt` Cargo feature enabled:
+
+[`probe-run`]: https://crates.io/crates/probe-run
+[probe-run-post]: https://ferrous-systems.com/blog/probe-run/
+
+~~~ console
+$ cargo install \
+    --git https://github.com/knurling-rs/probe-run \
+    --branch main \
+    --features defmt
+~~~
+
 ### Rust Analyzer
 
 If you use Visual Studio Code, we recommend you install [Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer) to help you during development.
