@@ -89,19 +89,7 @@ Once you have instantiated a project using the template you'll need to fill in t
 +runner = "probe-run --chip nRF52840_xxAA --defmt"
 ~~~
 
-2. Also in `.cargo/config.toml`, change the linker from `rust-lld` (the default) to [`flip-link`]:
-
-~~~ diff
-[target.'cfg(all(target_arch = "arm", target_os = "none"))']
-runner = "probe-run --chip nRF52840_xxAA --defmt"
-rustflags = [
-+  "-C", "linker=flip-link",
-  "-C", "link-arg=-Tlink.x",
-  "-C", "link-arg=-Tdefmt.x",
-]
-~~~
-
-3. Adjust the compilation target in `.cargo/config.toml`.
+2. Adjust the compilation target in `.cargo/config.toml`.
 
 ~~~ diff
  # .cargo/config.toml
@@ -113,7 +101,7 @@ rustflags = [
 +target = "thumbv7em-none-eabihf" # Cortex-M4F (with FPU)
 ~~~
 
-4. Add a suitable HAL as a dependency.
+3. In `Cargo.toml`, Add a suitable HAL as a dependency.
 
 ~~~ diff
  # Cargo.toml
@@ -122,7 +110,7 @@ rustflags = [
 +nrf52840-hal = "0.11.0"
 ~~~
 
-5. Now that you have selected a HAL, fix the HAL import in `src/lib.rs`
+4. Now that you have selected a HAL, fix the HAL import in `src/lib.rs`
 
 ~~~ diff
  // my-app/src/lib.rs
@@ -132,7 +120,7 @@ rustflags = [
 
 [`flip-link`]: https://github.com/knurling-rs/flip-link
 
-6. Check that `cargo build` works:
+5. Check that `cargo build` works:
 
 ```console
 $ cd co2sensor
