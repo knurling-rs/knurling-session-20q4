@@ -30,6 +30,16 @@ $ cargo install \
 $ cargo install cargo-generate
 ```
 
+### `flip-link`
+
+install `flip-link`
+
+```console
+cargo install \
+    --git https://github.com/knurling-rs/flip-link \
+    --branch main \
+````
+
 ### Rust Analyzer
 
 If you use Visual Studio Code, we recommend you install [Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer) to help you during development.
