@@ -10,7 +10,7 @@ Go to [https://rustup.rs](https://rustup.rs/) and follow the instructions.
 
 ### `probe-run`
 
-Install the **git** version of `probe-run`, [a custom Cargo runner that lets you run embedded apps as if they were native apps][probe-run-post], with the `defmt` Cargo feature enabled:
+`probe-run` is [a custom Cargo runner that lets you run embedded apps as if they were native apps][probe-run-post]. Install the **git** version of it with the `defmt` Cargo feature enabled:
 
 [`probe-run`]: https://crates.io/crates/probe-run
 [probe-run-post]: https://ferrous-systems.com/blog/probe-run/
@@ -21,6 +21,14 @@ $ cargo install \
     --branch main \
     --features defmt
 ~~~
+
+### `cargo-generate`
+
+`cargo-generate` generates a new Rust project from a predefined template of choice for you. Install it like so:
+
+```console
+$ cargo install cargo-generate
+```
 
 ### Rust Analyzer
 
