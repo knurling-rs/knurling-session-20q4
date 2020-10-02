@@ -2,6 +2,8 @@
 
 - [Introduction](./introduction.md)
 - [Preparations](./Preparations.md)
+    - [Checking the Hardware](./hardware.md)
+    - [Installation Instructionse](./installation.md)
 - [CO<sub>2</sub>Sensor Project](./co2sensor.md)
     - [Hello World](./hello_world.md)
 - [Project Setup - General Guides](./project_setup.md)
