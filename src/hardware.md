@@ -3,7 +3,6 @@
 ## nRF52840 Development Kit (DK)
 
 Connect one end of a micro USB cable to the USB connector **J2** of the board and the other end to your PC.
-Do the same for the USB connector **J3**.
 
 💬 These directions assume you are holding the board "horizontally" with components (switches, buttons and pins) facing up. In this position, rotate the board, so that its concave shaped short side faces right. You'll find one USB connector (J2) on the left edge, another USB connector (J3) on the bottom edge and 4 buttons on the bottom right corner.
 
