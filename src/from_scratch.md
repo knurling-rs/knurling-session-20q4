@@ -49,48 +49,102 @@ It has:
 - 1 MB of Flash that spans the address range: `0x0000_0000` - `0x0010_0000`.
 - 256 KB of RAM that spans the address range: `0x2000_0000` - `0x2004_0000`.
 
-## The `cortex-m-quickstart` project template
+## The knurling `app-template`
 
-With all this information you'll be able to build programs for the target device. The [`cortex-m-quickstart`] project template provides the most frictionless way to start a new project for the ARM Cortex-M architecture -- for other architectures check out other project templates by the [rust-embedded] organization.
+With all this information you'll be able to build programs for the target device. 
 
+We've created a Cargo project template called [`app-template`] is based on the [`cortex-m-quickstart`] tempate that lets you start a new project for the ARM Cortex-M architecture which uses all knurling tools out of the box.
+
+🔎 for other architectures, check out other project templates by the [rust-embedded] organization.
+
+[`app-template`]: https://github.com/knurling-rs/app-template
 [`cortex-m-quickstart`]: https://github.com/rust-embedded/cortex-m-quickstart
 [rust-embedded]: https://github.com/rust-embedded/
 
-The recommended way to use the quickstart template is through the [`cargo-generate`] tool:
+❗️ Make sure you've installed `probe-run` and `cargo-generate` as advised in the [installation instructions](./installation.md).
+
+The recommended way to use the `app-template` to set up your own project is through the [`cargo-generate`] tool.
 
 [`cargo-generate`]: https://crates.io/crates/cargo-generate
 
-``` console
-$ cargo generate --git https://github.com/rust-embedded/cortex-m-quickstart
+~~~ console
+$ cargo generate \
+    --git https://github.com/knurling-rs/app-template \
+    --branch main \
+    --name co2sensor
+~~~
+
+❗️ it may be difficult to install the `cargo-generate` tool on Windows due to its `libgit2` (C library) dependency. Another option is to download a snapshot of the app-template from GitHub and then fill in the placeholders in `Cargo.toml` of the snapshot.
+
+Once you have instantiated a project using the template you'll need to fill in the device-specific information you collected in the two previous steps.
+
+> All things that need to be changed are also marked as `TODO` in the files.
+
+1. Enter your chip into `.cargo/config.toml`.
+
+~~~ diff
+ # .cargo/config.toml
+ [target.'cfg(all(target_arch = "arm", target_os = "none"))']
+-runner = "probe-run --chip {{chip}} --defmt"
++runner = "probe-run --chip nRF52840_xxAA --defmt"
+~~~
+
+2. Also in `.cargo/config.toml`, change the linker from `rust-lld` (the default) to [`flip-link`]:
+
+~~~ diff
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+runner = "probe-run --chip nRF52840_xxAA --defmt"
+rustflags = [
++  "-C", "linker=flip-link",
+  "-C", "link-arg=-Tlink.x",
+  "-C", "link-arg=-Tdefmt.x",
+]
+~~~
+
+3. Adjust the compilation target in `.cargo/config.toml`.
+
+~~~ diff
+ # .cargo/config.toml
+ [build]
+-target = "thumbv6m-none-eabi"    # Cortex-M0 and Cortex-M0+
+-# target = "thumbv7m-none-eabi"    # Cortex-M3
+-# target = "thumbv7em-none-eabi"   # Cortex-M4 and Cortex-M7 (no FPU)
+-# target = "thumbv7em-none-eabihf" # Cortex-M4F and Cortex-M7F (with FPU)
++target = "thumbv7em-none-eabihf" # Cortex-M4F (with FPU)
+~~~
+
+4. Add a suitable HAL as a dependency.
+
+~~~ diff
+ # Cargo.toml
+ [dependencies]
+-# some-hal = "1.2.3"
++nrf52840-hal = "0.11.0"
+~~~
+
+5. Now that you have selected a HAL, fix the HAL import in `src/lib.rs`
+
+~~~ diff
+ // my-app/src/lib.rs
+-// use some_hal as _; // memory layout
++use nrf52840_hal as _; // memory layout
+~~~
+
+[`flip-link`]: https://github.com/knurling-rs/flip-link
+
+6. Check that `cargo build` works:
+
+```console
+$ cd co2sensor
+$ cargo build
+   Compiling co2sensor v0.1.0 (/Users/ferrous/co2sensor)
+    Finished dev [optimized + debuginfo] target(s) in 0.65s
 ```
 
-But it may be difficult to install the `cargo-generate` tool on Windows due to its `libgit2` (C library) dependency. Another option is to download a snapshot of the quickstart template from GitHub and then fill in the placeholders in `Cargo.toml` of the snapshot.
+Congratulations! You've successfully cross compiled the sample code in `co2sensor/` for your target device.
 
-Once you have instantiated a project using the template you'll need to fill in the device-specific information you collected in the two previous steps:
 
-### 1. Change the default compilation target in `.cargo/config`
-
-``` toml
-[build]
-target = "thumbv7em-none-eabi"
-```
-
-For the nRF52840 you can choose either `thumbv7em-none-eabi` or `thumbv7em-none-eabihf`. If you are going to use the FPU then select the `hf` variant.
-
-### 2. Enter the memory layout of the chip in `memory.x`
-
-```
-MEMORY
-{
-  /* NOTE 1 K = 1 KiBi = 1024 bytes */
-  FLASH : ORIGIN = 0x00000000, LENGTH = 1M
-  RAM : ORIGIN = 0x20000000, LENGTH = 256K
-}
-```
-
-### 3. `cargo build` now will cross compile programs for your target device.
-
-If there's no template or signs of support for a particular architecture under the rust-embedded organization then you can follow the [embedonomicon] to bootstrap support for the new architecture by yourself.
+> If there's no template or signs of support for a particular architecture under the rust-embedded organization then you can follow the [embedonomicon] to bootstrap support for the new architecture by yourself.
 
 [embedonomicon]:https://docs.rust-embedded.org/embedonomicon/
 
