@@ -48,58 +48,6 @@ If you use Visual Studio Code, we recommend you install [Rust Analyzer](https://
 
 ## OS specific dependencies
 
-### Linux only: USB
-
-To access the Dongle as a non-root user, follow these steps:
-
-1. (Optional) Connect the dongle and check its permissions with these commands:
-
-``` console
-$ lsusb -d 1915:521f
-Bus 001 Device 016: ID 1915:521f Nordic Semiconductor ASA USB Billboard
-$ #   ^         ^^
-
-$ # take note of the bus and device numbers that appear for you when run the next command
-$ ls -l /dev/bus/usb/001/016
-crw-rw-r-- 1 root root 189, 15 May 20 12:00 /dev/bus/usb/001/016
-```
-
-The `root root` part in `crw-rw-r-- 1 root root` indicates the device can only be accessed by the `root` user.
-
-2. Create the following file with the displayed contents. You'll need root permissions to create the file.
-
-``` console
-$ cat /etc/udev/rules.d/50-oxidize-global.rules
-# udev rules to allow access to USB devices as a non-root user
-
-# nRF52840 Dongle in bootloader mode
-ATTRS{idVendor}=="1915", ATTRS{idProduct}=="521f", TAG+="uaccess"
-
-# nRF52840 Dongle applications
-ATTRS{idVendor}=="2020", TAG+="uaccess"
-
-# nRF52840 Development Kit
-ATTRS{idVendor}=="1366", ATTRS{idProduct}=="1015", TAG+="uaccess"
-```
-
-3. Run the following command to make the new udev rules effective
-
-``` console
-$ sudo udevadm control --reload-rules
-```
-
-4. (Optional) Disconnect and reconnect the dongle. Then check its permissions again.
-
-``` console
-$ lsusb
-Bus 001 Device 017: ID 1915:521f Nordic Semiconductor ASA 4-Port USB 2.0 Hub
-
-$ ls -l /dev/bus/usb/001/017
-crw-rw-r--+ 1 root root 189, 16 May 20 12:11 /dev/bus/usb/001/017
-```
-
-The `+` part in `crw-rw-r--+` indicates the device can be accessed without `root` permissions.
-
 ### Windows only: Zadig JLink driver
 
 On Windows you'll need to associate the nRF52840 Development Kit's USB device to the WinUSB driver.
@@ -120,4 +68,3 @@ In Zadig's graphical user interface,
 
 5. Click "Install WinUSB driver". The process may take a few minutes to complete.
 
-> You do not need to do anything for the **nRF52840 Dongle** device.
