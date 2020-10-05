@@ -37,7 +37,7 @@ install `flip-link`
 ```console
 cargo install \
     --git https://github.com/knurling-rs/flip-link \
-    --branch main \
+    --branch main
 ````
 
 ### Rust Analyzer
