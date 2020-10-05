@@ -64,7 +64,24 @@ let pins = P0Parts::new(board.P0);
 ```rust
 let mut led_1 = pins.p0_13.into_push_pull_output(Level::High);
 ```
-2. This HAL provides functionalities for the different resources, independent of board model. In our case we need to be able to set a pin high or low, or set delays for the Timer. Add the following dependency:
+
+2. The [`embedded-hal`] crate provides a generic API to access the different resources of a board, independent of board model. This makes development easier and your code more portable. We want to use it to set a pin high or low, or set delays for the Timer.
+
+To access it, add it as a dependency to your `Cargo.toml`
+
+~~~ diff
+ # Cargo.toml
+ [dependencies]
+ cortex-m = "0.6.3"
+ cortex-m-rt = "0.6.12"
+ # TODO(4) enter your HAL here
+ nrf52840-hal = "0.11.0"
++embedded-hal = "0.2.4"
+
+ [features]
+~~~
+
+and then, in `hello.rs`, bring its `DelayMs` and `OutputPin` Traits into scope so we can use them:
 
 ```rust
 use embedded_hal::{
@@ -73,8 +90,9 @@ use embedded_hal::{
 };
 ```
 
+[`embedded-hal`]: https://crates.io/crates/embedded-hal
 
-3. Add a delay of 1000 miliseconds:
+3. Add a delay of 1000 milliseconds to your `main()` function:
 
 ```rust
 timer.delay_ms(1000u32);
