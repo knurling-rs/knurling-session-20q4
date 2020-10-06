@@ -38,7 +38,7 @@ install `flip-link`
 cargo install \
     --git https://github.com/knurling-rs/flip-link \
     --branch main
-````
+```
 
 ### Rust Analyzer
 
@@ -47,6 +47,33 @@ If you use Visual Studio Code, we recommend you install [Rust Analyzer](https://
 **Windows**: It's OK to ignore the message about `git` not being installed, if you get one!
 
 ## OS specific dependencies
+
+### Linux only: Access USB Devices as non-root User 
+
+Some of our tools depend on `pkg-config` and `libudev.pc`. Ensure you have the proper packages installed; on Debian based distributions you can use:
+
+``` console
+$ sudo apt-get install libudev-dev libusb-1.0-0-dev
+```
+
+To access the USB devices as a non-root user, follow these steps:
+
+1. Create the following file with the displayed contents. You'll need root permissions to create the file.
+
+``` console
+$ cat /etc/udev/rules.d/50-oxidize-global.rules
+# udev rules to allow access to USB devices as a non-root user
+
+# nRF52840 Development Kit
+ATTRS{idVendor}=="1366", ATTRS{idProduct}=="1015", TAG+="uaccess"
+```
+
+2. Run the following command to make the new udev rules effective
+
+``` console
+$ sudo udevadm control --reload-rules
+```
+
 
 ### Windows only: Zadig JLink driver
 
