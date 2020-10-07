@@ -48,6 +48,33 @@ If you use Visual Studio Code, we recommend you install [Rust Analyzer](https://
 
 ## OS specific dependencies
 
+### Linux only: Access USB Devices as non-root User 
+
+Some of our tools depend on `pkg-config` and `libudev.pc`. Ensure you have the proper packages installed; on Debian based distributions you can use:
+
+``` console
+$ sudo apt-get install libudev-dev libusb-1.0-0-dev
+```
+
+To access the USB devices as a non-root user, follow these steps:
+
+1. Create the following file with the displayed contents. You'll need root permissions to create the file.
+
+``` console
+$ cat /etc/udev/rules.d/50-knurling.rules
+# udev rules to allow access to USB devices as a non-root user
+
+# nRF52840 Development Kit
+ATTRS{idVendor}=="1366", ATTRS{idProduct}=="1015", TAG+="uaccess"
+```
+
+2. Run the following command to make the new udev rules effective
+
+``` console
+$ sudo udevadm control --reload-rules
+```
+
+
 ### Windows only: Zadig JLink driver
 
 On Windows you'll need to associate the nRF52840 Development Kit's USB device to the WinUSB driver.
@@ -67,4 +94,3 @@ In Zadig's graphical user interface,
 4. Select 'WinUSB' as the target driver (right side)
 
 5. Click "Install WinUSB driver". The process may take a few minutes to complete.
-
