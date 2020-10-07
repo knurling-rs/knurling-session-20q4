@@ -61,7 +61,7 @@ To access the USB devices as a non-root user, follow these steps:
 1. Create the following file with the displayed contents. You'll need root permissions to create the file.
 
 ``` console
-$ cat /etc/udev/rules.d/50-oxidize-global.rules
+$ cat /etc/udev/rules.d/50-knurling.rules
 # udev rules to allow access to USB devices as a non-root user
 
 # nRF52840 Development Kit
@@ -94,4 +94,3 @@ In Zadig's graphical user interface,
 4. Select 'WinUSB' as the target driver (right side)
 
 5. Click "Install WinUSB driver". The process may take a few minutes to complete.
-
