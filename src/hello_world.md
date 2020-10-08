@@ -59,10 +59,10 @@ let pins = P0Parts::new(board.P0);
 ```
 
 ## Switching the Light on
-1. Configure pin p0.13 into a push-pull-output with High Level:
+1. Configure pin p0.13 into a push-pull-output with Low Level:
 
 ```rust
-let mut led_1 = pins.p0_13.into_push_pull_output(Level::High);
+let mut led_1 = pins.p0_13.into_push_pull_output(Level::Low);
 ```
 
 2. The [`embedded-hal`] crate provides a generic API to access the different resources of a board, independent of board model. This makes development easier and your code more portable. We want to use it to set a pin high or low, or set delays for the Timer.
@@ -113,9 +113,9 @@ loop {
 2. Inside the loop add the following lines:
 
 ```rust
-    led_1.set_low().unwrap();
-    timer.delay_ms(1000u32);
     led_1.set_high().unwrap();
+    timer.delay_ms(1000u32);
+    led_1.set_low().unwrap();
     timer.delay_ms(1000u32);
 ```
 
