@@ -4,7 +4,7 @@ The `#![no_std]` attribute in the first line of the program indicates that the p
 
 ## Collections
 
-The core library does not provide Vec, String, and HashMap, as they need a dynamic memory allocator (heap allocation), which core, by definition, does not provide. 
+The core library does not provide Vec, String, and HashMap, as they need a dynamic memory allocator (heap allocation), which `core` does not provide. 
 
 Without using other crates, you are restricted to types with a size known at compile time such as [arrays](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type) and [tuples](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type). 
 
