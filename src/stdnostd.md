@@ -36,7 +36,7 @@ log::info!("{:?}", slice); // length = 4
 
 Another possibility for dealing with this problem:
 
-The [heapless crate](https://docs.rs/heapless/0.5.6/heapless/), which provides `static` friendly data structures that don't require dynamic memory allocation.
+The [heapless crate](https://docs.rs/heapless/0.5.6/heapless/), which provides `static` friendly data structures that don't require dynamic memory allocation, with a fixed maximum storage size.
 
 
 ### Further Reading:
