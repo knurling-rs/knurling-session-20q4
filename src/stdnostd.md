@@ -20,7 +20,7 @@ let slice: &[u8] = &array;
 
 `slice` and `ref_to_array` are constructed in the same way but have different types. `ref_to_array` is represented in memory as a single pointer (1 word / 4 bytes on a 32-bit platform); `slice` is represented as a pointer + length (2 words / 8 bytes on a 32 bit platform).
 
-Because slices track length at runtime rather than in their type they can point to chunks of memory of any length.
+Because slices track length at runtime rather than at compile time, they can refer to chunks of memory of any length.
 
 ``` rust
 let array1: [u8; 3] = [0, 1, 2];
