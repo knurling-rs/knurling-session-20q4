@@ -6,7 +6,7 @@ The `#![no_std]` attribute in the first line of the program indicates that the p
 
 The core library does not provide Vec, String, and HashMap, as they need a dynamic memory allocator (heap allocation), which core, by definition, does not provide. 
 
-Without using other crates, you are restricted to types with a fixed size such as [arrays](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type) and [tuples](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type). 
+Without using other crates, you are restricted to types with a size known at compile time such as [arrays](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type) and [tuples](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type). 
 
 Another type that works with a bit more flexibility in length are [slices](https://doc.rust-lang.org/book/ch04-03-slices.html#the-slice-type). A slice is a reference into a list of elements stored in contiguous memory. One way to create a slice is to take a reference to an *array*, a fixed-size list of elements stored in contiguous memory.
 
@@ -42,5 +42,4 @@ The [heapless crate](https://docs.rs/heapless/0.5.6/heapless/), which provides `
 ### Further Reading:
 
 [The embedded Rust Book](https://docs.rust-embedded.org/book/collections/)
-
 
