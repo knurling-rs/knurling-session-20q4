@@ -8,7 +8,7 @@
 Release at least a small release every Friday
 releases can contain: 
 * new written instructions
-* new Video tutorials
+* new video tutorials
 * explanation of embedded concepts as video or text
 
 
