@@ -1,6 +1,6 @@
 # [std] and [no_std]?
 
-The #![no_std] attribute in the first line of the program indicates that the program will not make use of the standard library, the std crate. Instead it will use the core library, a subset of the standard library that does not depend on an underlying operating system (OS). It is completely platform agnostic, does not require upstream libraries, system libraries, or libc. It is necessary in environments, where this is the first code that is loaded. As a consequnce, the core library does not provide all functionalities. 
+The `#![no_std]` attribute in the first line of the program indicates that the program will not make use of the standard library, the `std` crate. Instead, it will use the `core` library, a subset of the standard library that does not depend on an underlying operating system (OS). It is completely platform agnostic, does not require upstream libraries, system libraries, or libc. It is necessary in environments, where this is the first code that is loaded. As a consequence, the core library does not provide all functionalities available within the `std` library. 
 
 ## Collections
 
@@ -42,6 +42,5 @@ The [heapless crate](https://docs.rs/heapless/0.5.6/heapless/), which provides `
 ### Further Reading:
 
 [The embedded Rust Book](https://docs.rust-embedded.org/book/collections/)
-
 
 
