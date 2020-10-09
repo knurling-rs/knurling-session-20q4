@@ -2,7 +2,7 @@
 
 ## HAL
 
-HAL is short for Hardware Abstraction Layer. A HAL is a set of routines that provide interfaces for programms for accessing hardware resources.
+HAL is short for Hardware Abstraction Layer. A HAL is a set of routines that provide interfaces for programs to access hardware resources.
 
 
 ## GPIO
