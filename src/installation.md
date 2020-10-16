@@ -35,9 +35,7 @@ $ cargo install cargo-generate
 install `flip-link`
 
 ```console
-cargo install \
-    --git https://github.com/knurling-rs/flip-link \
-    --branch main
+cargo install flip-link
 ```
 
 ### Rust Analyzer
@@ -48,7 +46,7 @@ If you use Visual Studio Code, we recommend you install [Rust Analyzer](https://
 
 ## OS specific dependencies
 
-### Linux only: Access USB Devices as non-root User 
+### Linux only: Access USB Devices as non-root User
 
 Some of our tools depend on `pkg-config` and `libudev.pc`. Ensure you have the proper packages installed; on Debian based distributions you can use:
 
