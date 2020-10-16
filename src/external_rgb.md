@@ -9,10 +9,10 @@
 
 ❗️❗️❗️ There are common anode and common cathode RGB LEDs. If you just took one from your stash, compare what the bulb of the LED looks like in relation to where the longest leg is:
 
-
 ![Common anode oder common cathode?](img/cc_or_ca.png)
 
-We provide 
+The LED in our shopping list is a common anode RGB LED. For now we'll provide instructions for both types.
+
 ## Wiring
 
 ❗️❗️❗️ Before you start to wire things up, make sure, your breadboard and the nRF52840-DK is disconnected from any power source. 
