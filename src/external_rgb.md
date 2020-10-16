@@ -10,7 +10,7 @@
 ❗️❗️❗️ There are common anode and common cathode RGB LEDs. If you just took one from your stash, compare what the bulb of the LED looks like in relation to where the longest leg is:
 
 
-![Common anode oder common cathode?](cc_or_ca.png)
+![Common anode oder common cathode?](img/cc_or_ca.png)
 
 We provide 
 ## Wiring
@@ -27,7 +27,7 @@ A circuit diagram which is focused on showing what parts are connected in what w
 
 The breadboard diagram focuses on appearance of the parts and how they are arranged on a breadboard, while still showing the correct wiring. 
 
-![Breadboard Diagram for external RGB LED](img/knurling-rgb-led-ca-bb.png) 
+![Breadboard Diagram for external RGB LED, common anode](img/knurling-rgb-led-ca-bb.png) 
 
 ✅ Compare both diagrams for how they depict the RGB LED.
 
@@ -42,11 +42,11 @@ We have provided two ways that depict the wiring of this setup:
 
 A circuit diagram which is focused on showing what parts are connected in what ways. This type of diagram neglects physical appearance of the parts and how the parts arranged in the physical world. 
 
-![Circuit Diagram for external RGB LED, common anode](img/knurling-rgb-led-cc-circuit.png)
+![Circuit Diagram for external RGB LED, common cathode](img/knurling-rgb-led-cc-circuit.png)
 
 The breadboard diagram focuses on appearance of the parts and how they are arranged on a breadboard, while still showing the correct wiring. 
 
-![Breadboard Diagram for external RGB LED](img/knurling-rgb-led-cc-bb.png) 
+![Breadboard Diagram for external RGB LED, common cathode](img/knurling-rgb-led-cc-bb.png) 
 
 ✅ Compare both diagrams for how they depict the RGB LED.
 
