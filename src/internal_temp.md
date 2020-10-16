@@ -4,7 +4,7 @@
 
 Before we start to work with an external sensor, where we would have to write a driver, we will access the board's internal temperature sensor first. We'll take a look at the HAL to learn more about how accessing peripherals works in detail and how methods work in Rust.
 
-✅  Open the [nrf-hal-common](https://github.com/nrf-rs/nrf-hal/blob/master/nrf-hal-common/)
+✅  Open the [nrf-hal-common 0.11.1](https://github.com/nrf-rs/nrf-hal/tree/v0.11.1/nrf-hal-common)
 
 ✅  Open `/src/temp.rs`, the place where the communication with the boards temperature sensor is implemented. 
 
@@ -33,30 +33,27 @@ use nrf52840_hal::{
 
 Now that we have an instance of the temperature sensor, we can take a measurement. 
 
-✅ Go back to the HAL code. 
+✅ Go back to [temp.rs](https://github.com/nrf-rs/nrf-hal/blob/v0.11.1/nrf-hal-common/src/temp.rs) in the HAL code. 
 
-`fn measurement()` takes a mutable reference to `self` as an argument. `self` is the instance of the temperature sensor that was created with `fn new()`. The method will stop a measurement, if one has already been started, starts a new measurment and block the program until it has completed the measurement and then returns a fixed point number `I30F2`. The second option is starting a measurement with `fn start_measurement()` and reading the measurement with `fn read()` which works in a non-blocking way. A measurement is started or stopped by writing to the register. 
+`fn measure()` takes a mutable reference to `self` as an argument. `self` is the instance of the temperature sensor that was created with `fn new()`. The method will stop a measurement, if one has already been started, starts a new measurment and block the program until it has completed the measurement and then returns a fixed point number `I30F2`. The second option is starting a measurement with `fn start_measurement()` and reading the measurement with `fn read()` which works in a non-blocking way. A measurement is started or stopped by writing to the register. 
 
-We'll stick with the blocking method `fn measurement()` for now. 
+We'll stick with the blocking method `fn measure()` for now. 
 
 ✅  In your code, add a line that takes a measurement, and one that logs the temperature value. 
 
 ```rust
-let temperature = temp.measurement();
-defmt::info!("{}", temperature);
+let temperature = temp.measure();
+defmt::info!("{:?}", temperature);
 ```
 The syntax reflects that methods are attached to objects: The argument `self` refers to the object in front of the dot, and the parenthesis remain empty. 
 
-✅ Run your code.
+If you run the code now, you'll run into a compiler error, becuase the return type of `fn measure()`, `I30F2` is not in scope, as it it not part of the `core` library. 
 
-You notice that the return type of `fn measurement()`, `I30F2` is not in scope, as it it not part of the `core` library. 
-
-✅ Add another method `to_num()` in the measurement line. This method casts the fix point number into an `f32`. In order to be displayable, the type needs to be indicated in the format string. 
+✅ Add another method `to_num()` behind `fn measure()`. This method casts the fix point number into an `f32`. In order to be displayable, the type needs to be indicated in the format string. 
 
 ```rust
-let temperature = temp.measurement().to_num();
+let temperature = temp.measure().to_num();
 defmt::info!("{:f32}", temperature);
 ```
-
 
 ✅ Initialize a loop that measures and displays the temperature every 60 seconds. 
