@@ -47,7 +47,7 @@ defmt::info!("{:?}", temperature);
 ```
 The syntax reflects that methods are attached to objects: The argument `self` refers to the object in front of the dot, and the parenthesis remain empty. 
 
-If you run the code now, you'll run into a compiler error, becuase the return type of `fn measure()`, `I30F2` is not in scope, as it it not part of the `core` library. 
+If you run the code now, you'll run into a compiler error, because `the trait `defmt::Format` is not implemented for the `I30F2``, the return type of `fn measure()`. 
 
 ✅ Add another method `to_num()` behind `fn measure()`. This method casts the fix point number into an `f32`. In order to be displayable, the type needs to be indicated in the format string. 
 
