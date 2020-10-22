@@ -8,6 +8,7 @@
     - [Hello World](./hello_world.md)
     - [External RGB LED](./external_rgb.md)
     - [Internal Temperature Sensor](./internal_temp.md)
+    - [More about Methods](./methods.md)
 - [Project Setup - General Guides](./project_setup.md)
     - [defmt setup](./defmt_setup.md)
     - [Starting from Scratch](./from_scratch.md)
