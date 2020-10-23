@@ -13,14 +13,6 @@ Additionally you'll need the peripherals and parts listed in [this blogpost](htt
 ## Required Software
 Make sure to [install the required software](./installation.md) so you can start coding!
 
-## Course Material
-Knurling-sessions aims to be as inclusive as possible. This means that some information is available in several forms, for example pictures and text description. We also use icons so that different kinds of information are visually distinguishable on the first glance. If you have accessibility needs that are not covered, please let us know.
 
-# Icons and Formatting we use
-We use Icons to mark different kinds of information in the book:
-* ✅ Call for action
-* ❗️ Warnings, Details that require special attention
-* 🔎 Knowledge, that gets you deeper into the subject, but you do not have to understand it completely to proceed.
-* 💬 Descriptions for Accessibility
 
-> Note: Notes like this one contain helpful information
+

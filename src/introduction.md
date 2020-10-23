@@ -1,14 +1,32 @@
 ![knurling-rs logo](horizontal_color_sessions_stacked.svg)
 
 ## Introduction
-This book is a collection of guided projects to help you get started with embedded Rust.
+This book is a collection of guided projects and knowledge to help you get started with embedded Rust. 
 
-## Knurling Sessions 2020 Q4: Building a CO<sub>2</sub> Sensor
-In the first Knurling-sessions project, we will be incrementally building a CO<sub>2</sub> sensor. This is not only a fun way to explore working with electronics and embedded Rust, in the end you'll also have a useful helper, especially if you're working from home: CO<sub>2</sub> levels have a significant impact on your ability to concentrate and make decisions, and they drop faster than you think! The device we're building will tell you when it's time to open a window.
+## How to use this Book
 
-**Every Friday**, we will release material to guide you through this project.
-Releases can contain:
-* new written instructions
-* new Video tutorials
-* explanation of embedded concepts as video or text
+The book consists of several sections:
+
+* Instructions for the *knurling-sessions* projects
+* Reference Material
+* Knowledge 
+* Troubleshooting Pages
+
+To build one of the quarterly *knurling-sessions* projects and to collect as much embedded knowledge as possible on the way, work through the instructions of each project in order. The Reference Material section contains more general instructions to help you get started with a project from scratch. Some of the instructions from *knurling-sessions* projects depend on this part. When ever this is the case, we link to the appropriate section. The Knowledge section contains a glossary and articles about embedded concepts to help you dig deeper into the subject. The Troubleshooting pages contain help for common problems when setting up projects. 
+
+### Icons and Formatting we use
+We use Icons to mark different kinds of information in the book:
+* ✅ Call for action
+* ❗️ Warnings, Details that require special attention
+* 🔎 Knowledge, that gets you deeper into the subject, but you do not have to understand it completely to proceed.
+* 💬 Descriptions for Accessibility
+
+> Note: Notes like this one contain helpful information
+
+## Course Material
+Knurling-sessions aims to be as inclusive as possible. This means that some information is available in several forms, for example pictures and text description. We also use icons so that different kinds of information are visually distinguishable on the first glance. If you have accessibility needs that are not covered, please let us know.
+
+
+
+
 

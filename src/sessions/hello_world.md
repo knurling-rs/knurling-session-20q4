@@ -5,7 +5,7 @@ This is a step by step guide expand the `hello.rs` example in the [`knurling app
 
 ## Project Setup
 
-Come up with a name for the Project and generate the app template according to [our guide](/defmt_setup.html). Don't forget to enter the appropriate Information in the TODOs.
+Come up with a name for the Project and generate the app template according to [our guide](../defmt_setup.html). Don't forget to enter the appropriate Information in the TODOs.
 
 <!-- 1. Set up with cargo generate according to defmt_setup. 
 2. TODO1 : Insert your name if it was not done automatically.
