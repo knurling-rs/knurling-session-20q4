@@ -52,8 +52,8 @@ If you run the code now, you'll run into a compiler error, because `the trait de
 ✅ Add another method `to_num()` behind `fn measure()`. This method casts the fix point number into an `f32`. In order to be displayable, the type needs to be indicated in the format string. 
 
 ```rust
-let temperature = temp.measure().to_num();
-defmt::info!("{:f32}", temperature);
+let temperature: f32 = temp.measure().to_num();
+defmt::info!("{:f32} °C", temperature);
 ```
 
 ✅ Initialize a loop that measures and displays the temperature every 60 seconds. 

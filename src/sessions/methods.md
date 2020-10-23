@@ -44,20 +44,20 @@ There are two types of methods: *static methods* and *instance methods*. Static 
 
 ```rust
 fn init(pins: P0Parts) -> LEDState {
-        let mut led_red = pins.p0_03.into_push_pull_output(Level::High);
-        let mut led_blue = pins.p0_04.into_push_pull_output(Level::High);
-        let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
+    let mut led_red = pins.p0_03.into_push_pull_output(Level::High);
+    let mut led_blue = pins.p0_04.into_push_pull_output(Level::High);
+    let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
 
-        LEDState {
-            red: led_red,
-            blue: led_blue,
-            green: led_green,
-        }
+    LEDState {
+        red: led_red,
+        blue: led_blue,
+        green: led_green,
     }
+}
 ```
 ✅ Inside `fn main()` substitute the 3 lines that configure the pins with calling this static method. 
 
-```rust
+```diff
 - let mut led_red = pins.p0_03.into_push_pull_output(Level::High);
 - let mut led_blue = pins.p0_04.into_push_pull_output(Level::High);
 - let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
@@ -68,48 +68,47 @@ We can now define all sorts of instance methods that control the behaviour of th
 
 ```rust
 loop {
-        
-        led_red.set_low().unwrap();
-        led_blue.set_high().unwrap();
+    led_red.set_low().unwrap();
+    led_blue.set_high().unwrap();
 
-        timer.delay_ms(1000_u32);
+    timer.delay_ms(1000_u32);
 
-        led_red.set_high().unwrap();
-        led_blue.set_low().unwrap();
+    led_red.set_high().unwrap();
+    led_blue.set_low().unwrap();
 
-        timer.delay_ms(1000_u32);
-    };
+    timer.delay_ms(1000_u32);
+    }
 ```
 ✅ Go back to the `impl` block. Define an instance method that sets the red channel low and the others high. 
 
 ```rust 
 fn red(&mut self) {
-        self.red.set_low().unwrap();
-        self.green.set_high().unwrap();
-        self.blue.set_high().unwrap();
-    }
+    self.red.set_low().unwrap();
+    self.green.set_high().unwrap();
+    self.blue.set_high().unwrap();
+}
 ```
 The methods takes a mutable reference of the instance of `LEDState` as argument. `&mut self` is short for `self: &mut Self`. The fields of the struct can be accessed with the . syntax.  
 
 ✅ Define a method that sets the blue channel high and the others low in the same way. 
 
-✅ Go back to `fn main()` and substitute the lines with the corresponding function call. 
-```rust
-loop {
- -      led_red.set_low().unwrap();
- -      led_blue.set_high().unwrap();
- +      light.red();
+✅ Go back to `fn main()` inside the loop substitute the lines with the corresponding function call. 
 
-        timer.delay_ms(1000_u32);
+```diff
+- led_red.set_low().unwrap();
+- led_blue.set_high().unwrap();
++ light.red();
 
- -      led_red.set_high().unwrap();
- -      led_blue.set_low().unwrap();
- +      light.blue();
+  timer.delay_ms(1000_u32);
 
-        timer.delay_ms(1000_u32);
-    };
+- led_red.set_high().unwrap();
+- led_blue.set_low().unwrap();
++ light.blue();
+
+  timer.delay_ms(1000_u32);
 ```
 
-✅ Write a method that blinks the LED between the two colors. 
-✅ Write a method that consumes the `LEDState` instance, so you can no longer use it. 
+✅ Write a method that blinks the LED between the two colors.
+
+
 
