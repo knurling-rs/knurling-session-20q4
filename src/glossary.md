@@ -21,4 +21,4 @@ Open Drain outputs switch between "disconnected" and "connected to ground".
 
 
 ### Pull-Up-Input
-A pin that is configured as pull-up input is set to high voltage, as long as it is not overwritten by an external source. Setting the pin to high voltage prevents the pin from floating, which can cause noise in the system. 
+A pin that is configured as pull-up input is set to VCC, as long as it is not overwritten by an external source. This setting prevents the pin from floating, which can cause noise in the system. 
