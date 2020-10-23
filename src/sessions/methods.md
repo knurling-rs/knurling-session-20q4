@@ -64,7 +64,7 @@ fn init(pins: P0Parts) -> LEDState {
 
 + let mut light = LEDState::init(pins);
 ```
-We can now define all sorts of instance methods that control the behaviour of the LED. As an example we will refactor this piece of code that switches the led from red light to blue light with a 1000ms intervall:
+We can now define all sorts of instance methods that control the behaviour of the LED. As an example we will refactor this piece of code that switches the led from red light to blue light with a 1000ms interval:
 
 ```rust
 loop {
