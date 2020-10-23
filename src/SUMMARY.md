@@ -5,7 +5,7 @@
     - [Preparations](./sessions/Preparations.md)
         - [Checking the Hardware](./sessions/hardware.md)
         - [Installation Instructions](./sessions/installation.md)
-    - [CO<sub>2</sub>Sensor Project](./sessions/co2sensor.md)
+    - [CO2 Sensor Project](./sessions/co2sensor.md)
         - [Hello World](./sessions/hello_world.md)
         - [External RGB LED](./sessions/external_rgb.md)
         - [Internal Temperature Sensor](./sessions/internal_temp.md)
