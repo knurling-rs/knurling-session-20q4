@@ -32,7 +32,7 @@ pub fn is_pressed(&self) -> bool {
     self.0.is_low().unwrap()
 }
 ```
-Note, that `struct Button` does not have any named fields. To access the accociated type, index with `0`. 
+Note, that `struct Button` does not have any named fields. To access the associated type, index with `0`. 
 
 ✅ Inside `fn main()`, implement one of the onboard LEDs.
 
@@ -43,7 +43,6 @@ Note, that `struct Button` does not have any named fields. To access the accocia
 The user experience is pretty straight forward, when the program does one thing, while the button is pressed and another thing, when the button is not pressed. This gets more complicated, when pressing a button should only trigger a one-time event, like switching a display mode. Pressing the button too long would switch the display mode several times. This makes an intentional switch to a specific mode an act of luck. So, inserting a delay sounds like a good solution. When choosing a delay that is too long, some button presses might not get noticed, while if the delay is too short, switching the mode is still hard to control. It gets more complicated than that: What if pushing a button longer triggers a different event, than pushing the button shorter? What if an unpressed button triggers an event that delays reading the status of the button for too long, that pressing the button will often not get noticed?  
 
 To be continued...
-
 
 
 
