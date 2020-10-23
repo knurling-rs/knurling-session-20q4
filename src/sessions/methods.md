@@ -6,7 +6,7 @@ We assume you used a common anode RGB LED. If you use a common cathode RGB LED, 
 
 ✅ Go back to your code for the external RGB LED. 
 
-Instead of setting the Level for each of the channels individually, we can definde a type that contains all three channels and methods that define the behavior of the RGB LED.
+Instead of setting the Level for each of the channels individually, we can define a type that contains all three channels and methods that define the behavior of the RGB LED.
 
 ✅ Bring the GPIOS as well as the pin configurations into scope. 
 
@@ -112,4 +112,3 @@ loop {
 
 ✅ Write a method that blinks the LED between the two colors. 
 ✅ Write a method that consumes the `LEDState` instance, so you can no longer use it. 
-
