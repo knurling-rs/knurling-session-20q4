@@ -25,7 +25,7 @@ fn main() -> ! {
     // set pin p0_13 into push pull output, with the initial level HIGH
     let mut led_1 = pins.p0_13.into_push_pull_output(Level::Low);
     timer.delay_ms(1000_u32);
-    
+
     loop {
         led_1.set_high().unwrap();
         timer.delay_ms(1000_u32);

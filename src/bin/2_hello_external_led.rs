@@ -9,13 +9,9 @@ use embedded_hal::{blocking::delay::DelayMs, digital::v2::OutputPin};
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
-    gpio::{
-        p0::{Parts as P0Parts},
-        Level,
-    },
+    gpio::{p0::Parts as P0Parts, Level},
     Timer,
 };
-
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -32,9 +28,7 @@ fn main() -> ! {
     let mut led_blue = pins.p0_04.into_push_pull_output(Level::High);
     let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
 
-
     loop {
-       
         led_red.set_high().unwrap();
         led_blue.set_low().unwrap();
         led_green.set_high().unwrap();
@@ -46,10 +40,7 @@ fn main() -> ! {
         led_green.set_high().unwrap();
 
         timer.delay_ms(1000_u32);
-    };
+    }
 
-    knurling_session_20q4::exit()
+    // knurling_session_20q4::exit()
 }
-
-
-
