@@ -22,14 +22,23 @@ fn main() -> ! {
     let mut timer = Timer::new(board.TIMER0);
     // second peripheral: access to P0 pins
     let pins = P0Parts::new(board.P0);
-    // set pin p0_13 into push pull output, with the initial level HIGH
-    let mut led_1 = pins.p0_13.into_push_pull_output(Level::Low);
-    timer.delay_ms(1000_u32);
+
+    // set 3 gpios into push pull output, with the initial level HIGH
+    let mut led_red = pins.p0_03.into_push_pull_output(Level::High);
+    let mut led_blue = pins.p0_04.into_push_pull_output(Level::High);
+    let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
 
     loop {
-        led_1.set_high().unwrap();
+        led_red.set_high().unwrap();
+        led_blue.set_low().unwrap();
+        led_green.set_high().unwrap();
+
         timer.delay_ms(1000_u32);
-        led_1.set_low().unwrap();
+
+        led_red.set_low().unwrap();
+        led_blue.set_high().unwrap();
+        led_green.set_high().unwrap();
+
         timer.delay_ms(1000_u32);
     }
 
