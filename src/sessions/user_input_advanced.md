@@ -11,7 +11,7 @@ We want to be able to switch the unit in which the temperature is displayed, whi
 ✅ Add a `unit` field to the `struct Button`. 
 
 ```rust
-pub struct Button{
+pub struct Button {
     pin: Pin<Input<PullUp>>,
     unit: Unit,
 }
