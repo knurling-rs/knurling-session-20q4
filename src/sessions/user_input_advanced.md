@@ -2,7 +2,7 @@
 
 ## Convert Temperature Unit by pushing a Button
 
-The user experience is pretty straight forward, the program does one thing, while the button is pressed and another thing, when the button is not pressed. This gets more complicated, when pressing a button should only trigger a one-time event, like switching the way temperature is displayed. 
+The user experience is pretty straight forward: the program does one thing while the button is pressed, and another thing when the button is not pressed. This gets more complicated when pressing a button should only trigger a one-time event like switching the way temperature is displayed. 
 
 ✅ Start with the file from the last chapter. 
 
