@@ -211,7 +211,7 @@ No matter how long you push the button, the unit only changes once. If you don't
 
 In order to detect all human button interactions and register the button's state, the button state needs to be read quite often. To filter out noise from the hardware, reading the button about every 5 ms is enough. We're looking to detect a rising edge, that is long enough to be intentional. Reacting on the rising edge of the button release, after a falling edge of a button press gives even more assurance, that the signal is intentional. 
 
-On a high level the implimentation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed microseconds is divisible by 5, the the button status is updated and everytime it is divisible by 1000 the temperature is logged. 
+On a high level the implementation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed milliseconds is divisible by 5, the the button status is updated and every time it is divisible by 1000 (one second) the temperature is logged. 
 
 
 ✅ After timer instance, add variable that will keep track of passed miliseconds. 
