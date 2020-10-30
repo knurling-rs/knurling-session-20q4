@@ -231,7 +231,7 @@ loop {
         defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
         // measure temperature
         // display temperature
-        }
+    }
     if (millis % 5) == 0 {
         // read and update button status
     }
