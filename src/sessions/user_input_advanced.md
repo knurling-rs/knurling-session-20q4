@@ -204,7 +204,7 @@ loop {
 ```
 ✅ Run the program. 
 
-No matter how long you push the button, the unit only changes once. If you don't push the button more then once within 100 ms, every interaction is registered. But our log output is still 10 times more then planned and button timing is not ideal. 
+No matter how long you push the button, the unit only changes once. If you don't push the button more than once within 100 ms, every interaction is registered. But our log output is still 10 times more than planned and button timing is not ideal. 
 
 
 ## Timing
