@@ -145,7 +145,7 @@ We implement buttons, because we want people to be able to interact with a syste
 
 ## What should the program behavior be like?
 
-We want to change the unit in which the temperature is displayed by pressing a button. The change should persist despite the button is released. We use one of the button's transistion from being pressed to being not pressed as triggering event for the unit conversion. To detect the button's state, the program keeps track of the past state of the button. The temperature should be displayed every 1000ms.
+We want to change the unit in which the temperature is displayed by pressing a button. The change should persist once the button is released. We use one of the button's transition from "being pressed" to "not being pressed" as the triggering event for the unit conversion. To detect the button's transitions, the program keeps track of the past state of the button. The temperature should be displayed every 1000ms.
 
 ## Improve Button behaviour
 
