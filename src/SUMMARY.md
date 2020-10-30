@@ -12,6 +12,7 @@
         - [More about Methods](./sessions/methods.md)
         - [Adding User Input - Basic](./sessions/user_input_basic.md)
         - [Adding User Input - Advanced](./sessions/user_input_advanced.md)
+        - [Bringing it all Together](./sessions/bring-together.md)
 - [Reference Material](./reference.md)
     - [Project Setup - General Guides](./project_setup.md)
         - [defmt setup](./defmt_setup.md)
