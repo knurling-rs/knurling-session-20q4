@@ -2,7 +2,7 @@
 
 ## Convert Temperature Unit by pushing a Button
 
-The user experience is pretty straight forward, the program does one thing, while the button is pressed and another thing, when the button is not pressed. This gets more complicated, when pressing a button should only trigger a one-time event, like switching the way temperature is displayed. 
+The user experience is pretty straight forward: the program does one thing while the button is pressed, and another thing when the button is not pressed. This gets more complicated when pressing a button should only trigger a one-time event like switching the way temperature is displayed. 
 
 ✅ Start with the file from the last chapter. 
 
@@ -11,7 +11,7 @@ We want to be able to switch the unit in which the temperature is displayed, whi
 ✅ Add a `unit` field to the `struct Button`. 
 
 ```rust
-pub struct Button{
+pub struct Button {
     pin: Pin<Input<PullUp>>,
     unit: Unit,
 }
@@ -145,7 +145,7 @@ We implement buttons, because we want people to be able to interact with a syste
 
 ## What should the program behavior be like?
 
-We want to change the unit in which the temperature is displayed by pressing a button. The change should persist despite the button is released. We use one of the button's transistion from being pressed to being not pressed as triggering event for the unit conversion. To detect the button's state, the program keeps track of the past state of the button. The temperature should be displayed every 1000ms.
+We want to change the unit in which the temperature is displayed by pressing a button. The change should persist once the button is released. We use one of the button's transition from "being pressed" to "not being pressed" as the triggering event for the unit conversion. To detect the button's transitions, the program keeps track of the past state of the button. The temperature should be displayed every 1000ms.
 
 ## Improve Button behaviour
 
@@ -204,14 +204,14 @@ loop {
 ```
 ✅ Run the program. 
 
-No matter how long you push the button, the unit only changes once. If you don't push the button more then once within 100 ms, every interaction is registered. But our log output is still 10 times more then planned and button timing is not ideal. 
+No matter how long you push the button, the unit only changes once. If you don't push the button more than once within 100 ms, every interaction is registered. But our log output is still 10 times more than planned and button timing is not ideal. 
 
 
 ## Timing
 
 In order to detect all human button interactions and register the button's state, the button state needs to be read quite often. To filter out noise from the hardware, reading the button about every 5 ms is enough. We're looking to detect a rising edge, that is long enough to be intentional. Reacting on the rising edge of the button release, after a falling edge of a button press gives even more assurance, that the signal is intentional. 
 
-On a high level the implimentation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed microseconds is divisible by 5, the the button status is updated and everytime it is divisible by 1000 the temperature is logged. 
+On a high level the implementation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed milliseconds is divisible by 5, the the button status is updated and every time it is divisible by 1000 (one second) the temperature is logged. 
 
 
 ✅ After timer instance, add variable that will keep track of passed miliseconds. 
@@ -231,7 +231,7 @@ loop {
         defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
         // measure temperature
         // display temperature
-        }
+    }
     if (millis % 5) == 0 {
         // read and update button status
     }
