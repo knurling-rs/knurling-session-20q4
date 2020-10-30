@@ -1,4 +1,4 @@
-# Adding User Input
+# Adding User - Input
 
 This section focuses on getting the buttons to work, so you can interact with the hardware!
 
@@ -38,11 +38,7 @@ Note, that `struct Button` does not have any named fields. To access the associa
 
 ✅ Continue to write the program, so that the LED is on, when the button is pushed and off, when the button is not pushed. 
 
-## Some considerations when adding user input
 
-The user experience is pretty straight forward, the program does one thing, while the button is pressed and another thing, when the button is not pressed. This gets more complicated, when pressing a button should only trigger a one-time event, like switching a display mode. Pressing the button too long could switch the display mode several times. This makes an intentional switch to a specific mode an act of luck. So, inserting a delay sounds like a good solution. When choosing a delay that is too long, some button presses might not get noticed, while if the delay is too short, switching the mode is still hard to control. It gets more complicated than that: What if pushing a button longer triggers a different event, than pushing the button shorter? What if an unpressed button triggers an event that delays reading the status of the button for too long, that pressing the button will often not get noticed?  
-
-To be continued...
 
 
 
