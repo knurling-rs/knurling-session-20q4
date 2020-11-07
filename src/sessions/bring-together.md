@@ -13,7 +13,38 @@ Define a spectrum around that temperature spanning 3 Degrees (°C). Temperatures
 
 ✅ Integrate this behavior of the LED into the last program. 
 
-❗️ Refactor the way the `struct LEDState` is defined, if you want to rely on that code. It is bound to specific pins, but can be rewritten so that it can take any gpio, just like `struct Button`. 
+You have written a lot of code in one file. This makes everything overwhelming and hard to reuse code. Let's refactor, by putting code we're likely to reuse in modules.
 
+✅ Inside `scr/` create a new folder with the name `dk_button`.
+
+✅ Inside `dk_button' create a file with the name `mod.rs`.
+
+✅ Move the `struct Button` definition and its `impl` block from `src/bin/thermometer` to `dk_button/mod.rs`.
+
+✅ Bring all necessary modules into scope.
+
+✅ Add `pub` in front of every method and every `struct` or `enum` definition, to make them accessible from other files. 
+
+✅ In `scr/lib.rs` add the following line, to export this module:
+
+```rust
+pub mod dk_button;
+```
+
+✅ In `src/bin/thermometer`, bring the `dk_button` module into scope:
+
+```rust
+use knurling_session_20q4::{
+    dk_button, 
+};
+```
+
+✅ Change the line, where the static method for instanciating the button is called, so that the method is called from the `dk_button` module:
+
+```rust
+let mut button_1 = dk_button::Button::new(pins.p0_11.degrade());
+```
+
+✅ Create the module `rgb_led` for the LED related code in the same way. 
 
 
