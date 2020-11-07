@@ -79,6 +79,7 @@ loop {
     timer.delay_ms(1000_u32);
     }
 ```
+
 ✅ Go back to the `impl` block. Define an instance method that sets the red channel low and the others high. 
 
 ```rust 
@@ -88,6 +89,7 @@ fn red(&mut self) {
     self.blue.set_high().unwrap();
 }
 ```
+
 The methods takes a mutable reference of the instance of `LEDState` as argument. `&mut self` is short for `self: &mut Self`. The fields of the struct can be accessed with the . syntax.  
 
 ✅ Define a method that sets the blue channel high and the others low in the same way. 
@@ -108,7 +110,57 @@ The methods takes a mutable reference of the instance of `LEDState` as argument.
   timer.delay_ms(1000_u32);
 ```
 
-✅ Write a method that blinks the LED between the two colors.
+✅ Turn this blinking loop into a method that can be called.
+
+Right now, the pins for the LED are hard coded. This makes the code hard to reuse for a second LED. Let's refactor this part of the code. 
+
+✅ Bring the `Pin` type and the `pelude::*` module into scope.
+
+```rust
+use nrf52840_hal::{
+    prelude::*, 
+    gpio::{
+        Level, 
+        Output, 
+        PushPull, 
+        Pin,
+    }, 
+    Timer,
+};
+```
+
+✅ In the struct definition, substitute the specific pins with the `Pin` type.
+
+```rust
+struct LEDColor {
+    red: Pin<Output<PushPull>>,
+    green: Pin<Output<PushPull>>,
+    blue: Pin<Output<PushPull>>,
+}
+```
+
+✅ Modify the `init` method, so the pins it will take can be any numbered pin, but they can also be in any configuration. The method will, when instanciating the `LEDColor` struct, configure the pins into a push-pull output, with high level.
+
+Note the assocated type `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
 
 
+```rust
+pub fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>) -> LEDColor {
 
+    LEDColor {
+        red: led_red.into_push_pull_output(Level::High),
+        blue: led_green.into_push_pull_output(Level::High),
+        green: led_blue.into_push_pull_output(Level::High),
+    }
+}
+```
+
+✅ Rewrite the lines in `fn main()` so that the code works.
+
+```rust
+let led_channel_red = pins.p0_03.degrade();
+let led_channel_green = pins.p0_04.degrade();
+let led_channel_blue = pins.p0_28.degrade();
+
+let mut light = LEDColor::init(led_channel_red, led_channel_blue, led_channel_green);
+```
