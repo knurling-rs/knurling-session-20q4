@@ -74,20 +74,12 @@ Now we need to implement the change of the unit on pressing a button.
 ✅ Go to the `impl Button` block. Add a method, that changes the unit. Use a match statement that, depending on the current unit switches to different one. 
 
 ```rust
-fn change_unit(&self) {
+fn change_unit(&mut self) {
     defmt::info!("Unit changed");
-    match self.unit {
-        Unit::Fahrenheit => {
-            self.unit = Unit::Kelvin
-        },
-
-        Unit::Kelvin => {
-            self.unit  = Unit::Celsius
-        },
-
-        Unit::Celsius => {
-            self.unit  = Unit::Fahrenheit
-        }
+    self.unit = match self.unit {
+        Unit::Fahrenheit => Unit::Kelvin,
+        Unit::Kelvin => Unit::Celsius,
+        Unit::Celsius => Unit::Fahrenheit,
     }
 }
 ```
@@ -187,9 +179,8 @@ pub fn check_rising_edge(&mut self) {
                 self.unit  = Unit::Fahrenheit
             }
         }
-
-        self.was_pressed = is_pressed;
     }
+    self.was_pressed = is_pressed;
 }
 ```
 ✅ In `fn main()` replace the `if` block with a call to this method.
@@ -228,7 +219,7 @@ loop {
     periodic_timer.start(1000u32);
 
     if (millis % 1000) == 0 {
-        defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
+        defmt::info!("Tick (milliseconds): {:u64}", millis);
         // measure temperature
         // display temperature
     }
@@ -259,4 +250,4 @@ use nb::block;
 ```rust
 block!(periodic_timer.wait()).unwrap();
 ```
-✅ Run the program. Enjoy pushing buttons
+✅ Run the program. Enjoy pushing buttons!
