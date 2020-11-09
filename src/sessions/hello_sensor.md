@@ -181,7 +181,7 @@ pub fn get_firmware_version(&mut self) -> Result<[u8; 2], Error> {
     let minor = u8::from_be(rd_buffer[1]);
         
     Ok([major, minor]) 
-    }
+}
 ```
 
 The method takes a mutable reference to `self` and returns a `Result` type, with an `Error` variant and an `ok` variant containing an `array` of two unsigned 8 bit integers. 
