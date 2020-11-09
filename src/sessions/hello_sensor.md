@@ -186,7 +186,7 @@ pub fn get_firmware_version(&mut self) -> Result<[u8; 2], Error> {
 
 The method takes a mutable reference to `self` and returns a `Result` type, with an `Error` variant and an `ok` variant containing an `array` of two unsigned 8 bit integers. 
 
-In the first line of the function body, we create an `array` of two `u8` containing the command that is sent to the sensor. Next, we create an empty read buffer that contains two zeroed u8, because we only need the first two bytes of the bytes that are returned. We can ommit the CRC byte. 
+In the first line of the function body, we create an `array` of two `u8` containing the command that is sent to the sensor. Next, we create an empty read buffer that contains two zeroed u8, because we only need the first two bytes of the bytes that are returned. We can omit the CRC byte. 
 
 Next, we call the `write()` method on the `SCD30`. It takes the address and a reference to the command as arguments. Then we call the read() method with the address and a mutable reference to the read buffer as arguments.
 
