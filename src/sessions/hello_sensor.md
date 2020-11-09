@@ -1,23 +1,27 @@
 # Hello, Sensor!
 
-On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. The depending on the command, the sensor will start or end a process, or return data. The SCD30 can use three different protocolls, we'll use i2c. 
+On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocolls, we'll use I2C. 
 
-# Some basics about the I2C Protocoll
+# Wiring 
 
-The I2C protocoll has two signal lines, one for data (SDA) and one for the clock signal (SCL). An I2C transaction consists of one or more messages. Each message begins with a start symbol, and the transaction ends with a stop symbol. Each message is either *write* or *read*, indicated by the next bit in the row. Following this comes the actual message in form of bytes. After every two bytes the recipient of the message sends an ACK signal. 
+[add image]
+
 
 # Prequisits
 
-* Access to Timer, P0 Pins, 1 LED
+In your programm, have access to the following ressources: 
+
+* Timer 
+* P0 Pins 
+* 1 LED
 
 # Setting up the i2c resource
 
-The resource we use is called twim. twim and I2C are identical protocolls, where the latter is trademarked, the former is not. 
+The resource we use is called twim. Twim and I2C are identical protocolls, the difference is that the latter is trademarked, the former is not. 
 
-Bring the following modules into scope:
+✅ Bring the following modules into scope:
 
 ```rust
-use embedded_hal::blocking::delay::DelayMs;
 
 // access to board peripherals:
 use nrf52840_hal::{
@@ -36,27 +40,26 @@ use nrf52840_hal::{
 ```
 
 
-In `fn main()` configure 2 pins as floating, one for the data signal (SDA) and one for the clock signal (SCL).
+✅ In `fn main()` configure 2 pins as floating, one for the data signal (SDA) and one for the clock signal (SCL).
 
 
 ```rust
 let scl = pins.p0_30.degrade();
 let sda = pins.p0_31.degrade();
 ```
-Instantiate the pins as `twim::Pins`:
+
+✅ Instantiate the pins as `twim::Pins`:
 
 ```rust
 let pins = twim::Pins { scl, sda };
 ```
 
-Create a `Twim` instance. The method takes three arguments: `TWIM` peripheral, the `pins` and a Frequency
-
-Where does the frequency come from?
+✅ Create a `Twim` instance. The method takes three arguments: `TWIM` peripheral, the `pins` and a frequency:
 
 ```rust
 let i2c = Twim::new(board.TWIM0, pins, twim::Frequency::K100);
 ```
-To introduce a different way of getting feedback from the hardware, that a program is running, add a blinking loop at the end of the program. 
+✅ To introduce a way of getting feedback from a running embedded Program that has no other perceivable output, add a blinking loop at the end of the program. 
 
 ```rust
 loop {
@@ -67,12 +70,12 @@ loop {
     };
 ```
 
-Run the program. You should see a blinking LED. 
+✅ Run the program. You should see a blinking LED. 
 
 
-We built the i2c instance, it needs to be connected to the sensor's interface. For this, we need the sensor's address. 
+We built the I2C instance, it needs to be connected to the sensor's interface. For this, we need the sensor's address. 
 
-Find the sensor's adress in the [Interface Description][Interface Description] and add it as global variable `DEFAULT_ADDRESS` above `fn main()`. 
+✅ Find the sensor's adress in the [Interface Description][Interface Description] and add it as global variable `DEFAULT_ADDRESS` above `fn main()`. 
 
 <details>
     <summary>Answer</summary>
@@ -84,7 +87,7 @@ Find the sensor's adress in the [Interface Description][Interface Description] a
   </details>
 
 
-Create an anonymous struct as type alias for `Twim<T>`. 
+✅ Create an anonymous struct as type alias for `Twim<T>`. 
 
 ```rust
 pub struct SCD30<T: Instance>(Twim<T>);
@@ -95,10 +98,11 @@ impl<T> SCD30<T> where T: Instance {
 ```
 
 What are the <T>s?
-i2c has the type `Twim<T>`, the `T` is a placeholder for a generic type, that needs to be defined in the `struct`. When a generic type `<T>` is part of a type declaration for function arguments, it needs to be specified right after the function name. When implementing methods for that `struct` `<T>` needs to be specified and defined as well, but this happens in the opening line of the `impl` block. 
+
+I2C has the type `Twim<T>`, the `T` is a placeholder for a generic type, that needs to be defined in the `struct`. When a generic type `<T>` is part of a type declaration for function arguments, it needs to be specified right after the function name. When implementing methods for that `struct` `<T>` needs to be specified and defined as well, but this happens in the opening line of the `impl` block. 
 
 
-Inside the `impl` block, create a static method that returns an instance of the `SCD30`. 
+✅ Inside the `impl` block, create a static method that returns an instance of the `SCD30`. 
 
 ```rust
 impl<T> SCD30<T> where T: Instance {
@@ -107,12 +111,13 @@ impl<T> SCD30<T> where T: Instance {
         SCD30(i2c2)
     }
 
-    /// impl block
+    /// other methods
 }
 ```
-Next, create a method that can be used on a sensor instance. The purpose of the message is to write a command to the sensor that will allow us to read the sensor's firmware version number. In order to be able to do this, we need to find some information in the sensor's [Interface Description][Interface Description]:
 
-Find the i2c command for reading the firmware version.
+Next, we'll create a method that can be used on a sensor instance. The purpose of the method is to write a command to the sensor that will allow us to read the sensor's firmware version number. In order to be able to do this, we need to find some information in the sensor's [Interface Description][Interface Description]:
+
+✅ Find the I2C command for reading the firmware version.
 
  <details>
     <summary>Answer</summary>
@@ -121,7 +126,7 @@ Find the i2c command for reading the firmware version.
 
   </details>
 
-Find the message sequence that actually needs to be written to the sensor.
+✅ Find the message sequence that actually needs to be written to the sensor.
 
  <details>
     <summary>Answer</summary>
@@ -132,7 +137,8 @@ Find the message sequence that actually needs to be written to the sensor.
 
   </details>
 
-Find the message that is read from the sensor. How long is the actual information content in bytes?
+✅ Find the message that is read from the sensor. How long is the actual information content in bytes?
+
  <details>
     <summary>Answer</summary>
     The message that is read:
@@ -144,7 +150,7 @@ Find the message that is read from the sensor. How long is the actual informatio
     The `read()` method returns a byte array of all bytes following the *read* byte. 
 </details>
 
-Calculate the Version number from the hexadecimal byte representation. 
+✅ Calculate the Version number from the hexadecimal byte representation from the example. 
 
  <details>
     <summary>Answer</summary>
@@ -161,6 +167,8 @@ Calculate the Version number from the hexadecimal byte representation.
 
 We'll go over this method in detail, because all other methods are just variations of this theme. 
 
+✅ Add the method to the `SCD30` impl block.
+
 ```rust
 pub fn get_firmware_version(&mut self) -> Result<[u8; 2], Error> {
     let command:[u8; 2] = [0xd1, 0x00];
@@ -176,16 +184,16 @@ pub fn get_firmware_version(&mut self) -> Result<[u8; 2], Error> {
     }
 ```
 
-The method takes a mutable reference to `self` and Returns a `Result` type, with an Error variant and an `ok` variant containing an an array of two unsigned 8 bit integers. 
+The method takes a mutable reference to `self` and returns a `Result` type, with an `Error` variant and an `ok` variant containing an `array` of two unsigned 8 bit integers. 
 
-In the first line of the function body, we create an array of two `u8` containing the command that is sent to the sensor. Next, we create an empty read buffer that contains two zeroed u8, because we only need the first two bytes of the bytes that are returned. We can ommit the CRC byte. 
+In the first line of the function body, we create an `array` of two `u8` containing the command that is sent to the sensor. Next, we create an empty read buffer that contains two zeroed u8, because we only need the first two bytes of the bytes that are returned. We can ommit the CRC byte. 
 
 Next, we call the `write()` method on the `SCD30`. It takes the address and a reference to the command as arguments. Then we call the read() method with the address and a mutable reference to the read buffer as arguments.
 
 The last operation is converting the returned bytes into decimal numbers, and returning them as array. 
 
 
-In `fn main()` call the method on the sensor instance, and log the sensor's firmware version. 
+✅ In `fn main()` call the method on the sensor instance, and log the sensor's firmware version. 
 
 ```rust
 let firmware_version = sensor.get_firmware_version().unwrap();
