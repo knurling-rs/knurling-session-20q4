@@ -200,7 +200,7 @@ let firmware_version = sensor.get_firmware_version().unwrap();
 defmt::info!("Firmware Version: {:u8}.{:u8}", firmware_version[0], firmware_version[1]);
 ```
 
-Run your programm. You should get a version number as log output while the LED blinks.
+Run your program. You should get a version number as log output while the LED blinks.
 
 Congratulations! You have written your first part of a hardware driver!
 
