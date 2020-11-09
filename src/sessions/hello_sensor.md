@@ -1,6 +1,6 @@
 # Hello, Sensor!
 
-On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocolls, we'll use I2C. 
+On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocols, we'll use I2C. 
 
 # Wiring 
 
@@ -9,7 +9,7 @@ On a high level, the driver we will write will be able to send different command
 
 # Prequisits
 
-In your programm, have access to the following ressources: 
+In your program, have access to the following resources: 
 
 * Timer 
 * P0 Pins 
@@ -17,7 +17,7 @@ In your programm, have access to the following ressources:
 
 # Setting up the I2C resource
 
-The resource we use is called twim. Twim and I2C are identical protocolls, the difference is that the latter is trademarked, the former is not. 
+The resource we use is called twim. Twim and I2C are identical protocols, the difference is that the latter is trademarked, the former is not. 
 
 ✅ Bring the following modules into scope:
 
@@ -181,12 +181,12 @@ pub fn get_firmware_version(&mut self) -> Result<[u8; 2], Error> {
     let minor = u8::from_be(rd_buffer[1]);
         
     Ok([major, minor]) 
-    }
+}
 ```
 
 The method takes a mutable reference to `self` and returns a `Result` type, with an `Error` variant and an `ok` variant containing an `array` of two unsigned 8 bit integers. 
 
-In the first line of the function body, we create an `array` of two `u8` containing the command that is sent to the sensor. Next, we create an empty read buffer that contains two zeroed u8, because we only need the first two bytes of the bytes that are returned. We can ommit the CRC byte. 
+In the first line of the function body, we create an `array` of two `u8` containing the command that is sent to the sensor. Next, we create an empty read buffer that contains two zeroed u8, because we only need the first two bytes of the bytes that are returned. We can omit the CRC byte. 
 
 Next, we call the `write()` method on the `SCD30`. It takes the address and a reference to the command as arguments. Then we call the read() method with the address and a mutable reference to the read buffer as arguments.
 
@@ -200,7 +200,7 @@ let firmware_version = sensor.get_firmware_version().unwrap();
 defmt::info!("Firmware Version: {:u8}.{:u8}", firmware_version[0], firmware_version[1]);
 ```
 
-Run your programm. You should get a version number as log output while the LED blinks.
+Run your program. You should get a version number as log output while the LED blinks.
 
 Congratulations! You have written your first part of a hardware driver!
 
