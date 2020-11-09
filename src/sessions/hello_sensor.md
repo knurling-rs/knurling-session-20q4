@@ -1,6 +1,6 @@
 # Hello, Sensor!
 
-On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocolls, we'll use I2C. 
+On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocols, we'll use I2C. 
 
 # Wiring 
 
