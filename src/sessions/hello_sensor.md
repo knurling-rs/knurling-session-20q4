@@ -4,7 +4,7 @@ On a high level, the driver we will write will be able to send different command
 
 # Wiring 
 
-[add image]
+![Breadboard Diagram for wiring of SCD30](../img/knurling-scd30-bb.png)
 
 
 # Prequisits
@@ -15,7 +15,7 @@ In your programm, have access to the following ressources:
 * P0 Pins 
 * 1 LED
 
-# Setting up the i2c resource
+# Setting up the I2C resource
 
 The resource we use is called twim. Twim and I2C are identical protocolls, the difference is that the latter is trademarked, the former is not. 
 
@@ -59,7 +59,7 @@ let pins = twim::Pins { scl, sda };
 ```rust
 let i2c = Twim::new(board.TWIM0, pins, twim::Frequency::K100);
 ```
-✅ To introduce a way of getting feedback from a running embedded Program that has no other perceivable output, add a blinking loop at the end of the program. 
+✅  Add a blinking loop at the end of the program. This is a way of creating a visual output, that your program is running.
 
 ```rust
 loop {
@@ -67,7 +67,7 @@ loop {
         led_1.set_high().unwrap();
         timer.delay(250_000);
         led_1.set_low().unwrap();
-    };
+    }
 ```
 
 ✅ Run the program. You should see a blinking LED. 
@@ -97,7 +97,7 @@ impl<T> SCD30<T> where T: Instance {
 }
 ```
 
-What are the <T>s?
+What are the `<T>`s?
 
 I2C has the type `Twim<T>`, the `T` is a placeholder for a generic type, that needs to be defined in the `struct`. When a generic type `<T>` is part of a type declaration for function arguments, it needs to be specified right after the function name. When implementing methods for that `struct` `<T>` needs to be specified and defined as well, but this happens in the opening line of the `impl` block. 
 
