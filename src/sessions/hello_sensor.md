@@ -17,7 +17,7 @@ In your program, have access to the following resources:
 
 # Setting up the i2c resource
 
-The resource we use is called twim. Twim and I2C are identical protocolls, the difference is that the latter is trademarked, the former is not. 
+The resource we use is called twim. Twim and I2C are identical protocols, the difference is that the latter is trademarked, the former is not. 
 
 ✅ Bring the following modules into scope:
 
