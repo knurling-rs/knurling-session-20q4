@@ -9,7 +9,7 @@ On a high level, the driver we will write will be able to send different command
 
 # Prequisits
 
-In your programm, have access to the following ressources: 
+In your program, have access to the following resources: 
 
 * Timer 
 * P0 Pins 
