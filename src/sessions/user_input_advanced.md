@@ -6,18 +6,7 @@ The user experience is pretty straight forward: the program does one thing while
 
 ✅ Start with the file from the last chapter. 
 
-We want to be able to switch the unit in which the temperature is displayed, while the temperature is updated regularly. Since some of the programs behavior depends on the current choice of unit, that unit needs to be saved somewhere.
-
-✅ Add a `unit` field to the `struct Button`. 
-
-```rust
-pub struct Button {
-    pin: Pin<Input<PullUp>>,
-    unit: Unit,
-}
-```
-
-Note that the former anonymous struct now has fields. This change needs to be reflected in the methods that are implemented for this struct. 
+We want to be able to switch the unit in which the temperature is displayed, while the temperature is updated regularly. Since some of the programs behavior depends on the current choice of unit, that unit needs to be kept track of.
 
 There are three common ways of displaying Temperature: Celsius, Kelvin and Fahrenheit. They are three variants of the same concept, this calls for the use of an `enum` for this type. 
 
@@ -33,20 +22,20 @@ enum Unit {
 
 The sensor gives out the temperature in degrees Celsius. 
 
-✅ Go to the `impl Button` block, change the `new` method, so that the button is instantiated with the `unit` field set to `Unit::Celsius`.
+✅ Go to `fn main()`. Before the loop, add a variable that sets the current display unit.
 
 ```rust
-fn new<Mode>(pin: Pin<Mode>) -> Self {
-    Button {
-        pin: pin.into_pullup_input(),
-        unit: Unit::Celsius,
+let current_unit = Unit::Celsius;
+
+    loop {
+        // ...
     }
-}
+
 ```
 
 We can define methods for an `enum` in the same way we can do that for a `struct`.
 
-✅ Add a method to the enum, that contains a match statement. In each of the `match` arms, implement the conversion of the temperature value to the corresponding unit, then log the temperature. 
+✅ Add a method to the `enum Unit`, that contains a match statement. In each of the `match` arms, implement the conversion of the temperature value to the corresponding unit
 
 ```rust
 impl Unit {
@@ -74,20 +63,12 @@ Now we need to implement the change of the unit on pressing a button.
 ✅ Go to the `impl Button` block. Add a method, that changes the unit. Use a match statement that, depending on the current unit switches to different one. 
 
 ```rust
-fn change_unit(&self) {
+fn change_unit(&mut self) {
     defmt::info!("Unit changed");
-    match self.unit {
-        Unit::Fahrenheit => {
-            self.unit = Unit::Kelvin
-        },
-
-        Unit::Kelvin => {
-            self.unit  = Unit::Celsius
-        },
-
-        Unit::Celsius => {
-            self.unit  = Unit::Fahrenheit
-        }
+    self.unit = match self.unit {
+        Unit::Fahrenheit => Unit::Kelvin,
+        Unit::Kelvin => Unit::Celsius,
+        Unit::Celsius => Unit::Fahrenheit,
     }
 }
 ```
@@ -141,6 +122,7 @@ To define these states a bit more binary, we can look at these states by asking 
 While the human perspective seems pretty straight forward, determining what the button states mean in hardware is a bit more complicated. In theory pushing a button causes a signal change, but this change is often not so clean and rather noisy, especially when the button gets older. Compensating for this behavior is called *debouncing* a button. In software, this can be done by having a state machine that keeps track of the 4 states of the button, and by defining that a pushed button counts as a pushed button if it is pushed for a certain amount of time and not because of a sudden signal spike, because a conductive dust spec got in the way. 
 
 ## Persistance of system change
+
 We implement buttons, because we want people to be able to interact with a system and change the systems behavior by pushing a button. This change can either be only there while the button is pressed and ended by it's release, or started by pressing a button and persisting despite the button is released.
 
 ## What should the program behavior be like?
@@ -151,46 +133,33 @@ We want to change the unit in which the temperature is displayed by pressing a b
 
 ✅ Add another field to the button struct, that keeps track of the button's past state with a `bool`. The initial state is `false`.
 
+Note that the former anonymous struct now has fields. This change needs to be reflected in the methods that are implemented for this struct. 
+
 ```rust 
 pub struct Button{
     pin: Pin<Input<PullUp>>,
-    unit: Unit,
     was_pressed: bool,
 }
 ```
 ✅ Replace the method that just changes the unit to one that detects a rising edge in the signal by
     * reading the current state of the button
     * comparing the current state with the past state, which is saved in the button struct. 
-    * changing the unit, if button was pressed, but currently is not pressed. 
+    * returns `true`, if button was pressed, but currently is not pressed. 
     * updating the past state of the button. 
 
 ```rust
-pub fn check_rising_edge(&mut self) {
+pub fn check_falling_edge(&mut self) -> bool {
 
     let is_pressed = self.is_pressed();
 
-    // Only trigger on "falling edge" of the signal
-    // Term: "Edge Triggering"
     if self.was_pressed && !is_pressed {
         // Was pressed, now isn't:
-        defmt::info!("Unit changed");
-        match self.unit {
-            Unit::Fahrenheit => {
-                self.unit = Unit::Kelvin
-            },
-
-            Unit::Kelvin => {
-                self.unit  = Unit::Celsius
-            },
-
-            Unit::Celsius => {
-                self.unit  = Unit::Fahrenheit
-            }
-        }
-
-        self.was_pressed = is_pressed;
+        true;
     }
+    self.was_pressed = is_pressed;
+    false
 }
+
 ```
 ✅ In `fn main()` replace the `if` block with a call to this method.
 
@@ -228,7 +197,7 @@ loop {
     periodic_timer.start(1000u32);
 
     if (millis % 1000) == 0 {
-        defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
+        defmt::info!("Tick (milliseconds): {:u64}", millis);
         // measure temperature
         // display temperature
     }
@@ -259,4 +228,4 @@ use nb::block;
 ```rust
 block!(periodic_timer.wait()).unwrap();
 ```
-✅ Run the program. Enjoy pushing buttons
+✅ Run the program. Enjoy pushing buttons!
