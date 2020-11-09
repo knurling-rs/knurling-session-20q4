@@ -97,7 +97,7 @@ impl<T> SCD30<T> where T: Instance {
 }
 ```
 
-What are the <T>s?
+What are the `<T>`s?
 
 I2C has the type `Twim<T>`, the `T` is a placeholder for a generic type, that needs to be defined in the `struct`. When a generic type `<T>` is part of a type declaration for function arguments, it needs to be specified right after the function name. When implementing methods for that `struct` `<T>` needs to be specified and defined as well, but this happens in the opening line of the `impl` block. 
 
