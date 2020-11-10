@@ -18,14 +18,14 @@ use nrf52840_hal::{
     Timer,
 };
 
-pub struct Button(Pin<Input<PullUp>>);
+struct Button(Pin<Input<PullUp>>);
 
 impl Button {
     fn new<Mode>(pin: Pin<Mode>) -> Self {
         Button(pin.into_pullup_input())
     }
     /// Button is pressed
-    pub fn is_pressed(&self) -> bool {
+    fn is_pressed(&self) -> bool {
         self.0.is_low().unwrap()
     }
 }
@@ -53,6 +53,4 @@ fn main() -> ! {
             timer.delay_ms(500_u32);
         }
     };
-
-    // knurling_session_20q4::exit()
 }
