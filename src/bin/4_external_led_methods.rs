@@ -1,29 +1,30 @@
 #![no_main]
 #![no_std]
 
-use hal::timer::OneShot;
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 
 // access to functionality:
-use embedded_hal::{blocking::delay::DelayMs, digital::v2::OutputPin};
+use embedded_hal::blocking::delay::DelayMs;
 
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
+    prelude::*, 
     gpio::{
         p0::{
-            Parts as P0Parts, P0_03, P0_04, P0_28
+            Parts as P0Parts,
         },
-        Level, Output, PushPull,
+        Pin, Level, Output, PushPull,
     },
     pac::TIMER0,
     Timer,
+    timer::OneShot,
 };
 
 struct LEDColor {
-    red: P0_03<Output<PushPull>>,
-    green: P0_04<Output<PushPull>>,
-    blue: P0_28<Output<PushPull>>,
+    r: Pin<Output<PushPull>>,
+    g: Pin<Output<PushPull>>,
+    b: Pin<Output<PushPull>>,
 }
 
 impl LEDColor {
@@ -32,16 +33,12 @@ impl LEDColor {
     // they are used as constructors.
     // they don't have `self` as an argument.
 
-    fn init(pins: P0Parts) -> LEDColor {
-        let led_red = pins.p0_03.into_push_pull_output(Level::Low);
-        let led_green = pins.p0_04.into_push_pull_output(Level::Low);
-        let led_blue = pins.p0_28.into_push_pull_output(Level::Low);
-
+    fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>) -> Self { 
         LEDColor {
-            red: led_red,
-            green: led_green,
-            blue: led_blue,
-        }
+            r: led_red.into_push_pull_output(Level::High),
+            b: led_green.into_push_pull_output(Level::High),
+            g: led_blue.into_push_pull_output(Level::High),
+        } 
     }
 
     // instance methods:
@@ -49,65 +46,60 @@ impl LEDColor {
     // they have a reference `self` as an argument.
 
     fn off(&mut self) {
-        self.red.set_low().unwrap();
-        self.green.set_low().unwrap();
-        self.blue.set_low().unwrap();
+        self.r.set_high().unwrap();
+        self.g.set_high().unwrap();
+        self.b.set_high().unwrap();
     }
 
     fn blue(&mut self) {
-        self.red.set_low().unwrap();
-        self.green.set_low().unwrap();
-        self.blue.set_high().unwrap();
+        self.r.set_high().unwrap();
+        self.g.set_high().unwrap();
+        self.b.set_low().unwrap();
     }
 
     fn red(&mut self) {
-        self.red.set_high().unwrap();
-        self.green.set_low().unwrap();
-        self.blue.set_low().unwrap();
+        self.r.set_low().unwrap();
+        self.g.set_high().unwrap();
+        self.b.set_high().unwrap();
     }
 
     fn green(&mut self) {
-        self.red.set_low().unwrap();
-        self.green.set_high().unwrap();
-        self.blue.set_low().unwrap();
+        self.r.set_high().unwrap();
+        self.g.set_low().unwrap();
+        self.b.set_high().unwrap();
     }
 
     fn yellow(&mut self) {
-        self.red.set_high().unwrap();
-        self.green.set_high().unwrap();
-        self.blue.set_low().unwrap();
+        self.r.set_low().unwrap();
+        self.g.set_low().unwrap();
+        self.b.set_high().unwrap();
     }
 
     fn pink(&mut self) {
-        self.red.set_high().unwrap();
-        self.green.set_low().unwrap();
-        self.blue.set_high().unwrap();
+        self.r.set_low().unwrap();
+        self.g.set_high().unwrap();
+        self.b.set_low().unwrap();
     }
 
     fn light_blue(&mut self) {
-        self.red.set_low().unwrap();
-        self.green.set_high().unwrap();
-        self.blue.set_high().unwrap();
+        self.r.set_high().unwrap();
+        self.g.set_low().unwrap();
+        self.b.set_low().unwrap();
     }
 
     fn white(&mut self) {
-        self.red.set_high().unwrap();
-        self.green.set_high().unwrap();
-        self.blue.set_high().unwrap();
+        self.r.set_low().unwrap();
+        self.g.set_low().unwrap();
+        self.b.set_low().unwrap();
     }
     // blinks between two colors
     fn blinky(&mut self, timer: &mut Timer<TIMER0, OneShot>) {
-        self.red.set_high().unwrap();
-        self.blue.set_low().unwrap();
+        self.r.set_low().unwrap();
+        self.b.set_high().unwrap();
         timer.delay_ms(1000_u32);
-        self.red.set_low().unwrap();
-        self.blue.set_high().unwrap();
+        self.r.set_high().unwrap();
+        self.b.set_low().unwrap();
         timer.delay_ms(1000_u32);
-    }
-    // if the method takes ownership of self and allows it to go out of scope, the instance is dropped and can no longer be used.
-    fn extinquish(self) {
-        let LEDState = self;
-        defmt::info!("Destroy LED instance");
     }
 }
 
@@ -120,13 +112,17 @@ fn main() -> ! {
     // second peripheral: access to P0 pins
     let pins = P0Parts::new(board.P0);
 
-    let mut light = LEDColor::init(pins);
-    light.blue();
-    timer.delay_ms(1000_u32);
+    let led_channel_red = pins.p0_03.degrade();
+    let led_channel_green = pins.p0_04.degrade();
+    let led_channel_blue = pins.p0_28.degrade();
 
-    light.extinquish();
-    //light.red();
-    timer.delay_ms(1000_u32);
+    let mut light: LEDColor = LEDColor::init(led_channel_red, led_channel_blue, led_channel_green);
 
-    knurling_session_20q4::exit()
+    loop {
+        light.blue();
+        timer.delay_ms(1000_u32);
+
+        light.red();
+        timer.delay_ms(1000_u32);
+    }
 }
