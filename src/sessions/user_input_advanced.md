@@ -6,6 +6,18 @@ The user experience is pretty straight forward: the program does one thing while
 
 ✅  Start with the file from the last chapter. 
 
+✅  Bring the following ressources into scope:
+
+```rust 
+use nrf52840_hal::{
+    self as hal,
+    gpio::{p0::Parts as P0Parts, Input, Pin, PullUp},
+    prelude::*,
+    Temp, 
+    Timer,
+};
+```
+
 We want to be able to switch the unit in which the temperature is displayed, while the temperature is updated regularly. Since some of the programs behavior depends on the current choice of unit, that unit needs to be kept track of.
 
 There are three common ways of displaying Temperature: Celsius, Kelvin and Fahrenheit. They are three variants of the same concept, this calls for the use of an `enum` for this type. 
