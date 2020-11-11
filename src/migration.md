@@ -66,5 +66,3 @@ $ cargo install probe-run -f
 ```
 
 Now you can resume working on your project!
-
-<!-- TODO(japaric) check if `cargo clean` or `cargo update` is needed after step 3 -->
