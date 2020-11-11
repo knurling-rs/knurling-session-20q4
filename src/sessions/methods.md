@@ -24,9 +24,9 @@ use nrf52840_hal::{
 
 ```rust
 struct LEDState {
-    red: P0_03<Output<PushPull>>,
-    blue: P0_04<Output<PushPull>>,
-    green: P0_28<Output<PushPull>>,
+    r: P0_03<Output<PushPull>>,
+    b: P0_04<Output<PushPull>>,
+    b: P0_28<Output<PushPull>>,
 }
 ```
 
@@ -38,9 +38,9 @@ impl LEDState {
 }
 ```
 
-There are two types of methods: *static methods* and *instance methods*. Static methods are generally used as constructors of an instance. They are called with the :: syntax. Instance methods are called by an object, this is why they have a reference to that object as argument. They are called with the dot syntax.
+There are two types of methods: *static methods* and *instance methods*. Static methods are generally used as constructors of an instance. They are called with the :: syntax. Instance methods are called by an object, this is why they have a reference to that object as argument. They are called with the dot syntax. Here, it is important that fields don't have the same name as methods you plan to write. If that is the case, the struct's field is called and not the method! 
 
-✅ Inside the `impl` block create a static method that constructs the struct. The first part of the methods configures the pins, the second part creates the struct, which is then returned. 
+✅ Inside the `impl` block create a static method that constructs the struct. The first part of the methods configures the pins, the second part creates the struct, which is then returned.
 
 ```rust
 fn init(pins: P0Parts) -> LEDState {
@@ -49,9 +49,9 @@ fn init(pins: P0Parts) -> LEDState {
     let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
 
     LEDState {
-        red: led_red,
-        blue: led_blue,
-        green: led_green,
+        r: led_red,
+        b: led_blue,
+        b: led_green,
     }
 }
 ```
@@ -84,9 +84,9 @@ loop {
 
 ```rust 
 fn red(&mut self) {
-    self.red.set_low().unwrap();
-    self.green.set_high().unwrap();
-    self.blue.set_high().unwrap();
+    self.r.set_low().unwrap();
+    self.g.set_high().unwrap();
+    self.b.set_high().unwrap();
 }
 ```
 
@@ -133,9 +133,9 @@ use nrf52840_hal::{
 
 ```rust
 struct LEDColor {
-    red: Pin<Output<PushPull>>,
-    green: Pin<Output<PushPull>>,
-    blue: Pin<Output<PushPull>>,
+    r: Pin<Output<PushPull>>,
+    b: Pin<Output<PushPull>>,
+    b: Pin<Output<PushPull>>,
 }
 ```
 
@@ -148,9 +148,9 @@ Note the assocated type `<Mode>`. It needs to be declared right after the functi
 pub fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>) -> LEDColor {
 
     LEDColor {
-        red: led_red.into_push_pull_output(Level::High),
-        blue: led_green.into_push_pull_output(Level::High),
-        green: led_blue.into_push_pull_output(Level::High),
+        r: led_red.into_push_pull_output(Level::High),
+        b: led_green.into_push_pull_output(Level::High),
+        b: led_blue.into_push_pull_output(Level::High),
     }
 }
 ```
