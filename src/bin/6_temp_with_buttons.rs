@@ -4,7 +4,7 @@
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 
 // access to functionality:
-use embedded_hal::{blocking::delay::DelayMs, digital::v2::InputPin};
+use embedded_hal::blocking::delay::DelayMs;
 
 // access to board peripherals:
 use nrf52840_hal::{
@@ -20,7 +20,7 @@ impl Button {
     fn new<Mode>(pin: Pin<Mode>) -> Self {
         Button(pin.into_pullup_input())
     }
-    /// Button is pressed
+    /// Returns true if button is pressed
     fn is_pressed(&self) -> bool {
         self.0.is_low().unwrap()
     }

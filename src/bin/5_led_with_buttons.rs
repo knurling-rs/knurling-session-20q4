@@ -3,7 +3,6 @@
 
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 
-use embedded_hal::digital::v2::InputPin;
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
@@ -17,7 +16,7 @@ impl Button {
     fn new<Mode>(pin: Pin<Mode>) -> Self {
         Button(pin.into_pullup_input())
     }
-    /// Button is pressed
+    /// Returns true if button is pressed
     fn is_pressed(&self) -> bool {
         self.0.is_low().unwrap()
     }

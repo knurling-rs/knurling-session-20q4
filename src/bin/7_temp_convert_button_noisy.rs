@@ -44,7 +44,7 @@ impl Button {
         Button(pin.into_pullup_input())
     }
 
-    /// Button is pressed
+    /// Returns true if button is pressed
     pub fn is_pressed(&self) -> bool {
         self.0.is_low().unwrap()
     }

@@ -50,7 +50,7 @@ impl Button {
         }
     }
 
-    /// Button is pressed
+    /// Returns true if button is pressed
     pub fn is_pressed(&self) -> bool {
         self.pin.is_low().unwrap()
     }
