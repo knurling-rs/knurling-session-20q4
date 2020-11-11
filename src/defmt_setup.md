@@ -6,16 +6,13 @@ Here are the setup steps.
 
 [Cargo project template]: https://github.com/knurling-rs/app-template
 
-0. Install the **git** version of `probe-run`, [a custom Cargo runner that lets you run embedded apps if they were native apps][probe-run-post]. Be sure to enable the `defmt` Cargo feature!
+0. Install version v0.1.4 (or newer) of `probe-run`, [a custom Cargo runner that lets you run embedded apps if they were native apps][probe-run-post].
 
 [`probe-run`]: https://crates.io/crates/probe-run
 [probe-run-post]: https://ferrous-systems.com/blog/probe-run/
 
 ~~~ console
-$ cargo install \
-    --git https://github.com/knurling-rs/probe-run \
-    --branch main \
-    --features defmt
+$ cargo install probe-run
 ~~~
 
 1. Either initialize the project template with [`cargo-generate`] or [fetch a copy] and initialize the `Cargo.toml` manually.
@@ -138,4 +135,3 @@ Or if you are using VS code + Rust-Analyzer, instead, you can open the `src/bin/
 For more details check out [the `defmt` book][book].
 
 [book]: https://defmt.ferrous-systems.com/
-
