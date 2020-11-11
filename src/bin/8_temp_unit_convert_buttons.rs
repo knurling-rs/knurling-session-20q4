@@ -10,7 +10,8 @@ use nrf52840_hal::{
     self as hal,
     gpio::{p0::Parts as P0Parts, Input, Pin, PullUp},
     prelude::*,
-    Temp, Timer,
+    Temp, 
+    Timer,
 };
 
 enum Unit {

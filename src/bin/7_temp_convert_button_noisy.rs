@@ -10,10 +10,9 @@ use embedded_hal::blocking::delay::DelayMs;
 use nrf52840_hal::{
     self as hal,
     gpio::{p0::Parts as P0Parts, Input, Pin, PullUp},
-    pac::TIMER0,
     prelude::*,
-    timer::OneShot,
-    Temp, Timer,
+    Temp, 
+    Timer,
 };
 
 enum Unit {
