@@ -63,8 +63,8 @@ impl Unit {
 
             Unit::Celsius => {
                 // return temperature as it is
-            }
-        }
+            },
+        };
     }
 }
 ```
@@ -102,7 +102,7 @@ loop {
         Unit::Fahrenheit => defmt::info!("{:?} °F", converted_temp),
         Unit::Kelvin => defmt::info!("{:?} K", converted_temp),
         Unit::Celsius => defmt::info!("{:?} °C", converted_temp),
-    }
+    };
     if button_1.is_pressed() {
         // ...
     };       
@@ -189,8 +189,7 @@ fn check_rising_edge(&mut self) -> bool {
     if self.was_pressed && !is_pressed {
         // Was pressed, now isn't:
         rising_edge = true;
-    } 
-
+    }; 
     self.was_pressed = is_pressed;
     rising_edge
 }
@@ -237,13 +236,13 @@ loop {
     periodic_timer.start(1000u32);
 
     if (millis % 1000) == 0 {
-        defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
+        defmt::info!("Tick (milliseconds): {:u64}", millis);
         // measure temperature
         // display temperature
-    }
+    };
     if (millis % 5) == 0 {
         // read and update button status
-    }
+    };
 
     millis = millis.saturating_add(1);
 }
@@ -268,4 +267,6 @@ use nb::block;
 ```rust
 block!(periodic_timer.wait()).unwrap();
 ```
+
 ✅  Run the program. Enjoy pushing buttons!
+
