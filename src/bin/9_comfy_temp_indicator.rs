@@ -9,16 +9,12 @@ use knurling_session_20q4::{
 };
 
 use nb::block;
-// access to functionality:
-use embedded_hal::blocking::delay::DelayMs;
 
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
-    gpio::{p0::Parts as P0Parts, Input, Level, Output, Pin, PullUp, PushPull},
-    pac::TIMER0,
+    gpio::{p0::Parts as P0Parts},
     prelude::*,
-    timer::OneShot,
     Temp, Timer,
 };
 
@@ -27,13 +23,8 @@ fn main() -> ! {
     // take() returns all peripherals, so we can access them
     let board = hal::pac::Peripherals::take().unwrap();
 
-    // Initialize two timer resources:
-
-    // one for delay
-    let mut delay_timer = Timer::new(board.TIMER0);
-
     // one for continuous counting
-    let mut periodic_timer = Timer::periodic(board.TIMER1);
+    let mut periodic_timer = Timer::periodic(board.TIMER0);
     let mut millis: u64 = 0;
 
     // Initialize temperature sensor
