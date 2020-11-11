@@ -27,9 +27,6 @@ nrf52840-hal = "0.11.0"
 embedded-hal = "0.2.4"
 nb = "1.0.0"
 crc_all = "0.2.0"
-nrf-smartled = { version = "0.2.0", features = ["52840"] }
-smart-leds-trait = "0.2.0"
-smart-leds = "0.3.0"
 
 [features]
 # set logging levels here
