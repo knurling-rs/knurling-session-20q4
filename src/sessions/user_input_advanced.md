@@ -4,13 +4,13 @@
 
 The user experience is pretty straight forward: the program does one thing while the button is pressed, and another thing when the button is not pressed. This gets more complicated when pressing a button should only trigger a one-time event like switching the way temperature is displayed. 
 
-✅ Start with the file from the last chapter. 
+✅  Start with the file from the last chapter. 
 
 We want to be able to switch the unit in which the temperature is displayed, while the temperature is updated regularly. Since some of the programs behavior depends on the current choice of unit, that unit needs to be kept track of.
 
 There are three common ways of displaying Temperature: Celsius, Kelvin and Fahrenheit. They are three variants of the same concept, this calls for the use of an `enum` for this type. 
 
-✅ Add the following `enum` before the `struct Button`.
+✅  Add the following `enum` before the `struct Button`.
 
 ```rust
 enum Unit {
@@ -22,10 +22,10 @@ enum Unit {
 
 The sensor gives out the temperature in degrees Celsius. 
 
-✅ Go to `fn main()`. Before the loop, add a variable that sets the current display unit.
+✅  Go to `fn main()`. Before the loop, add a variable that sets the current display unit.
 
 ```rust
-let current_unit = Unit::Celsius;
+let mut current_unit = Unit::Celsius;
 
     loop {
         // ...
@@ -35,24 +35,22 @@ let current_unit = Unit::Celsius;
 
 We can define methods for an `enum` in the same way we can do that for a `struct`.
 
-✅ Add a method to the `enum Unit`, that contains a match statement. In each of the `match` arms, implement the conversion of the temperature value to the corresponding unit
+✅  Add a method to the `enum Unit`, that contains a match statement. In each of the `match` arms, implement the conversion of the temperature value to the corresponding unit.
 
 ```rust
 impl Unit {
-    fn convert_unit_and_display (&self, temperature: f32) {
+    fn convert_temperature(&self, temperature: f32) -> f32 {
         match self {
             Unit::Fahrenheit => {
-                // convert temperature
-                // log temperature
+                // convert and return temperature
             },
 
             Unit::Kelvin => {
-                // convert temperature
-                // log temperature
+                // convert and return temperature
             },
 
             Unit::Celsius => {
-                // log temperature
+                // return temperature as it is
             }
         }
     }
@@ -60,42 +58,62 @@ impl Unit {
 ```
 Now we need to implement the change of the unit on pressing a button.
 
-✅ Go to the `impl Button` block. Add a method, that changes the unit. Use a match statement that, depending on the current unit switches to different one. 
+✅  Go to fn `main()`. Inside the loop, use a match statement that, depending on the current unit, switches to different one if the button is pressed. Add a log statement, that indicates, that the unit was changed. 
 
 ```rust
-fn change_unit(&mut self) {
-    defmt::info!("Unit changed");
-    self.unit = match self.unit {
+if button_1.is_pressed() {
+    current_unit = match current_unit {
         Unit::Fahrenheit => Unit::Kelvin,
         Unit::Kelvin => Unit::Celsius,
         Unit::Celsius => Unit::Fahrenheit,
-    }
-}
+    };
+    defmt::info!("Unit changed");
+};
 ```
 
-✅ Go to  `fn main()`.
+✅  Run the program. Upon pressing the button, you should see continuous log output.
 
-✅ Implement a timer instance. 
+✅  Implement a periodic timer instance. Use this timer instead of the regular one.
 
 ```rust
 let mut periodic_timer= Timer::periodic(board.TIMER0);
 ```
 
-✅ Add a loop, where the temperature is read and displayed according to the current unit, and if a button is pushed, the unit is changed. Add a delay of 100 ms to the end of the loop.
+✅ Inside the loop, after the temperature is read from the sensor, call the `convert_temperature` method on the `current_unit` and bind to a new variable. This is followed by a match statement, that prints the temperature value with the right unit displayed to the log. 
 
 ```rust
 loop {
     let temperature: f32 = temp.measure().to_num();
-    button_1.unit.convert_unit_and_display(temperature);
-    if button_1.is_pressed() {
-        button_1.change_unit();
+    let converted_temp = current_unit.convert_temperature(temperature);
+
+    match current_unit {
+        Unit::Fahrenheit => defmt::info!("{:?} °F", converted_temp),
+        Unit::Kelvin => defmt::info!("{:?} K", converted_temp),
+        Unit::Celsius => defmt::info!("{:?} °C", converted_temp),
     }
+    if button_1.is_pressed() {
+        // ...
+    };       
+}
+```
+
+✅  Run the program.
+
+This should lead to many log outputs displaying the temperature in the current unit. Pushing the button once, changes the unit a number of times, so changing it intentionally to a certain unit is impossible.
+
+✅  Add a delay of 100 ms to the end of the loop.
+
+```rust
+loop {
+    // ... 
+
+    if button_1.is_pressed() {
+        // ...
+    };
     periodic_timer.delay_ms(100_u32);        
 }
 ```
-✅ Run the program.
-
-This should lead to many log outputs displaying the temperature in the current unit. Pushing the button once, changes the unit a number of times, so changing it intentionally to a certain unit is impossible.
+✅  Run the program.
 
 While the program kind of does what we want, the user experience is quite horrible. Let's improve that. 
 
@@ -119,6 +137,7 @@ To define these states a bit more binary, we can look at these states by asking 
 |4.|not pressed|pressed|
 
 ## State of the button out of machine perspective
+
 While the human perspective seems pretty straight forward, determining what the button states mean in hardware is a bit more complicated. In theory pushing a button causes a signal change, but this change is often not so clean and rather noisy, especially when the button gets older. Compensating for this behavior is called *debouncing* a button. In software, this can be done by having a state machine that keeps track of the 4 states of the button, and by defining that a pushed button counts as a pushed button if it is pushed for a certain amount of time and not because of a sudden signal spike, because a conductive dust spec got in the way. 
 
 ## Persistance of system change
@@ -131,47 +150,55 @@ We want to change the unit in which the temperature is displayed by pressing a b
 
 ## Improve Button behaviour
 
-✅ Add another field to the button struct, that keeps track of the button's past state with a `bool`. The initial state is `false`.
+✅  Add another field to the button struct, that keeps track of the button's past state with a `bool`. The initial state is `false`.
 
 Note that the former anonymous struct now has fields. This change needs to be reflected in the methods that are implemented for this struct. 
 
 ```rust 
-pub struct Button{
+struct Button{
     pin: Pin<Input<PullUp>>,
     was_pressed: bool,
 }
 ```
-✅ Replace the method that just changes the unit to one that detects a rising edge in the signal by
+✅  Add a method to the `impl Button` block that detects a rising edge in the signal by
     * reading the current state of the button
     * comparing the current state with the past state, which is saved in the button struct. 
     * returns `true`, if button was pressed, but currently is not pressed. 
     * updating the past state of the button. 
 
 ```rust
-pub fn check_falling_edge(&mut self) -> bool {
+fn check_rising_edge(&mut self) -> bool {
+
+    let mut rising_edge = false;
 
     let is_pressed = self.is_pressed();
-
+    // Only trigger on "rising edge" of the signal
+    // Term: "Edge Triggering"
     if self.was_pressed && !is_pressed {
         // Was pressed, now isn't:
-        true;
-    }
-    self.was_pressed = is_pressed;
-    false
-}
+        rising_edge = true;
+    } 
 
+    self.was_pressed = is_pressed;
+    rising_edge
+}
 ```
-✅ In `fn main()` replace the `if` block with a call to this method.
+
+✅  Go to `fn main()`. Declare the button's pin as mutable. Substitute the `is_presses` method with `check_rising_edge()`.
 
 ```rust
+let mut button_1 = Button::new(pins.p0_11.degrade()); 
+
 loop {
-    let temperature: f32 = temp.measure().to_num();
-    button_1.unit.convert_unit_and_display(temperature);
-    button_1.check_rising_edge();    
-    periodic_timer.delay_ms(100_u32); 
+    // ...
+    if button_1.check_rising_edge() {
+        // ...
+    };
+    // ...
 }
 ```
-✅ Run the program. 
+
+✅  Run the program. 
 
 No matter how long you push the button, the unit only changes once. If you don't push the button more than once within 100 ms, every interaction is registered. But our log output is still 10 times more than planned and button timing is not ideal. 
 
@@ -180,24 +207,25 @@ No matter how long you push the button, the unit only changes once. If you don't
 
 In order to detect all human button interactions and register the button's state, the button state needs to be read quite often. To filter out noise from the hardware, reading the button about every 5 ms is enough. We're looking to detect a rising edge, that is long enough to be intentional. Reacting on the rising edge of the button release, after a falling edge of a button press gives even more assurance, that the signal is intentional. 
 
-On a high level the implementation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed milliseconds is divisible by 5, the the button status is updated and every time it is divisible by 1000 (one second) the temperature is logged. 
+On a high level the implementation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed milliseconds is divisible by 5 and a rising edge is detected, the unit is changed. Every time the number of passed milliseconds is divisible by 1000 (one second) the temperature is logged. 
 
+Here, it is relevant, which type of unsigned integer the counter has. If the maximum value of the type is reached, we have a problem. For reference: A counter with u32 would run out after 49.7 days, a counter with u64 would run out after 267844497 years.
 
-✅ After timer instance, add variable that will keep track of passed miliseconds. 
+✅  After timer instance, add variable that will keep track of passed miliseconds. 
 
 ```rust
 let mut periodic_timer= Timer::periodic(board.TIMER0);
 let mut millis: u64 = 0;
 ```
 
-✅ Inside the loop, start the timer with a maximum value of 1000 µs. Implement the controll flow for updating the button and logging the temperature. Then add a line, where after each iteration of the loop 1 is added to the counter for passed microseconds. 
+✅  Inside the loop, start the timer with a maximum value of 1000 µs. Implement the controll flow for updating the button and logging the temperature. Then add a line, where after each iteration of the loop 1 is added to the counter for passed microseconds. 
 
 ```rust
 loop {
     periodic_timer.start(1000u32);
 
     if (millis % 1000) == 0 {
-        defmt::info!("Tick (milliseconds): {:u64}", millis);
+        defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
         // measure temperature
         // display temperature
     }
@@ -209,23 +237,23 @@ loop {
 }
 ```
 
-✅ Run the code. 
+✅  Run the code. 
 
 The temperature is still logged way more often then every 1000 ms, because the entire execution of the loop takes under 1000 µs. So the number of passed microseconds is increased before that time has actually passed. In order for the program to have the correct timing, we need to block the execution of the loop until the 1000 µs have passed before increasing the number. 
 
-✅ Go to the `cargo.toml` file. 
+✅  Go to the `cargo.toml` file. 
 
-✅ Import the crate `nb = "1.0.0"`. 
+✅  Import the crate `nb = "1.0.0"`. 
 
-✅ Go back to your program file and bring that crate and it's block `module` into scope. 
+✅  Go back to your program file and bring that crate and it's block `module` into scope. 
 
 ```rust
 use nb::block;
 ```
 
-✅ Before incrementing the number of milliseconds add the following line that will turn the nonblocking counter into a blocking one, until it has counted up to 1000 µs.
+✅  Before incrementing the number of milliseconds add the following line that will turn the nonblocking counter into a blocking one, until it has counted up to 1000 µs.
 
 ```rust
 block!(periodic_timer.wait()).unwrap();
 ```
-✅ Run the program. Enjoy pushing buttons!
+✅  Run the program. Enjoy pushing buttons!
