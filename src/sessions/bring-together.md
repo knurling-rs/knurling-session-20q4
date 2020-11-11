@@ -45,6 +45,6 @@ use knurling_session_20q4::{
 let mut button_1 = dk_button::Button::new(pins.p0_11.degrade());
 ```
 
-✅ Create the module `rgb_led` for the LED related code in the same way. 
+✅ Create acmodule `rgb_led` for the LED related code and a module `number_representations` for the unit conversions in the same way. It makes sense, that the method for unit conversion is changed to only taking a reference to `temperature`, because ownership is not needed. 
 
 
