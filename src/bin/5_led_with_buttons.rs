@@ -7,7 +7,7 @@ use embedded_hal::digital::v2::InputPin;
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
-    gpio::{p0::Parts as P0Parts, Level, Input, Pin, PullUp},
+    gpio::{p0::Parts as P0Parts, Input, Level, Pin, PullUp},
     prelude::*,
 };
 
@@ -37,5 +37,5 @@ fn main() -> ! {
         } else {
             led_1.set_high().unwrap();
         }
-    };
+    }
 }

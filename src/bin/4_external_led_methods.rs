@@ -9,16 +9,11 @@ use embedded_hal::blocking::delay::DelayMs;
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
-    prelude::*, 
-    gpio::{
-        p0::{
-            Parts as P0Parts,
-        },
-        Pin, Level, Output, PushPull,
-    },
+    gpio::{p0::Parts as P0Parts, Level, Output, Pin, PushPull},
     pac::TIMER0,
-    Timer,
+    prelude::*,
     timer::OneShot,
+    Timer,
 };
 
 struct LEDColor {
@@ -33,12 +28,12 @@ impl LEDColor {
     // they are used as constructors.
     // they don't have `self` as an argument.
 
-    fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>) -> Self { 
+    fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>) -> Self {
         LEDColor {
             r: led_red.into_push_pull_output(Level::High),
             b: led_green.into_push_pull_output(Level::High),
             g: led_blue.into_push_pull_output(Level::High),
-        } 
+        }
     }
 
     // instance methods:

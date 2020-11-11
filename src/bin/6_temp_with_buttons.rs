@@ -4,18 +4,14 @@
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 
 // access to functionality:
-use embedded_hal::{
-    blocking::delay::DelayMs, 
-    digital::v2::InputPin
-};
+use embedded_hal::{blocking::delay::DelayMs, digital::v2::InputPin};
 
 // access to board peripherals:
 use nrf52840_hal::{
     self as hal,
     gpio::{p0::Parts as P0Parts, Input, Pin, PullUp},
     prelude::*,
-    Temp, 
-    Timer,
+    Temp, Timer,
 };
 
 struct Button(Pin<Input<PullUp>>);
@@ -36,9 +32,7 @@ fn main() -> ! {
     let board = hal::pac::Peripherals::take().unwrap();
     // first peripheral: initialize timer
     let mut timer = Timer::new(board.TIMER0);
-    let mut other_timer= Timer::periodic(board.TIMER1);
-    other_timer.start(10000000_u32);
-   
+
     // second peripheral: initialize temperature sensor
     let mut temp = Temp::new(board.TEMP);
 
@@ -52,5 +46,5 @@ fn main() -> ! {
             defmt::info!("{:?} °C", temperature);
             timer.delay_ms(500_u32);
         }
-    };
+    }
 }

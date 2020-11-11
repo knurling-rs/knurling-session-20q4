@@ -10,8 +10,7 @@ use nrf52840_hal::{
     self as hal,
     gpio::{p0::Parts as P0Parts, Input, Pin, PullUp},
     prelude::*,
-    Temp,
-    Timer,
+    Temp, Timer,
 };
 
 enum Unit {
@@ -21,37 +20,31 @@ enum Unit {
 }
 
 impl Unit {
-    fn convert_unit_and_display (&self, temperature: f32) {
+    fn convert_temperature(&self, temperature: f32) -> f32 {
         match self {
             Unit::Fahrenheit => {
                 let temperature = (temperature * 9.0_f32 / 5.0_f32) + 32.0_f32;
-                defmt::info!("{:?} °F", temperature);
-            },
-
+                temperature
+            }
             Unit::Kelvin => {
                 let temperature = temperature + 273.15;
-                defmt::info!("{:?} K", temperature);
-            },
-
-            Unit::Celsius => {
-                defmt::info!("{:?} °C", temperature);
+                temperature
             }
+            Unit::Celsius => temperature,
         }
     }
 }
 
 // Button struct contains the unit variant to keep record of button status
-pub struct Button{
+pub struct Button {
     pin: Pin<Input<PullUp>>,
-    unit: Unit,
     was_pressed: bool,
 }
 
 impl Button {
-    fn new<Mode>(pin: Pin<Mode>) -> Self {
+    pub fn new<Mode>(pin: Pin<Mode>) -> Self {
         Button {
             pin: pin.into_pullup_input(),
-            unit: Unit::Celsius,
             was_pressed: false,
         }
     }
@@ -59,12 +52,6 @@ impl Button {
     /// Button is pressed
     pub fn is_pressed(&self) -> bool {
         self.pin.is_low().unwrap()
-
-    }
-
-    /// Button is released
-    pub fn is_released(&self) -> bool {
-        self.pin.is_high().unwrap()
     }
 
     /// what state is the button in?
@@ -73,64 +60,19 @@ impl Button {
     // This is a very simple state machine with two states.
     //
     // Note: This function should be called periodically
-    pub fn check_falling_edge(&mut self) {
+    pub fn check_rising_edge(&mut self) -> bool {
+        let mut rising_edge = false;
 
         let is_pressed = self.is_pressed();
-
-        // Only trigger on "falling edge" of the signal
+        // Only trigger on "rising edge" of the signal
         // Term: "Edge Triggering"
         if self.was_pressed && !is_pressed {
             // Was pressed, now isn't:
-            defmt::info!("Unit changed");
-            match self.unit {
-                Unit::Fahrenheit => {
-                    self.unit = Unit::Kelvin
-                },
-
-                Unit::Kelvin => {
-                    self.unit  = Unit::Celsius
-                },
-
-                Unit::Celsius => {
-                    self.unit  = Unit::Fahrenheit
-                }
-            }
+            rising_edge = true;
         }
 
-        // NOTE FOR TANKS, REMOVE BEFORE MERGE
-        // match (self.was_pressed, is_pressed) {
-        //     (false, false) => {
-        //         // Wasn't pressed, still isn't:
-        //         // Nothing to do.
-        //     }
-        //     (false, true) => {
-        //         // Wasn't pressed, but now is:
-        //         // Take note of that, but no further action
-        //     }
-        //     (true, false) => {
-        //         // Was pressed, now isn't:
-        //         defmt::info!("Unit changed");
-        //         match self.unit {
-        //             Unit::Fahrenheit => {
-        //                 self.unit = Unit::Kelvin
-        //             },
-
-        //             Unit::Kelvin => {
-        //                 self.unit  = Unit::Celsius
-        //             },
-
-        //             Unit::Celsius => {
-        //                 self.unit  = Unit::Fahrenheit
-        //             }
-        //         }
-        //     }
-        //     (true, true) => {
-        //         // Was pressed, still is:
-        //         // Nothing to do.
-        //     }
-        // }
-
         self.was_pressed = is_pressed;
+        rising_edge
     }
 }
 
@@ -140,7 +82,7 @@ fn main() -> ! {
     let board = hal::pac::Peripherals::take().unwrap();
 
     // Set up our "wall clock" timer, will be used to count milliseconds
-    let mut periodic_timer = Timer::new(board.TIMER1);
+    let mut periodic_timer = Timer::new(board.TIMER1).into_periodic();
     let mut millis: u64 = 0;
 
     // Initialize temperature sensor
@@ -150,25 +92,34 @@ fn main() -> ! {
     let pins = P0Parts::new(board.P0);
     let mut button_1 = Button::new(pins.p0_11.degrade());
 
+    let mut current_unit = Unit::Celsius;
     // state of the button is read continuoulsly, and new button state is saved, so every input gets noticed,
     // but temp value is only printed if tick number is divisible
     loop {
-
         // Start by setting/resetting the timer for our next interval
         // Timer counts in microseconds/at 1MHz, we care about milliseconds.
         periodic_timer.start(1000u32);
 
         // Every 250ms, print the current temperature reading
-        if (millis % 250) == 0 {
+        if (millis % 1000) == 0 {
             defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
             let temperature: f32 = temp.measure().to_num();
-            button_1.unit.convert_unit_and_display(temperature);
+            let converted_temp = current_unit.convert_temperature(temperature);
+            match current_unit {
+                Unit::Fahrenheit => defmt::info!("{:?} °F", converted_temp),
+                Unit::Kelvin => defmt::info!("{:?} K", converted_temp),
+                Unit::Celsius => defmt::info!("{:?} °C", converted_temp),
+            };
         }
 
         // Every 5ms, check the current state of the button
-        if (millis % 5) == 0 {
-            button_1.check_falling_edge();
-        }
+        if (millis % 5) == 0 && button_1.check_rising_edge() {
+            current_unit = match current_unit {
+                Unit::Fahrenheit => Unit::Kelvin,
+                Unit::Kelvin => Unit::Celsius,
+                Unit::Celsius => Unit::Fahrenheit,
+            };
+        };
 
         // Now wait for the timer to complete
         block!(periodic_timer.wait()).unwrap();
