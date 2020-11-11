@@ -3,8 +3,6 @@
 
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 use knurling_session_20q4::scd30;
-// access to functionality:
-
 
 // access to board peripherals:
 use nrf52840_hal::{
