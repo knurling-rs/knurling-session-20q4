@@ -26,7 +26,7 @@ use nrf52840_hal::{
 struct LEDState {
     r: P0_03<Output<PushPull>>,
     b: P0_04<Output<PushPull>>,
-    b: P0_28<Output<PushPull>>,
+    g: P0_28<Output<PushPull>>,
 }
 ```
 
@@ -51,7 +51,7 @@ fn init(pins: P0Parts) -> LEDState {
     LEDState {
         r: led_red,
         b: led_blue,
-        b: led_green,
+        g: led_green,
     }
 }
 ```
@@ -135,7 +135,7 @@ use nrf52840_hal::{
 struct LEDColor {
     r: Pin<Output<PushPull>>,
     b: Pin<Output<PushPull>>,
-    b: Pin<Output<PushPull>>,
+    g: Pin<Output<PushPull>>,
 }
 ```
 
@@ -149,8 +149,8 @@ pub fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>)
 
     LEDColor {
         r: led_red.into_push_pull_output(Level::High),
-        b: led_green.into_push_pull_output(Level::High),
         b: led_blue.into_push_pull_output(Level::High),
+        g: led_green.into_push_pull_output(Level::High),
     }
 }
 ```
@@ -159,8 +159,8 @@ pub fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>)
 
 ```rust
 let led_channel_red = pins.p0_03.degrade();
-let led_channel_green = pins.p0_04.degrade();
-let led_channel_blue = pins.p0_28.degrade();
+let led_channel_blue = pins.p0_04.degrade();
+let led_channel_green = pins.p0_28.degrade();
 
 let mut light = LEDColor::init(led_channel_red, led_channel_blue, led_channel_green);
 ```
