@@ -21,8 +21,8 @@ where
         let command: [u8; 2] = [0xd1, 0x00];
         let mut rd_buffer = [0u8; 2];
 
-        self.0.write(DEFAULT_ADDRESS, &command).unwrap();
-        self.0.read(DEFAULT_ADDRESS, &mut rd_buffer).unwrap();
+        self.0.write(DEFAULT_ADDRESS, &command)?;
+        self.0.read(DEFAULT_ADDRESS, &mut rd_buffer)?;
 
         let major = u8::from_be(rd_buffer[0]);
         let minor = u8::from_be(rd_buffer[1]);
@@ -41,7 +41,7 @@ where
         crc.update(&pressure.to_be_bytes());
         command[4] = crc.finish();
 
-        self.0.write(DEFAULT_ADDRESS, &command).unwrap();
+        self.0.write(DEFAULT_ADDRESS, &command)?;
 
         Ok(())
     }
@@ -50,8 +50,8 @@ where
         let command: [u8; 2] = [0x02, 0x02];
         let mut rd_buffer = [0u8; 3];
 
-        self.0.write(DEFAULT_ADDRESS, &command).unwrap();
-        self.0.read(DEFAULT_ADDRESS, &mut rd_buffer).unwrap();
+        self.0.write(DEFAULT_ADDRESS, &command)?;
+        self.0.read(DEFAULT_ADDRESS, &mut rd_buffer)?;
 
         Ok(u16::from_be_bytes([rd_buffer[0], rd_buffer[1]]) == 1)
     }
@@ -60,8 +60,8 @@ where
         let command: [u8; 2] = [0x03, 0x00];
         let mut rd_buffer = [0u8; 18];
 
-        self.0.write(DEFAULT_ADDRESS, &command).unwrap();
-        self.0.read(DEFAULT_ADDRESS, &mut rd_buffer).unwrap();
+        self.0.write(DEFAULT_ADDRESS, &command)?;
+        self.0.read(DEFAULT_ADDRESS, &mut rd_buffer)?;
 
         let data = SensorData {
             co2: f32::from_bits(u32::from_be_bytes([

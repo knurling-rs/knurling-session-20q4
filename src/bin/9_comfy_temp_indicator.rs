@@ -18,6 +18,14 @@ use nrf52840_hal::{
     Temp, Timer,
 };
 
+use core::ops::Range;
+
+const FREEZING_TEMPERATURE: f32 = 19.99;
+const CRISP_TEMPERATURES: Range<f32> = 20.00..21.99;
+const PLEASANTLY_WARM_TEMPERATURES: Range<f32> = 22.0..23.99;
+const A_BIT_TOO_STEAMY_TEMPERATURES: Range<f32> = 24.00..25.99;
+const BOILING_TEMPERATURE: f32 = 26.00;
+
 #[cortex_m_rt::entry]
 fn main() -> ! {
     // take() returns all peripherals, so we can access them
@@ -61,15 +69,15 @@ fn main() -> ! {
 
             let temperature: f32 = temp.measure().to_num();
 
-            if temperature < 23.4_f32 {
+            if temperature < FREEZING_TEMPERATURE {
                 led_indicator.blue();
-            } else if temperature > 23.04_f32 && temperature < 24.4_f32 {
+            } else if CRISP_TEMPERATURES.contains(&temperature) {
                 led_indicator.light_blue();
-            } else if temperature > 24.04_f32 && temperature < 25.5_f32 {
+            } else if PLEASANTLY_WARM_TEMPERATURES.contains(&temperature) {
                 led_indicator.green();
-            } else if temperature > 25.05_f32 && temperature < 26.5_f32 {
+            } else if A_BIT_TOO_STEAMY_TEMPERATURES.contains(&temperature) {
                 led_indicator.yellow();
-            } else if temperature > 26.5_f32 {
+            } else if temperature > BOILING_TEMPERATURE {
                 led_indicator.red();
             }
 
@@ -94,6 +102,6 @@ fn main() -> ! {
         block!(periodic_timer.wait()).unwrap();
 
         // Increment our millisecond count
-        millis = millis.saturating_add(1);
+        millis = millis.wrapping_add(1);
     }
 }

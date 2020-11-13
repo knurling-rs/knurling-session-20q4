@@ -1,5 +1,6 @@
 #![no_main]
 #![no_std]
+// This program assumes the use of an common anode rgb led. Switch high and low for use with a common cathode rgb led.
 
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 
@@ -90,11 +91,9 @@ impl LEDColor {
     }
     // blinks between two colors
     pub fn blinky(&mut self, timer: &mut Timer<TIMER0, OneShot>) {
-        self.r.set_low().unwrap();
-        self.b.set_high().unwrap();
+        self.red();
         timer.delay_ms(1000_u32);
-        self.r.set_high().unwrap();
-        self.b.set_low().unwrap();
+        self.blue();
         timer.delay_ms(1000_u32);
     }
 }

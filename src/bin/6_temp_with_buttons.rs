@@ -42,8 +42,8 @@ fn main() -> ! {
     loop {
         let temperature: f32 = temp.measure().to_num();
 
-        if button_1.is_pressed() == true {
-            defmt::info!("{:?} °C", temperature);
+        if button_1.is_pressed() {
+            defmt::info!("{:f32} °C", temperature);
             timer.delay_ms(500_u32);
         }
     }
