@@ -42,6 +42,4 @@ fn main() -> ! {
 
         timer.delay_ms(1000_u32);
     }
-
-    // knurling_session_20q4::exit()
 }
