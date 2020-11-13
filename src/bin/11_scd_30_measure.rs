@@ -43,6 +43,10 @@ fn main() -> ! {
 
     let pins = twim::Pins { scl, sda };
     let i2c = Twim::new(board.TWIM0, pins, twim::Frequency::K100);
+
+    // set ambient air pressure:
+    let pressure = 1020_u16;
+
     let mut sensor = scd30::SCD30::init(i2c);
 
     let firmware_version = sensor.get_firmware_version().unwrap();
@@ -52,7 +56,7 @@ fn main() -> ! {
         firmware_version[1]
     );
 
-    sensor.start_measuring().unwrap();
+    sensor.start_measuring(pressure).unwrap();
 
     'ready: loop {
         if sensor.data_ready().unwrap() {
@@ -60,7 +64,7 @@ fn main() -> ! {
             led_indicator.green();
             timer.delay_ms(2000_u32);
             led_indicator.off();
-            break
+            break 'ready
         } else {
             led_indicator.red();
             timer.delay_ms(500_u32);
