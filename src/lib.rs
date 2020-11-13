@@ -7,6 +7,11 @@ use panic_probe as _;
 
 use nrf52840_hal as _; // memory layout
 
+pub mod dk_button;
+pub mod number_representation;
+pub mod rgb_led;
+pub mod scd30;
+
 #[defmt::timestamp]
 fn timestamp() -> u64 {
     static COUNT: AtomicUsize = AtomicUsize::new(0);
