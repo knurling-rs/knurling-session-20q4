@@ -30,16 +30,22 @@ where
         Ok([major, minor])
     }
 
-    pub fn start_measuring(&mut self) -> Result<(), Error> {
-        let pressure = 0_u16;
-
+    pub fn start_continuous_measurement(&mut self, pressure: u16) -> Result<(), Error> {
+        
         // command bytes
         let mut command: [u8; 5] = [0x00, 0x10, 0x00, 0x00, 0x00];
+        let argument_bytes = &pressure.to_be_bytes();
+
+        command[2] = argument_bytes[0];
+        command[3] = argument_bytes[1];
 
         let mut crc = Crc::<u8>::new(0x31, 8, 0xff, 0x00, false);
 
+        defmt::info!("{:?}", command);
+
         crc.update(&pressure.to_be_bytes());
         command[4] = crc.finish();
+        defmt::info!("{:?}", command);
 
         self.0.write(DEFAULT_ADDRESS, &command)?;
 
@@ -56,7 +62,7 @@ where
         Ok(u16::from_be_bytes([rd_buffer[0], rd_buffer[1]]) == 1)
     }
 
-    pub fn get_measurement(&mut self) -> Result<SensorData, Error> {
+    pub fn read_measurement(&mut self) -> Result<SensorData, Error> {
         let command: [u8; 2] = [0x03, 0x00];
         let mut rd_buffer = [0u8; 18];
 
