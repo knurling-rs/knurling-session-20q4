@@ -2,6 +2,8 @@
 
 In this section, you will write your own methods. 
 
+An example of this implementation can be found here: [4_external_led_methods.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/4_external_led_methods.rs).
+
 We assume you used a common anode RGB LED. If you use a common cathode RGB LED, the settings `high` and `low` are the other way round. 
 
 ✅ Go back to your code for the external RGB LED. 
@@ -24,9 +26,9 @@ use nrf52840_hal::{
 
 ```rust
 struct LEDState {
-    red: P0_03<Output<PushPull>>,
-    blue: P0_04<Output<PushPull>>,
-    green: P0_28<Output<PushPull>>,
+    r: P0_03<Output<PushPull>>,
+    b: P0_04<Output<PushPull>>,
+    g: P0_28<Output<PushPull>>,
 }
 ```
 
@@ -38,9 +40,9 @@ impl LEDState {
 }
 ```
 
-There are two types of methods: *static methods* and *instance methods*. Static methods are generally used as constructors of an instance. They are called with the :: syntax. Instance methods are called by an object, this is why they have a reference to that object as argument. They are called with the dot syntax.
+There are two types of methods: *static methods* and *instance methods*. Static methods are generally used as constructors of an instance. They are called with the :: syntax. Instance methods are called by an object, this is why they have a reference to that object as argument. They are called with the dot syntax. 
 
-✅ Inside the `impl` block create a static method that constructs the struct. The first part of the methods configures the pins, the second part creates the struct, which is then returned. 
+✅ Inside the `impl` block create a static method that constructs the struct. The first part of the methods configures the pins, the second part creates the struct, which is then returned.
 
 ```rust
 fn init(pins: P0Parts) -> LEDState {
@@ -49,9 +51,9 @@ fn init(pins: P0Parts) -> LEDState {
     let mut led_green = pins.p0_28.into_push_pull_output(Level::High);
 
     LEDState {
-        red: led_red,
-        blue: led_blue,
-        green: led_green,
+        r: led_red,
+        b: led_blue,
+        g: led_green,
     }
 }
 ```
@@ -79,15 +81,17 @@ loop {
     timer.delay_ms(1000_u32);
     }
 ```
+
 ✅ Go back to the `impl` block. Define an instance method that sets the red channel low and the others high. 
 
 ```rust 
 fn red(&mut self) {
-    self.red.set_low().unwrap();
-    self.green.set_high().unwrap();
-    self.blue.set_high().unwrap();
+    self.r.set_low().unwrap();
+    self.g.set_high().unwrap();
+    self.b.set_high().unwrap();
 }
 ```
+
 The methods takes a mutable reference of the instance of `LEDState` as argument. `&mut self` is short for `self: &mut Self`. The fields of the struct can be accessed with the . syntax.  
 
 ✅ Define a method that sets the blue channel high and the others low in the same way. 
@@ -108,7 +112,57 @@ The methods takes a mutable reference of the instance of `LEDState` as argument.
   timer.delay_ms(1000_u32);
 ```
 
-✅ Write a method that blinks the LED between the two colors.
+✅ Turn this blinking loop into a method that can be called.
+
+Right now, the pins for the LED are hard coded. This makes the code hard to reuse for a second LED. Let's refactor this part of the code. 
+
+✅ Bring the `Pin` type and the `prelude::*` module into scope.
+
+```rust
+use nrf52840_hal::{
+    prelude::*, 
+    gpio::{
+        Level, 
+        Output, 
+        PushPull, 
+        Pin,
+    }, 
+    Timer,
+};
+```
+
+✅ In the struct definition, substitute the specific pins with the `Pin` type.
+
+```rust
+struct LEDColor {
+    r: Pin<Output<PushPull>>,
+    b: Pin<Output<PushPull>>,
+    g: Pin<Output<PushPull>>,
+}
+```
+
+✅ Modify the `init` method, so the pins it will take can be any numbered pin, but they can also be in any configuration. The method will, when instantiating the `LEDColor` struct, configure the pins into a push-pull output, with high level.
+
+Note the generic type paramater `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
 
 
+```rust
+pub fn init<Mode>(led_red: Pin<Mode>, led_blue: Pin<Mode>, led_green: Pin<Mode>) -> LEDColor {
 
+    LEDColor {
+        r: led_red.into_push_pull_output(Level::High),
+        b: led_blue.into_push_pull_output(Level::High),
+        g: led_green.into_push_pull_output(Level::High),
+    }
+}
+```
+
+✅ Rewrite the lines in `fn main()` so that the code works.
+
+```rust
+let led_channel_red = pins.p0_03.degrade();
+let led_channel_blue = pins.p0_04.degrade();
+let led_channel_green = pins.p0_28.degrade();
+
+let mut light = LEDColor::init(led_channel_red, led_channel_blue, led_channel_green);
+```

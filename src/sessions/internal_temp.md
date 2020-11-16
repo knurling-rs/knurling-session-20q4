@@ -1,5 +1,7 @@
 # Internal Temperature Sensor
 
+An example of this implementation can be found here: [3_temperature.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/3_temperature.rs).
+
 ✅ Preparations: have the board and the timer peripheral initialized in your code.
 
 Before we start to work with an external sensor, where we would have to write a driver, we will access the board's internal temperature sensor first. We'll take a look at the HAL to learn more about how accessing peripherals works in detail and how methods work in Rust.
