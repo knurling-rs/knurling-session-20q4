@@ -101,9 +101,9 @@ loop {
     let converted_temp = current_unit.convert_temperature(temperature);
 
     match current_unit {
-        Unit::Fahrenheit => defmt::info!("{:?} °F", converted_temp),
-        Unit::Kelvin => defmt::info!("{:?} K", converted_temp),
-        Unit::Celsius => defmt::info!("{:?} °C", converted_temp),
+        Unit::Fahrenheit => defmt::info!("{:f32} °F", converted_temp),
+        Unit::Kelvin => defmt::info!("{:f32} K", converted_temp),
+        Unit::Celsius => defmt::info!("{:f32} °C", converted_temp),
     };
     if button_1.is_pressed() {
         // ...

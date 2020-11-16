@@ -253,9 +253,9 @@ loop {
     let humidity = result.humidity;
 
     defmt::info!("
-        CO2 {:?} ppm 
-        Temperature {:?} C
-        Humidity {:?} %
+        CO2 {:f32} ppm 
+        Temperature {:f32} °C
+        Humidity {:f32} %
         ", co2, temp, humidity
     );
 
