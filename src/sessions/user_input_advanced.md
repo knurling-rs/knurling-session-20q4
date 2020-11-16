@@ -167,7 +167,7 @@ We want to change the unit in which the temperature is displayed by pressing a b
 Note that the former anonymous struct now has fields. This change needs to be reflected in the methods that are implemented for this struct. 
 
 ```rust 
-struct Button{
+struct Button {
     pin: Pin<Input<PullUp>>,
     was_pressed: bool,
 }
@@ -269,4 +269,3 @@ block!(periodic_timer.wait()).unwrap();
 ```
 
 ✅  Run the program. Enjoy pushing buttons!
-
