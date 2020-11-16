@@ -4,7 +4,7 @@
 
 Last week, [defmt v0.1.0 to crates.io][defmt-crates] was released on crates.io. We prepared a handy [guide] on migrating your project from the github version of demft to the crates.io version. New projects based on the app-template will automatically use the crates.io version from now on.
 
-
+----
 
 After making sure, the communication is set up correctly by reading and logging the version number of the firmware, we'll start making measurements. 
 
@@ -63,7 +63,7 @@ command[2] = argument_bytes[0];
 command[3] = argument_bytes[1];
 ```
 
-# Calculating the CRC byte
+# Calculating the CRC-Byte
 
 If we send messages that are longer then two bytes, we need to send CRC bytes for verification after every two bytes. They need to be calculated from the argument bytes.
 
@@ -158,7 +158,7 @@ loop {
 ✅ Run your program. You should see the log output "Data ready".
 
 
-## Reading and logging sensor data
+## Reading and Logging Sensor Data
 
 The sensor returns three values, one for Carbondioxide concentration, one for temperature and one for humidity. In section 1.5 in the [Interface Description] find the number type the sensor uses for the data. 
 
@@ -263,12 +263,12 @@ loop {
 ✅ Run the program, you should see the three values in the log output. 
 
 
-## Things to do on you own:
+## Optional Challenges:
 
 * The factory calibration of the sensor is pretty good, but you can still read up on how to calibrate the sensor and implement the necessary methods. 
 * Implement the altitude compensation method and use it instead of pressure compensation. 
-* Calculate absolute humidity from the relative humidiy value you can get from the sensor
-* Calculate the dewpoint
+* Calculate absolute humidity from the relative humidiy value you get from the sensor.
+* Calculate the dewpoint.
 * Implement the remaining methods.
 
 
