@@ -26,5 +26,4 @@
         - [[std] and [no_std]?](./stdnostd.md)
     - [Glossary](./glossary.md)
 - [Troubleshooting](./troubleshooting.md)
-
-
+- [Migrating from git defmt to stable defmt](./migration.md)
