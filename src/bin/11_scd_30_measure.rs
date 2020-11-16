@@ -4,7 +4,6 @@
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
 use knurling_session_20q4::{
     scd30,
-    rgb_led,
 };
 
 use embedded_hal::blocking::delay::DelayMs;
@@ -34,9 +33,6 @@ fn main() -> ! {
     let led_channel_blue = pins.p0_04.degrade();
     let led_channel_green = pins.p0_28.degrade();
 
-    let mut led_indicator =
-        rgb_led::LEDColor::init(led_channel_red, led_channel_blue, led_channel_green);
-
     // instanciate I2C
     let scl = pins.p0_30.degrade();
     let sda = pins.p0_31.degrade();
@@ -61,19 +57,10 @@ fn main() -> ! {
     'ready: loop {
         if sensor.data_ready().unwrap() {
             defmt::info!("Data ready.");
-            led_indicator.green();
-            timer.delay_ms(2000_u32);
-            led_indicator.off();
             break 'ready
-        } else {
-            led_indicator.red();
-            timer.delay_ms(500_u32);
-            led_indicator.off();
-            timer.delay_ms(500_u32);
-        }
     }
 
-    'measuring: loop {
+    loop {
 
         let result = sensor.get_measurement().unwrap();
 
