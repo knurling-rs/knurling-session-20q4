@@ -189,7 +189,7 @@ fn check_rising_edge(&mut self) -> bool {
     if self.was_pressed && !is_pressed {
         // Was pressed, now isn't:
         rising_edge = true;
-    }; 
+    }
     self.was_pressed = is_pressed;
     rising_edge
 }
