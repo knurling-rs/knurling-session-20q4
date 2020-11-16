@@ -160,7 +160,7 @@ loop {
 
 ## Reading and Logging Sensor Data
 
-The sensor returns three values, one for Carbondioxide concentration, one for temperature and one for humidity. In section 1.5 in the [Interface Description] find the number type the sensor uses for the data. 
+The sensor returns three values, one for Carbon dioxide concentration, one for temperature and one for humidity. In section 1.5 in the [Interface Description] find the number type the sensor uses for the data. 
 
 <details>
     <summary>Answer</summary>
