@@ -4,6 +4,11 @@
 
 Last week, [defmt v0.1.0 to crates.io][defmt-crates] was released on crates.io. We prepared a handy [guide] on migrating your project from the github version of defmt to the crates.io version. New projects based on the app-template will automatically use the crates.io version from now on.
 
+# Refactoring of older instructions: 
+
+**Please read the Chapter [Bringing it all together](https://knurling-books.ferrous-systems.com/sessions/bring-together.html) and Chapter [Hello Sensor](https://knurling-books.ferrous-systems.com/sessions/hello_sensor.html) and put your code into modules**
+
+
 ----
 
 After making sure, the communication is set up correctly by reading and logging the version number of the firmware, we'll start making measurements. 
