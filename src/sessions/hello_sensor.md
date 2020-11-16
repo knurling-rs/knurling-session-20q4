@@ -2,6 +2,8 @@
 
 On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocols, we'll use I2C. 
 
+An example of this implementation can be found here: [10_scd_30_log_v.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/10_scd_30_log_v.rs).
+
 # Wiring 
 
 ![Breadboard Diagram for wiring of SCD30](../img/knurling-scd30-bb.png)
@@ -87,7 +89,8 @@ We built the I2C instance, it needs to be connected to the sensor's interface. F
   </details>
 
 
-✅ Create an anonymous struct as type alias for `Twim<T>`. 
+✅ Create a module `scd30` for the sensor.
+Inside `src/scd30/mod.rs` create an anonymous struct as type alias for `Twim<T>`. 
 
 ```rust
 pub struct SCD30<T: Instance>(Twim<T>);
@@ -99,7 +102,7 @@ impl<T> SCD30<T> where T: Instance {
 
 What are the `<T>`s?
 
-I2C has the type `Twim<T>`, the `T` is a placeholder for a generic type, that needs to be defined in the `struct`. When a generic type `<T>` is part of a type declaration for function arguments, it needs to be specified right after the function name. When implementing methods for that `struct` `<T>` needs to be specified and defined as well, but this happens in the opening line of the `impl` block. 
+I2C has the type `Twim<T>`, the `T` is a generic type parameter, that needs to be defined in the `struct`. When a generic type `<T>` is part of a type declaration for function arguments, it needs to be specified right after the function name. When implementing methods for that `struct` `<T>` needs to be specified and defined as well, but this happens in the opening line of the `impl` block. 
 
 
 ✅ Inside the `impl` block, create a static method that returns an instance of the `SCD30`. 
@@ -193,7 +196,13 @@ Next, we call the `write()` method on the `SCD30`. It takes the address and a re
 The last operation is converting the returned bytes into decimal numbers, and returning them as array. 
 
 
-✅ In `fn main()` call the method on the sensor instance, and log the sensor's firmware version. 
+✅ Go to your program file and bring the `scd30` module into scope.
+
+```rust
+use knurling_session_20q4::scd30;
+```
+
+✅ In `fn main()`call the method on the sensor instance, and log the sensor's firmware version. 
 
 ```rust
 let firmware_version = sensor.get_firmware_version().unwrap();
@@ -202,6 +211,6 @@ defmt::info!("Firmware Version: {:u8}.{:u8}", firmware_version[0], firmware_vers
 
 Run your program. You should get a version number as log output while the LED blinks.
 
-Congratulations! You have written your first part of a hardware driver!
+Congratulations! You have written the first part of a hardware driver!
 
  [Interface Description]:https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/9.5_CO2/Sensirion_CO2_Sensors_SCD30_Interface_Description.pdf
