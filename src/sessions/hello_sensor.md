@@ -2,6 +2,8 @@
 
 On a high level, the driver we will write will be able to send different commands in form of bytes to the sensor. Depending on the command, the sensor will start or end a process or return data. The SCD30 can use three different protocols, we'll use I2C. 
 
+An example of this implementation can be found here: [10_scd_30_log_v.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/10_scd_30_log_v.rs).
+
 # Wiring 
 
 ![Breadboard Diagram for wiring of SCD30](../img/knurling-scd30-bb.png)

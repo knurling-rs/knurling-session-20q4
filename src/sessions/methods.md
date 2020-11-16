@@ -2,6 +2,8 @@
 
 In this section, you will write your own methods. 
 
+An example of this implementation can be found here: [4_external_led_methods.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/4_external_led_methods.rs).
+
 We assume you used a common anode RGB LED. If you use a common cathode RGB LED, the settings `high` and `low` are the other way round. 
 
 ✅ Go back to your code for the external RGB LED. 
@@ -38,7 +40,7 @@ impl LEDState {
 }
 ```
 
-There are two types of methods: *static methods* and *instance methods*. Static methods are generally used as constructors of an instance. They are called with the :: syntax. Instance methods are called by an object, this is why they have a reference to that object as argument. They are called with the dot syntax. Here, it is important that fields don't have the same name as methods you plan to write. If that is the case, the struct's field is called and not the method! 
+There are two types of methods: *static methods* and *instance methods*. Static methods are generally used as constructors of an instance. They are called with the :: syntax. Instance methods are called by an object, this is why they have a reference to that object as argument. They are called with the dot syntax. 
 
 ✅ Inside the `impl` block create a static method that constructs the struct. The first part of the methods configures the pins, the second part creates the struct, which is then returned.
 
@@ -141,7 +143,7 @@ struct LEDColor {
 
 ✅ Modify the `init` method, so the pins it will take can be any numbered pin, but they can also be in any configuration. The method will, when instantiating the `LEDColor` struct, configure the pins into a push-pull output, with high level.
 
-Note the assocated type `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
+Note the generic type paramater `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
 
 
 ```rust

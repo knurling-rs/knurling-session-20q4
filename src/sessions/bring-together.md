@@ -1,5 +1,6 @@
 # Bringing it all Together
-## Using the LED as Temperature Indicator
+
+## Using the LED as Comfort Temperature Indicator
 
 You have learned the following:
 * Lighting and wiring RGB LEDs.
@@ -8,12 +9,14 @@ You have learned the following:
 
 Build a program that indicates temperatures around your personal comfort temperature with different light colors. 
 
+An example of this implementation can be found here: [9_comfy_temp_indicator.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/9_comfy_temp_indicator.rs).
+
 What is the temperature where you feel most comfortable?
-Define a spectrum around that temperature spanning 3 Degrees (°C). Temperatures below that interval are too cold, temperatures above are too hot. The middle degree is your comfort zone, around it are acceptable values. Assign a signal color for each zone. Feel free to adapt the ranges. 
+Define a spectrum spanning 2 Degrees (°C) that you feel most comfortable at. Temperatures up to two degrees above and below that interval are acceptable, temperatures outside this range of six degrees are too hot or too cold. Assign a signal color for each zone. Feel free to adapt the ranges. 
 
 ✅ Integrate this behavior of the LED into the last program. 
 
-You have written a lot of code in one file. This makes everything overwhelming and hard to reuse code. Let's refactor, by putting code we're likely to reuse in modules.
+You have written a lot of code in one file. This makes everything overwhelming and hard to reuse code. Let's refactor by putting code we're likely to reuse in modules.
 
 ✅ Inside `scr/` create a new folder with the name `dk_button`.
 
@@ -31,7 +34,7 @@ You have written a lot of code in one file. This makes everything overwhelming a
 pub mod dk_button;
 ```
 
-✅ In `src/bin/thermometer`, bring the `dk_button` module into scope:
+✅ In `src/bin/comfy_temp_indicator`, bring the `dk_button` module into scope:
 
 ```rust
 use knurling_session_20q4::{
