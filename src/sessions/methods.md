@@ -139,7 +139,7 @@ struct LEDColor {
 }
 ```
 
-✅ Modify the `init` method, so the pins it will take can be any numbered pin, but they can also be in any configuration. The method will, when instanciating the `LEDColor` struct, configure the pins into a push-pull output, with high level.
+✅ Modify the `init` method, so the pins it will take can be any numbered pin, but they can also be in any configuration. The method will, when instantiating the `LEDColor` struct, configure the pins into a push-pull output, with high level.
 
 Note the assocated type `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
 
