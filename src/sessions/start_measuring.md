@@ -32,7 +32,7 @@ This Message does not only contain a command, but also an argument which allows 
 
 # The Role of Ambient Air Pressure
 
-Together with temperature, air pressure determines how many gas molecules can be found in a defined space. In an open system, the number of molecules rises when pressure increases and falls when pressure decreases. The Sensor's output unit for CO<sub>2</sub> is ppm, parts per million, which means of one million particles (atoms or molecules) the air contains as a whole, a certain number are Carbondioxode molecules. To be able to calculate that fraction, air pressure is needed. 
+Together with temperature, air pressure determines how many gas molecules can be found in a defined space. The number of molecules rises when pressure increases and falls when pressure decreases. The Sensor's output unit for CO<sub>2</sub> is ppm, parts per million, which means of one million particles (atoms or molecules) the air contains as a whole, a certain number are Carbon dioxide molecules.
 
 If a very accurate sensor reading is necessary, the value for ambient air pressure should come from another sensor. When building an air quality monitor for work and school rooms, hardcoding a value is sufficient. The standard air pressure at sea-level is 1013.25 mbar, check you local weather station for a value if you live on higher altitudes. 
 
@@ -242,7 +242,7 @@ pub fn read_measurement(&mut self) -> Result<SensorData, Error> {
 </details>
 
 
-✅ In your program file, inside the blinking loop, call the method and add the values and their unit to the log. You can format using `\n` and `\r` for new lines.
+✅ In your program file, inside the blinking loop, call the method and add the values and their unit to the log. 
 
 ```rust
 loop {
@@ -252,8 +252,11 @@ loop {
     let temp = result.temperature;
     let humidity = result.humidity;
 
-    defmt::info!("CO2 {:?} ppm \r\nTemperature {:?} C \r\nHumidity {:?} % \r\n\r\n",
-        co2, temp, humidity
+    defmt::info!("
+        CO2 {:?} ppm 
+        Temperature {:?} C
+        Humidity {:?} %
+        ", co2, temp, humidity
     );
 
     // blinking leds
@@ -269,7 +272,7 @@ loop {
 * Implement the altitude compensation method and use it instead of pressure compensation. 
 * Calculate absolute humidity from the relative humidity value you get from the sensor.
 * Calculate the dew point.
-* Implement the remaining methods.
+* Implement the remaining methods listed in the sensor's [Interface Description].
 
 
 [Interface Description]: https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/9.5_CO2/Sensirion_CO2_Sensors_SCD30_Interface_Description.pdf
