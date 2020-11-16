@@ -34,7 +34,7 @@ This Message does not only contain a command, but also an argument which allows 
 
 Together with temperature, air pressure determines how many gas molecules can be found in a defined space. In an open system, the number of molecules rises when pressure increases and falls when pressure decreases. The Sensor's output unit for CO<sub>2</sub> is ppm, parts per million, which means of one million particles (atoms or molecules) the air contains as a whole, a certain number are Carbondioxode molecules. To be able to calculate that fraction, air pressure is needed. 
 
-If a very accurate sensor reading is neccesary, the value for ambient air pressure should come from another sensor. When building an air quality monitor for work and school rooms, hardcoding a value is sufficient. The standart air pressure at sea-level is 1013.25 mbar, check you local weather station for a value if you live on higher altitudes. 
+If a very accurate sensor reading is necessary, the value for ambient air pressure should come from another sensor. When building an air quality monitor for work and school rooms, hardcoding a value is sufficient. The standard air pressure at sea-level is 1013.25 mbar, check you local weather station for a value if you live on higher altitudes. 
 
 For this tutorial we use the current value from Berlin, which is 1020 mbar. 
 
