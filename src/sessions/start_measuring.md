@@ -268,7 +268,7 @@ loop {
 * The factory calibration of the sensor is pretty good, but you can still read up on how to calibrate the sensor and implement the necessary methods. 
 * Implement the altitude compensation method and use it instead of pressure compensation. 
 * Calculate absolute humidity from the relative humidiy value you get from the sensor.
-* Calculate the dewpoint.
+* Calculate the dew point.
 * Implement the remaining methods.
 
 
