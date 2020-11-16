@@ -16,6 +16,7 @@
             - [Bringing it all Together](./sessions/bring-together.md)
         - [Block 2: Write your own driver](./sessions/driver.md)
             - [Hello Sensor](./sessions/hello_sensor.md)
+            - [Start Measuring](./sessions/start_measuring.md)
 - [Reference Material](./reference.md)
     - [Project Setup - General Guides](./project_setup.md)
         - [defmt setup](./defmt_setup.md)
