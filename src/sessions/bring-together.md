@@ -39,12 +39,11 @@ use knurling_session_20q4::{
 };
 ```
 
-✅ Change the line, where the static method for instanciating the button is called, so that the method is called from the `dk_button` module:
+✅ Change the line, where the static method for instantiating the button is called, so that the method is called from the `dk_button` module:
 
 ```rust
 let mut button_1 = dk_button::Button::new(pins.p0_11.degrade());
 ```
 
 ✅ Create acmodule `rgb_led` for the LED related code and a module `number_representations` for the unit conversions in the same way. It makes sense, that the method for unit conversion is changed to only taking a reference to `temperature`, because ownership is not needed. 
-
 
