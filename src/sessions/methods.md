@@ -114,7 +114,7 @@ The methods takes a mutable reference of the instance of `LEDState` as argument.
 
 Right now, the pins for the LED are hard coded. This makes the code hard to reuse for a second LED. Let's refactor this part of the code. 
 
-✅ Bring the `Pin` type and the `pelude::*` module into scope.
+✅ Bring the `Pin` type and the `prelude::*` module into scope.
 
 ```rust
 use nrf52840_hal::{
