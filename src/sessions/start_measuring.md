@@ -10,7 +10,7 @@ After making sure, the communication is set up correctly by reading and logging 
 
 An example of this implementation can be found here: [11_scd_30_measure.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/11_scd_30_measure.rs).
 
-✅ Go to secion 1.4.1 of the [Interface Description]. 
+✅ Go to section 1.4.1 of the [Interface Description]. 
 
 What are the message components we have to provide, so that continous measuring is triggered?
 
