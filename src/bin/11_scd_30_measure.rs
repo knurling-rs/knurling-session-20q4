@@ -61,7 +61,6 @@ fn main() -> ! {
     }
 
     loop {
-
         let result = sensor.get_measurement().unwrap();
 
         let co2 = result.co2;
