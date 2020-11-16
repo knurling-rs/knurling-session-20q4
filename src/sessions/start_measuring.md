@@ -135,8 +135,8 @@ After powering up, the sensor takes about 2 seconds until data is ready to be re
     let command: [u8; 2] = [0x02, 0x02];
     let mut rd_buffer = [0u8; 3];
 
-    self.0.write(DEFAULT_ADDRESS, &command).unwrap();
-    self.0.read(DEFAULT_ADDRESS, &mut rd_buffer).unwrap();
+    self.0.write(DEFAULT_ADDRESS, &command)?;
+    self.0.read(DEFAULT_ADDRESS, &mut rd_buffer)?;
 
     Ok(u16::from_be_bytes([rd_buffer[0], rd_buffer[1]]) == 1)
     }
@@ -212,8 +212,8 @@ pub fn read_measurement(&mut self) -> Result<SensorData, Error> {
     let command: [u8; 2] = [0x03, 0x00];
     let mut rd_buffer = [0u8; 18];
 
-    self.0.write(DEFAULT_ADDRESS, &command).unwrap();
-    self.0.read(DEFAULT_ADDRESS, &mut rd_buffer).unwrap();
+    self.0.write(DEFAULT_ADDRESS, &command)?;
+    self.0.read(DEFAULT_ADDRESS, &mut rd_buffer)?;
 
     let data = SensorData {
         co2: f32::from_bits(u32::from_be_bytes([
