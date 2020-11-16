@@ -2,7 +2,7 @@
 
 # ❗️❗️❗️ defmt update
 
-Last week, [defmt v0.1.0 to crates.io][defmt-crates] was released on crates.io. We prepared a handy [guide] on migrating your project from the github version of demft to the crates.io version. New projects based on the app-template will automatically use the crates.io version from now on.
+Last week, [defmt v0.1.0 to crates.io][defmt-crates] was released on crates.io. We prepared a handy [guide] on migrating your project from the github version of defmt to the crates.io version. New projects based on the app-template will automatically use the crates.io version from now on.
 
 ----
 
@@ -277,4 +277,3 @@ loop {
 [crc_all]: https://docs.rs/crc_all/0.2.0/crc_all/
 [guide]: https://defmt.ferrous-systems.com/migration.html  
 [defmt-crates]: https://crates.io/crates/defmt
-
