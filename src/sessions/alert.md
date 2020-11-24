@@ -15,13 +15,13 @@ The pins have been changed in this diagram so that the cables don't cross. You c
 
 ### The Buzzer
 
-The buzzer works pretty simple: It is connected to a pin and ground. Put the pin high, it makes noise, put the pin low, it's silent. Having the buzzer on all the time lets the buzzer buzz at the highest possible frequency. Building a method that switches the buzzer on and off with millisecond breaks in between lowers the frequency. 
+The buzzer works pretty simple: It is connected to a pin and ground. Any form of voltage change lets the buzzer buzz. The lower the frequency of this change, the lower the tone of the buzz. 
 
 ✅ Create a module for the buzzer. Create a type with the following methods:
     * init: takes a pin and puts it into push pull output mode with the initial level low. 
-    * on: puts the pin high.
-    * off: puts the pin low.
-    * buzz at lower frequency: switch the buzzer on and off with a break of one millisecond between each switch. Experiment with different break lengths.
+    * high: puts the pin high.
+    * low: puts the pin low.
+    * buzz: set the pin low and and high with a break of one millisecond between each switch. Experiment with different break lengths.
 
 ✅ When initializing the sensor in `fn main()`, let the buzzer buzz for 500 ms, to test that it works. 
 
