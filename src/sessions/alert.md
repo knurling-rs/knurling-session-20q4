@@ -15,7 +15,7 @@ The pins have been changed in this diagram so that the cables don't cross. You c
 
 ### The Buzzer
 
-The buzzer works pretty simple: It is connected to a pin and ground. Any form of voltage change lets the buzzer buzz. The lower the frequency of this change, the lower the tone of the buzz. 
+The buzzer works in a straightforward way: It is connected to a pin and ground. Any form of voltage change lets the buzzer buzz. The lower the frequency of this change, the lower the tone of the buzz. 
 
 ✅ Create a module for the buzzer. Create a type with the following methods:
     * init: takes a pin and puts it into push pull output mode with the initial level low. 
