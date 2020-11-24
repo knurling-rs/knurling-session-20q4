@@ -2,7 +2,7 @@
 
 **This chapter will be refactored using Pulse Width Modulation (PWM) with the next release of the nrf-hal**
 
-The CO<sub>2</sub> measuring device can now measure and display Carbon dioxide levels in its surroundings. In this chapter we add more interactivity: The device not only displays values but classifies the amount and acts accordingly: We define a normal level, a warning level and an upper limit for carbon dioxide in the air. All levels are indicated by the led, the upper limit will also have an acoustic warning from the buzzer. 
+The CO<sub>2</sub> measuring device can now measure and display Carbon dioxide levels in its surroundings. In this chapter we add more interactivity: The device not only displays values, but also classifies the amount and acts accordingly: We define a normal level, a warning level, and an upper limit for carbon dioxide in the air. All levels are indicated by the LED, the upper limit will also have an acoustic warning from the buzzer. 
 
 ## Wiring
 
