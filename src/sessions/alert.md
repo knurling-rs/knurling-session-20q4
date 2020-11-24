@@ -33,15 +33,16 @@ Since over 150 years, carbon dioxide concentration is seen as an indicator for t
 
 ✅ Create a new module for CO<sub>2</sub> alert. It contains the following:
 
-    - defines the warning level of CO<sub>2</sub>.
-    - defines the upper limit of CO<sub>2</sub>. 
-    - contains a function that decides if the current CO<sub>2</sub> level is an alert or not:
+* defines the warning level of CO<sub>2</sub>.
+* defines the upper limit of CO<sub>2</sub>. 
+* contains a function that decides if the current CO<sub>2</sub> level is an alert or not:
     if the value is 
-        - below warning level the led is green.
-        - above warning level and below the upper limit, the led is yellow. 
-        - above the upper limit, the led is red and the buzzer buzzes.
+    * below warning level the led is green.
+    * above warning level and below the upper limit, the led is yellow. 
+    * above the upper limit, the led is red and the buzzer buzzes.
 
-Help: 
+**Help:** 
+
 Accessing other modules in a module:
 
 ```rust
@@ -61,6 +62,7 @@ It takes probably longer then you expect. Leaving the buzzer on for the entire t
 ✅ Come up with your own signal scheme. What are the events that can come up? How would you like to be notified of them?
 
 Here are some ideas:
+
 Events:
 - low humidity value (relevant in winter, with a lot of heating)
 - carbon dioxide baseline (below 500 ppm)
