@@ -71,7 +71,7 @@ Events:
 - alert for temperatures, if you do not have a thermostat regulated heater but want to conserve energy. 
 
 Notifications:
-- notifications don't have to be on all the time, they can serve as a reminder and go on again, if conditions did not change after a certain amount of time has passed
+- notifications don't have to be on all the time, they can serve as a reminder and go on again, if conditions do not change after a certain amount of time has passed
 - LEDs can blink or have a steady light, all in different colors
 - a buzzer can buzz at different frequencies or change frequencies in one signal. 
 - Lower frequencies are less alerting but still signaling, while higher frequencies create a sense of urgency. 
