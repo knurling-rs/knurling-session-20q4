@@ -11,6 +11,8 @@ pub mod dk_button;
 pub mod number_representation;
 pub mod rgb_led;
 pub mod scd30;
+pub mod buzzer;
+pub mod alerts;
 
 #[defmt::timestamp]
 fn timestamp() -> u64 {
