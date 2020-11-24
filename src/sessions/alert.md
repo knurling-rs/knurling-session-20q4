@@ -38,7 +38,7 @@ For over 150 years, carbon dioxide concentration has been seen as an indicator f
 * contains a function that decides if the current CO<sub>2</sub> level is an alert or not:
     if the value is 
     * below warning level the led is green.
-    * above warning level and below the upper limit, the led is yellow. 
+    * above warning level and below the upper limit, the LED is yellow. 
     * above the upper limit, the LED is red and the buzzer buzzes.
 
 **Help:** 
