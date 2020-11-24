@@ -6,6 +6,11 @@ The CO<sub>2</sub> measuring device can now measure and display Carbon dioxide l
 
 ## Wiring
 
+The buzzer has two legs, one goes into ground, the other into a pin. When having several devices connected to the board, make sure they are all connected to the same ground. 
+The pins have been changed in this diagram so that the cables don't cross. You can stick with your old pin layout. 
+
+![Wiring of Sensor, LED and Buzzer](../img/knurling-scd30-led-buzz-bb.png)
+
 ## Implementation
 
 ### The buzzer
@@ -44,7 +49,7 @@ use crate::rgb_led::LEDColor;
 use crate::buzzer::Buzzer;
 ```
 [corona virus]: https://publikationen.dguv.de/widgets/pdf/download/article/3873
-[Current recomendations]: https://www.umweltbundesamt.de/sites/default/files/medien/4031/bilder/dateien/0_ausschuss_fuer_innenraumrichtwerte_leitwerte_20200224.pdf
+[Current recommendations]: https://www.umweltbundesamt.de/sites/default/files/medien/4031/bilder/dateien/0_ausschuss_fuer_innenraumrichtwerte_leitwerte_20200224.pdf
 
 
 ### User Experience
