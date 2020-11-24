@@ -57,7 +57,7 @@ use crate::buzzer::Buzzer;
 
 Make the following experiment: If your carbon dioxide sensor detects concentrations above 2000 ppm and you open the window, how long does it take until the concentration is back to baseline at between 400 and 500 ppm? 
 
-It takes probably longer then you expect. Leaving the buzzer on for the entire time is annoying and will not serve the purpose, as people will just turn it off completely. Having not only a visual but also an acoustic signal, when baseline is reached makes sense, as leaving the window open for an extended period of time in winter is a waste of energy. This is where we have a lot of freedom for design.
+It probably takes longer than you expect. Leaving the buzzer on for the entire time is annoying and will not serve the purpose, as people will just turn it off completely. Having not only a visual but also an acoustic signal, when baseline is reached makes sense, as leaving the window open for an extended period of time in winter is a waste of energy. This is where we have a lot of freedom for design.
 
 ✅ Come up with your own signal scheme. What are the events that can come up? How would you like to be notified of them?
 
