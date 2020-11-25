@@ -2,12 +2,7 @@
 #![no_std]
 
 use knurling_session_20q4 as _; // global logger + panicking-behavior + memory layout
-use knurling_session_20q4::{
-    scd30,
-    rgb_led,
-    buzzer,
-    alerts,
-};
+use knurling_session_20q4::{alerts, buzzer, rgb_led, scd30};
 
 use embedded_hal::blocking::delay::DelayMs;
 
@@ -68,7 +63,7 @@ fn main() -> ! {
             led_indicator.green();
             timer.delay_ms(2000_u32);
             led_indicator.off();
-            break
+            break;
         } else {
             led_indicator.red();
             timer.delay_ms(500_u32);
@@ -78,7 +73,6 @@ fn main() -> ! {
     }
 
     'measuring: loop {
-
         let result = sensor.get_measurement().unwrap();
 
         let co2 = result.co2;
@@ -87,8 +81,11 @@ fn main() -> ! {
 
         alerts::check_levels(&co2, &mut buzzer, &mut led_indicator, &mut timer);
 
-        defmt::info!("CO2 {:?} ppm \r\nTemperature {:?} C \r\nHumidity {:?} % \r\n\r\n",
-            co2, temp, humidity
+        defmt::info!(
+            "CO2 {:?} ppm \r\nTemperature {:?} C \r\nHumidity {:?} % \r\n\r\n",
+            co2,
+            temp,
+            humidity
         );
 
         timer.delay_ms(2000_u32);
