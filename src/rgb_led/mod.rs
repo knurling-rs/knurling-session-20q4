@@ -44,7 +44,6 @@ impl LEDColor {
         self.r.set_high().unwrap();
         self.b.set_high().unwrap();
         self.g.set_low().unwrap();
-
     }
 
     pub fn yellow(&mut self) {
