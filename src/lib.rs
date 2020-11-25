@@ -7,12 +7,12 @@ use panic_probe as _;
 
 use nrf52840_hal as _; // memory layout
 
+pub mod alerts;
+pub mod buzzer;
 pub mod dk_button;
 pub mod number_representation;
 pub mod rgb_led;
 pub mod scd30;
-pub mod buzzer;
-pub mod alerts;
 
 #[defmt::timestamp]
 fn timestamp() -> u64 {
