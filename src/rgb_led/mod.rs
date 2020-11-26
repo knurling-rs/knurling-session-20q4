@@ -78,4 +78,11 @@ impl LEDColor {
         self.blue();
         timer.delay_ms(1000_u32);
     }
+
+    pub fn blink_red(&mut self, timer: &mut Timer<TIMER0, OneShot>) {
+        self.red();
+        timer.delay_ms(500_u32);
+        self.off();
+        timer.delay_ms(500_u32);
+    }
 }

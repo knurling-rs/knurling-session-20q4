@@ -64,15 +64,14 @@ fn main() -> ! {
     loop {
         if sensor.data_ready().unwrap() {
             defmt::info!("Data ready.");
+            // green light for 2000ms to indicate data is ready
             led_indicator.green();
             timer.delay_ms(2000_u32);
             led_indicator.off();
             break;
         } else {
-            led_indicator.red();
-            timer.delay_ms(500_u32);
-            led_indicator.off();
-            timer.delay_ms(500_u32);
+            // blinks red as long as data is not ready
+           led_indicator.blink_red(&mut timer);
         }
     }
 
@@ -95,6 +94,9 @@ fn main() -> ! {
             humidity
         );
 
+        // blink onboard LED with 2000ms delay as visual signal, that program is running
+        // delay leads to new measurment every 4 sec. 
+        // length of interval is arbitrary
         timer.delay_ms(2000_u32);
         led_1.set_high().unwrap();
         timer.delay_ms(2000_u32);
