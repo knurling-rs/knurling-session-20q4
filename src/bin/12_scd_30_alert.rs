@@ -37,8 +37,12 @@ fn main() -> ! {
     // buzzer pin
     let buzzer_pin = pins.p0_29.degrade();
     let mut buzzer = buzzer::Buzzer::init(buzzer_pin);
-
+    
+    //simple buzz method, frequency and length is fixed
     buzzer.noise(&mut timer);
+    
+    // buzzes in desired frequency in Hz and desired length in ms
+    buzzer.noise_variable(&mut timer, 440_u32, 500_u32);
 
     // instanciate I2C
     let scl = pins.p0_30.degrade();
