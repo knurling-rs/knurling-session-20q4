@@ -31,7 +31,6 @@ where
     }
 
     pub fn start_continuous_measurement(&mut self, pressure: u16) -> Result<(), Error> {
-        
         // command bytes
         let mut command: [u8; 5] = [0x00, 0x10, 0x00, 0x00, 0x00];
         let argument_bytes = &pressure.to_be_bytes();
@@ -92,4 +91,3 @@ where
         Ok(data)
     }
 }
-

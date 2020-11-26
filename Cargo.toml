@@ -8,8 +8,6 @@ version = "0.1.0"
 [workspace]
 members = ["testsuite"]
 
-
-
 [dependencies]
 defmt = "0.1.0"
 defmt-rtt = "0.1.0"

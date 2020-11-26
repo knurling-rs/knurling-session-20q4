@@ -46,7 +46,6 @@ impl LEDColor {
         self.r.set_high().unwrap();
         self.b.set_high().unwrap();
         self.g.set_low().unwrap();
-
     }
 
     pub fn yellow(&mut self) {
@@ -78,5 +77,12 @@ impl LEDColor {
         timer.delay_ms(1000_u32);
         self.blue();
         timer.delay_ms(1000_u32);
+    }
+
+    pub fn blink_red(&mut self, timer: &mut Timer<TIMER0, OneShot>) {
+        self.red();
+        timer.delay_ms(500_u32);
+        self.off();
+        timer.delay_ms(500_u32);
     }
 }
