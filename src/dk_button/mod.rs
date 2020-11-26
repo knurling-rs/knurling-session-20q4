@@ -3,7 +3,7 @@ use nrf52840_hal::{
     prelude::InputPin,
 };
 
-// Button struct contains the unit variant to keep record of button status
+// Button struct contains the boolean struct field to keep record of button status
 pub struct Button {
     pin: Pin<Input<PullUp>>,
     was_pressed: bool,

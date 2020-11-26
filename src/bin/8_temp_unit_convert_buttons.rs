@@ -35,7 +35,7 @@ impl Unit {
     }
 }
 
-// Button struct contains the unit variant to keep record of button status
+// Button struct contains the boolean struct field to keep record of button status
 pub struct Button {
     pin: Pin<Input<PullUp>>,
     was_pressed: bool,
@@ -100,15 +100,15 @@ fn main() -> ! {
         // Timer counts in microseconds/at 1MHz, we care about milliseconds.
         periodic_timer.start(1000u32);
 
-        // Every 250ms, print the current temperature reading
+        // Every 1000ms, print the current temperature reading
         if (millis % 1000) == 0 {
             defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
             let temperature: f32 = temp.measure().to_num();
             let converted_temp = current_unit.convert_temperature(temperature);
             match current_unit {
-                Unit::Fahrenheit => defmt::info!("{:?} °F", converted_temp),
-                Unit::Kelvin => defmt::info!("{:?} K", converted_temp),
-                Unit::Celsius => defmt::info!("{:?} °C", converted_temp),
+                Unit::Fahrenheit => defmt::info!("{:f32} °F", converted_temp),
+                Unit::Kelvin => defmt::info!("{:f32} K", converted_temp),
+                Unit::Celsius => defmt::info!("{:f32} °C", converted_temp),
             };
         }
 
@@ -125,6 +125,6 @@ fn main() -> ! {
         block!(periodic_timer.wait()).unwrap();
 
         // Increment our millisecond count
-        millis = millis.saturating_add(1);
+        millis = millis.wrapping_add(1);
     }
 }

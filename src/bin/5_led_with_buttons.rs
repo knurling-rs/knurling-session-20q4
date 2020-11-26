@@ -31,7 +31,7 @@ fn main() -> ! {
     let mut led_1 = pins.p0_13.into_push_pull_output(Level::High);
 
     loop {
-        if button_1.is_pressed() == true {
+        if button_1.is_pressed() {
             led_1.set_low().unwrap();
         } else {
             led_1.set_high().unwrap();

@@ -7,6 +7,8 @@ use nrf52840_hal::{
     timer::OneShot,
     Timer,
 };
+
+// This module is written for common anode rgb leds. For common cathode rgb leds, switch high and low.
 pub struct LEDColor {
     r: Pin<Output<PushPull>>,
     g: Pin<Output<PushPull>>,
@@ -71,11 +73,9 @@ impl LEDColor {
     }
     // blinks between two colors
     pub fn blinky(&mut self, timer: &mut Timer<TIMER0, OneShot>) {
-        self.r.set_low().unwrap();
-        self.b.set_high().unwrap();
+        self.red();
         timer.delay_ms(1000_u32);
-        self.r.set_high().unwrap();
-        self.b.set_low().unwrap();
+        self.blue();
         timer.delay_ms(1000_u32);
     }
 }
