@@ -46,6 +46,10 @@ fn main() -> ! {
 
     let pins = twim::Pins { scl, sda };
     let i2c = Twim::new(board.TWIM0, pins, twim::Frequency::K100);
+
+    // set ambient air pressure:
+    let pressure = 1020_u16;
+
     let mut sensor = scd30::SCD30::init(i2c);
 
     let firmware_version = sensor.get_firmware_version().unwrap();
@@ -55,9 +59,9 @@ fn main() -> ! {
         firmware_version[1]
     );
 
-    sensor.start_measuring().unwrap();
+    sensor.start_continuous_measurement(pressure).unwrap();
 
-    'ready: loop {
+    loop {
         if sensor.data_ready().unwrap() {
             defmt::info!("Data ready.");
             led_indicator.green();
@@ -72,8 +76,8 @@ fn main() -> ! {
         }
     }
 
-    'measuring: loop {
-        let result = sensor.get_measurement().unwrap();
+    loop {
+        let result = sensor.read_measurement().unwrap();
 
         let co2 = result.co2;
         let temp = result.temperature;
@@ -81,8 +85,11 @@ fn main() -> ! {
 
         alerts::check_levels(&co2, &mut buzzer, &mut led_indicator, &mut timer);
 
-        defmt::info!(
-            "CO2 {:?} ppm \r\nTemperature {:?} C \r\nHumidity {:?} % \r\n\r\n",
+        defmt::info!("
+            CO2 {:f32} ppm
+            Temperature {:f32} °C
+            Humidity {:f32} %
+          ",
             co2,
             temp,
             humidity

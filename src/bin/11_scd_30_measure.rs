@@ -49,7 +49,7 @@ fn main() -> ! {
         firmware_version[1]
     );
 
-    sensor.start_measuring(pressure).unwrap();
+    sensor.start_continuous_measurement(pressure).unwrap();
 
     loop {
         if sensor.data_ready().unwrap() {
@@ -60,7 +60,7 @@ fn main() -> ! {
 
 
     loop {
-        let result = sensor.get_measurement().unwrap();
+        let result = sensor.read_measurement().unwrap();
 
         let co2 = result.co2;
         let temp = result.temperature;
