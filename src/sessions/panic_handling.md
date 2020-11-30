@@ -134,7 +134,7 @@ By adding our part to the error message, we let a future user know what failed a
 ```rust
 let firmware_version = sensor.get_firmware_version()
     .unwrap_or_else(|error| {
-    panic!("Error getting firmware version: {:?}", error)
+        panic!("Error getting firmware version: {:?}", error)
     });
 ```
 
