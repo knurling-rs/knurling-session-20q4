@@ -198,7 +198,7 @@ When called, the LED will blink 10 times, relatively fast in red.
 let firmware_version = sensor.get_firmware_version()
     .unwrap_or_else(|error| {
     led_indicator.error_blink_red(&mut timer);
-    panic!("Error getting firmware version: {:?}", error)
+        panic!("Error getting firmware version: {:?}", error)
     });
 ```
 
