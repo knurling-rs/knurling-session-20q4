@@ -138,7 +138,7 @@ let firmware_version = sensor.get_firmware_version()
     });
 ```
 
-Instead of calling `unwrap()` we call `unwrap_or_else()`. Where unwrap() panics in case of an error, `unwrap_or_else()` can take a closure as argument, which allows to provide the same additional functionality as handling `Result` with a match statement. 
+Instead of calling `unwrap()` we call `unwrap_or_else()`. Where unwrap() panics in case of an error, `unwrap_or_else()` can take a closure as argument, which allows you to provide the same additional functionality as handling `Result` with a match statement. 
 
 Run your program. 
 
