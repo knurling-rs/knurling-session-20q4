@@ -38,7 +38,7 @@ In the program we call the method and add `unwrap()`.
 let firmware_version_result = sensor.get_firmware_version().unwrap();
 ```
 
-Using unwrap returns the value in case of a success and panics the program in case of an error. Using unwrap is only useful, when the occurrence of an error is not to be expected or if the error is non-recoverable anyways. Even if both of these are true for our case, handling panics manually has some benefits. Let's look at some of them.
+Using `unwrap()` returns the value in case of a success and panics the program in case of an error. This is only useful, when the occurrence of an error is not to be expected or if the error is non-recoverable anyways. Even if both of these are true for our case, handling panics manually has some benefits. Let's look at some of them.
 
 ✅ Run your program. 
 
@@ -140,7 +140,7 @@ let firmware_version = sensor.get_firmware_version()
 
 Instead of calling `unwrap()` we call `unwrap_or_else()`. Where unwrap() panics in case of an error, `unwrap_or_else()` can take a closure as argument, which allows you to provide the same additional functionality as handling `Result` with a match statement. 
 
-Run your program. 
+✅ Run your program. 
 
 Your should see something like this:
 
@@ -178,7 +178,7 @@ Compared to the solution of handling `Result` with `match`, we can see at least 
 
 More elaborate error messages are nice, but we program on an embedded device that is supposed to be able to run without a host machine for logging. Writing your own panic handler allows you to provide "error messages" for this case, as logging messages to a host that is not there is not helpful. 
 
-Go to `scr/rgb_led/mod.rs`. Add the following method:
+✅ Go to `scr/rgb_led/mod.rs`. Add the following method:
 
 ```rust
 pub fn error_blink_red(&mut self, timer: &mut Timer<TIMER0, OneShot>) {
