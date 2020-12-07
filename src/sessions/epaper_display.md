@@ -119,7 +119,7 @@ use embedded_graphics::{
 ```
 The waveshare e-Paper display has a binary color system: Color is either `ON`, or `OFF`. `ON` means black and `OFF` means white. 
 
-[Image of display and drawing with coordinates.]
+<!-- TODO [Image of display and drawing with coordinates.] -->
 
 One way to draw on the display is using primitive shapes. The crate offers circle, triangle, rectangle and line. Each one is defined by significant points and distances, the circle for example is defined by it's center and it's radius. 
 
@@ -153,4 +153,3 @@ Add the following lines to your code.
 ```
 
 Run your code. You should see a symbol constructed of two circles and a triangle.
-
