@@ -67,10 +67,10 @@ Configure the SPIM Pins and create a new instance of the SPIM peripheral.
 
 ```rust
 let spi_pins = spim::Pins {
-        sck: clk,
-        miso: None,
-        mosi: Some(din),
-    };
+    sck: clk,
+    miso: None,
+    mosi: Some(din),
+};
 
 
 let mut spi = Spim::new(board.SPIM3, spi_pins, spim::Frequency::K500, spim::MODE_0, 0);
@@ -147,9 +147,9 @@ Using the `draw()` method is not enough to actually display something on the scr
 Add the following lines to your code.
 
 ```rust
-    epd4in2.update_frame(&mut spi, &display.buffer()).unwrap();
-    epd4in2.display_frame(&mut spi)
-        .expect("display frame new graphics");
+epd4in2.update_frame(&mut spi, &display.buffer()).unwrap();
+epd4in2.display_frame(&mut spi)
+    .expect("display frame new graphics");
 ```
 
 Run your code. You should see a symbol constructed of two circles and a triangle.
