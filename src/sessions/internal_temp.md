@@ -10,7 +10,7 @@ Before we start to work with an external sensor, where we would have to write a 
 
 ✅  Open `/src/temp.rs`, the place where the communication with the boards temperature sensor is implemented. 
 
-The integrated temperature is a struct: `pub struct Temp(TEMP)`. It needs to be public, so it can be called from the outside. `TEMP` is a type definded in the peripheral access crate (pac), it accesses the temperature sensor's register block.  In the `impl` block are all the methods that are defined for `Temp`.
+The integrated temperature is a struct: `pub struct Temp(TEMP)`. It needs to be public, so it can be called from the outside. `TEMP` is a type defined in the peripheral access crate (pac), it accesses the temperature sensor's register block.  In the `impl` block are all the methods that are defined for `Temp`.
 
 Methods are different from functions in that they are attached to objects. Let's look at them in detail:
 
@@ -37,7 +37,7 @@ Now that we have an instance of the temperature sensor, we can take a measuremen
 
 ✅ Go back to [temp.rs](https://github.com/nrf-rs/nrf-hal/blob/v0.11.1/nrf-hal-common/src/temp.rs) in the HAL code. 
 
-`fn measure()` takes a mutable reference to `self` as an argument. `self` is the instance of the temperature sensor that was created with `fn new()`. The method will stop a measurement, if one has already been started, starts a new measurment and block the program until it has completed the measurement and then returns a fixed point number `I30F2`. The second option is starting a measurement with `fn start_measurement()` and reading the measurement with `fn read()` which works in a non-blocking way. A measurement is started or stopped by writing to the register. 
+`fn measure()` takes a mutable reference to `self` as an argument. `self` is the instance of the temperature sensor that was created with `fn new()`. The method will stop a measurement, if one has already been started, starts a new measurement and block the program until it has completed the measurement and then returns a fixed point number `I30F2`. The second option is starting a measurement with `fn start_measurement()` and reading the measurement with `fn read()` which works in a non-blocking way. A measurement is started or stopped by writing to the register. 
 
 We'll stick with the blocking method `fn measure()` for now. 
 

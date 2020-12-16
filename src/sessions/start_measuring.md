@@ -6,7 +6,7 @@ Last week, [defmt v0.1.0 to crates.io][defmt-crates] was released on crates.io. 
 
 # Refactoring of older instructions: 
 
-**Please read the Chapter [Bringing it all together](https://knurling-books.ferrous-systems.com/sessions/bring-together.html) and Chapter [Hello Sensor](https://knurling-books.ferrous-systems.com/sessions/hello_sensor.html) and put your code into modules**
+**Please read the Chapter [Bringing it all together](bring-together.html) and Chapter [Hello Sensor](https://knurling-books.ferrous-systems.com/sessions/hello_sensor.html) and put your code into modules**
 
 
 ----
@@ -45,7 +45,7 @@ For this tutorial we use the current value from Berlin, which is 1020 mbar.
 
 # Start Continuous Measurement
 
-✅ Go to `src/scd30/mod.rs`. In the `impl SCD30` block add a new function that takes `&mut self` as and `preassure: u16 `as arguments and returns a `Result` type with the variants `()` and `Error`.
+✅ Go to `src/scd30/mod.rs`. In the `impl SCD30` block add a new function that takes `&mut self` as and `pressure: u16 `as arguments and returns a `Result` type with the variants `()` and `Error`.
 
 Inside the function, define a mutable array for 5 `u8` bytes, as this is the length of the message we will send. Leave the argument bytes and the crc byte as `0x00`.
 

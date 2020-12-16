@@ -27,7 +27,7 @@ A pin that is configured as pull-up input is set to VCC, as long as it is not ov
 
 ## I2C 
 
-The I2C protocoll has two signal lines, one for data (SDA) and one for the clock signal (SCL). An I2C transaction consists of one or more messages. Each message begins with a start symbol. A message is either *write* or *read*, indicated by the next bit in the row. Following this comes the actual message in form of bytes. The message ends with a stop symbol. 
+The I2C protocol has two signal lines, one for data (SDA) and one for the clock signal (SCL). An I2C transaction consists of one or more messages. Each message begins with a start symbol. A message is either *write* or *read*, indicated by the next bit in the row. Following this comes the actual message in form of bytes. The message ends with a stop symbol. 
 The clock signal rises and falls in a specified frequency. 
 
 Many devices can be connected to the same I2C bus and messages can be send to a particular device by specifying its I2C address.

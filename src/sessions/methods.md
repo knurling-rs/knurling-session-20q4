@@ -66,7 +66,7 @@ fn init(pins: P0Parts) -> LEDState {
 
 + let mut light = LEDState::init(pins);
 ```
-We can now define all sorts of instance methods that control the behaviour of the LED. As an example we will refactor this piece of code that switches the led from red light to blue light with a 1000ms interval:
+We can now define all sorts of instance methods that control the behavior of the LED. As an example we will refactor this piece of code that switches the led from red light to blue light with a 1000ms interval:
 
 ```rust
 loop {
@@ -143,7 +143,7 @@ struct LEDColor {
 
 ✅ Modify the `init` method, so the pins it will take can be any numbered pin, but they can also be in any configuration. The method will, when instantiating the `LEDColor` struct, configure the pins into a push-pull output, with high level.
 
-Note the generic type paramater `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
+Note the generic type parameter `<Mode>`. It needs to be declared right after the function name, so that it can be used in the type declaration of the arguments. `<Mode>` is a place holder for the unknown pin configuration. 
 
 
 ```rust

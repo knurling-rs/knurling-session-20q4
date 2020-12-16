@@ -59,7 +59,7 @@ It has:
 
 With all this information you'll be able to build programs for the target device. 
 
-We've created a Cargo project template called [`app-template`] is based on the [`cortex-m-quickstart`] tempate that lets you start a new project for the ARM Cortex-M architecture which uses all knurling tools out of the box.
+We've created a Cargo project template called [`app-template`] is based on the [`cortex-m-quickstart`] template that lets you start a new project for the ARM Cortex-M architecture which uses all knurling tools out of the box.
 
 🔎 for other architectures, check out other project templates by the [rust-embedded] organization.
 

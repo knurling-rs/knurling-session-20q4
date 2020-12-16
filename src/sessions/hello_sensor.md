@@ -9,7 +9,7 @@ An example of this implementation can be found here: [10_scd_30_log_v.rs](https:
 ![Breadboard Diagram for wiring of SCD30](../img/knurling-scd30-bb.png)
 
 
-# Prequisits
+# Prerequisites
 
 In your program, have access to the following resources: 
 
@@ -77,7 +77,7 @@ loop {
 
 We built the I2C instance, it needs to be connected to the sensor's interface. For this, we need the sensor's address. 
 
-✅ Find the sensor's adress in the [Interface Description][Interface Description] and add it as global variable `DEFAULT_ADDRESS` above `fn main()`. 
+✅ Find the sensor's address in the [Interface Description][Interface Description] and add it as global variable `DEFAULT_ADDRESS` above `fn main()`. 
 
 <details>
     <summary>Answer</summary>

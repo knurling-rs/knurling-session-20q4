@@ -4,7 +4,7 @@ This section focuses on getting the buttons to work, so you can interact with th
 
 An example of this implementation can be found here: [5_led_with_buttons.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/5_led_with_buttons.rs).
 
-The buttons on the board are numbered pins, just like the on-board leds. Their pins are `p0.11`, `p0.12`, `p0.24` and `p0.25`. 
+The buttons on the board are numbered pins, just like the on-board LED's. Their pins are `p0.11`, `p0.12`, `p0.24` and `p0.25`. 
 
 ✅ Bring the `gpio` module with `p0` parts into scope and add a line to `fn main()` that gives you access to the `p0` pins. 
 

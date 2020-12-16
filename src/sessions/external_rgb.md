@@ -9,7 +9,7 @@
 
 ❗️❗️❗️ There are common anode and common cathode RGB LEDs. If you just took one from your stash, compare what the bulb of the LED looks like in relation to where the longest leg is:
 
-![Common anode oder common cathode?](../img/cc_or_ca.png)
+![Common anode or common cathode?](../img/cc_or_ca.png)
 
 The LED in our shopping list is a common anode RGB LED. For now we'll provide instructions for both types.
 
@@ -59,9 +59,9 @@ The breadboard diagram focuses on appearance of the parts and how they are arran
 
 An example of this implementation can be found here: [2_hello_external_led.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/2_hello_external_led.rs).
 
-You can either work on the same file from the hello world example, or work on a copy of it. We asume, that you have access to the p0 pins. In the first example, we configured one pin. That one pin was special in the sense, that it only gives access to one of the onboard LEDs. Now we need three [GPIO](../glossary.html#gpio) pins, one for red, one for blue one for green.
+You can either work on the same file from the hello world example, or work on a copy of it. We assume, that you have access to the p0 pins. In the first example, we configured one pin. That one pin was special in the sense, that it only gives access to one of the onboard LED's. Now we need three [GPIO](../glossary.html#gpio) pins, one for red, one for blue one for green.
 
-✅ Configute three gpio pins, P0.03, P0.04 and P0.28 into [push-pull-output](../glossary.html#push-pull-output) pins, the initial level is High for common anode, and Low for common cathode. 
+✅ Configure three gpio pins, P0.03, P0.04 and P0.28 into [push-pull-output](../glossary.html#push-pull-output) pins, the initial level is High for common anode, and Low for common cathode.
 
 ✅ Add a 1000ms delay. 
 

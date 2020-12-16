@@ -8,7 +8,7 @@ An example of this implementation can be found here: [8_temp_unit_convert_button
 
 ✅  Start with the file from the last chapter. 
 
-✅  Bring the following ressources into scope:
+✅  Bring the following resources into scope:
 
 ```rust 
 use nrf52840_hal::{
@@ -133,7 +133,7 @@ While the program kind of does what we want, the user experience is quite horrib
 
 An example of this implementation to this point can be found here: [7_temp_convert_button_noisy.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/7_temp_convert_button_noisy.rs).
 
-A first step is to define the behaviour we want to see a bit more detailed. Let's look at three components.
+A first step is to define the behavior we want to see a bit more detailed. Let's look at three components.
 
 ## State of the button out of human perspective
 A button can be in four states:
@@ -156,7 +156,7 @@ To define these states a bit more binary, we can look at these states by asking 
 
 While the human perspective seems pretty straight forward, determining what the button states mean in hardware is a bit more complicated. In theory pushing a button causes a signal change, but this change is often not so clean and rather noisy, especially when the button gets older. Compensating for this behavior is called *debouncing* a button. In software, this can be done by having a state machine that keeps track of the 4 states of the button, and by defining that a pushed button counts as a pushed button if it is pushed for a certain amount of time and not because of a sudden signal spike, because a conductive dust spec got in the way. 
 
-## Persistance of system change
+## Persistence of system change
 
 We implement buttons, because we want people to be able to interact with a system and change the systems behavior by pushing a button. This change can either be only there while the button is pressed and ended by it's release, or started by pressing a button and persisting despite the button is released.
 
@@ -164,7 +164,7 @@ We implement buttons, because we want people to be able to interact with a syste
 
 We want to change the unit in which the temperature is displayed by pressing a button. The change should persist once the button is released. We use one of the button's transition from "being pressed" to "not being pressed" as the triggering event for the unit conversion. To detect the button's transitions, the program keeps track of the past state of the button. The temperature should be displayed every 1000ms.
 
-## Improve Button behaviour
+## Improve Button behavior
 
 ✅  Add another field to the button struct, that keeps track of the button's past state with a `bool`. The initial state is `false`.
 
@@ -222,18 +222,18 @@ No matter how long you push the button, the unit only changes once. If you don't
 
 In order to detect all human button interactions and register the button's state, the button state needs to be read quite often. To filter out noise from the hardware, reading the button about every 5 ms is enough. We're looking to detect a rising edge, that is long enough to be intentional. Reacting on the rising edge of the button release, after a falling edge of a button press gives even more assurance, that the signal is intentional. 
 
-On a high level the implementation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed miliseconds is updated. If the number of passed milliseconds is divisible by 5 and a rising edge is detected, the unit is changed. Every time the number of passed milliseconds is divisible by 1000 (one second) the temperature is logged. 
+On a high level the implementation looks like this: A timer counts up until 1000 microseconds. Every time 1000 µs have passed, a counter that keeps track of passed milliseconds is updated. If the number of passed milliseconds is divisible by 5 and a rising edge is detected, the unit is changed. Every time the number of passed milliseconds is divisible by 1000 (one second) the temperature is logged. 
 
 Here, it is relevant, which type of unsigned integer the counter has. If the maximum value of the type is reached, we have a problem. For reference: A counter with u32 would run out after 49.7 days, a counter with u64 would run out after 267844497 years.
 
-✅  After timer instance, add variable that will keep track of passed miliseconds. 
+✅  After timer instance, add variable that will keep track of passed milliseconds. 
 
 ```rust
 let mut periodic_timer= Timer::periodic(board.TIMER0);
 let mut millis: u64 = 0;
 ```
 
-✅  Inside the loop, start the timer with a maximum value of 1000 µs. Implement the controll flow for updating the button and logging the temperature. Then add a line, where after each iteration of the loop 1 is added to the counter for passed microseconds. 
+✅  Inside the loop, start the timer with a maximum value of 1000 µs. Implement the control flow for updating the button and logging the temperature. Then add a line, where after each iteration of the loop 1 is added to the counter for passed microseconds. 
 
 ```rust
 loop {

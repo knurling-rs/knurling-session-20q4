@@ -18,9 +18,9 @@ Define a spectrum spanning 2 Degrees (°C) that you feel most comfortable at. Te
 
 You have written a lot of code in one file. This makes everything overwhelming and hard to reuse code. Let's refactor by putting code we're likely to reuse in modules.
 
-✅ Inside `scr/` create a new folder with the name `dk_button`.
+✅ Inside `src/` create a new folder with the name `dk_button`.
 
-✅ Inside `dk_button' create a file with the name `mod.rs`.
+✅ Inside `dk_button` create a file with the name `mod.rs`.
 
 ✅ Move the `struct Button` definition and its `impl` block from `src/bin/thermometer` to `dk_button/mod.rs`.
 
