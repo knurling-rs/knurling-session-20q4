@@ -1,6 +1,6 @@
 # Hello, e-Paper Display!
 
-Before adding the e-Paper display to the sensor project, we'll try it out on it's own. Start with a new file based on `hello_extended.rs`.
+Before adding the e-Paper display to the sensor project, we'll try it out on its own. Start with a new file based on `hello_extended.rs`.
 
 # Wiring
 
