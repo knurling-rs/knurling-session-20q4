@@ -125,7 +125,7 @@ pub fn draw_numbers (value: f32, unit: &str, position: (i32, i32), mut display: 
 }
 ```
 
-`pub fn draw_numbers` takes the value of the figure, it's unit, the top_left coordinate of the position where the figure is to be displayed and `display` as arguments. The display is returned.
+`pub fn draw_numbers` takes the value of the figure, its unit, the `top_left` coordinate of the position where the figure is to be displayed and `display` as arguments. The display is returned.
 
 The next step is to create a fixed size `ArrayString` as write buffer `buf`. Use the `write!` macro to write a format string that contains the value up to 2 decimal places and the unit into the write buffer `buf`. 
 
