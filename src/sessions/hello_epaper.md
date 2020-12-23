@@ -122,7 +122,7 @@ use embedded_graphics::{
 
 One way to draw on the display is using primitive shapes. The crate offers circle, triangle, rectangle and line. Each one is defined by significant points and distances, the circle for example is defined by it's center and it's radius.
 
-Each shape can be filled solid or just be depicted by a stroke around it's edges. Each time content for the display is defined, it needs to be added to the display buffer, this is done with the `draw` method.
+Each shape can be filled solid or just be depicted by a stroke around its edges. Each time content for the display is defined, it needs to be added to the display buffer, this is done with the `draw` method.
 
 ✅ Add the following definitions of shapes, two circles and a triangle, to your program.
 
