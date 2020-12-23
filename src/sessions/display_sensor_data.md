@@ -10,7 +10,7 @@ In this section, we're going to display the sensor data on the ePaper display. T
 
 ✅ Connect all other cables to their respective pins on the the development board.
 
-✅ The ePaper Display needs it's own power source to get enough current. Connect it to the other `VDD` and `GND`. 
+✅ The ePaper Display needs its own power source to get enough current. Connect it to the other `VDD` and `GND`. 
 
 ![Wiring of breadboard and ePaper display to different VDD/GND](../img/knurling-bb-and-display.png)
 
