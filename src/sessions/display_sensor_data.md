@@ -87,7 +87,7 @@ let display = Display4in2::default();
 let display = display::draw_text(display);
 ```
 
-✅ In order for the display to actually show what has been written to it's buffer, add the following lines to update and display the frame.
+✅ In order for the display to actually show what has been written to its buffer, add the following lines to update and display the frame.
 
 ```rust
 epd4in2.update_frame(&mut spi, &display.buffer()).unwrap();
