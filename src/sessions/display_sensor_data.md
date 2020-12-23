@@ -192,6 +192,6 @@ timer.delay_ms(30000_u32);
 led_1.set_low().unwrap();
 ```
 
-✅ Run your program. You should see the same output, but screen is only updated every minute. 
+✅ Run your program. You should see the same output, but the screen is only updated every minute. 
 
 The display still flashes when it is updated, this and other more aesthetic issues will be addressed in the last update of this project, delivered in January. 
