@@ -20,6 +20,8 @@
             - [Red Alert!](./sessions/alert.md)
             - [Panic!](./sessions/panic_handling.md)
         - [Block 3: ePaper display](./sessions/epaper_display.md)
+            - [Hello, e-Paper Display](./sessions/hello_epaper.md)
+            - [Display Sensor Data](./sessions/display_sensor_data.md)
 - [Reference Material](./reference.md)
     - [Project Setup - General Guides](./project_setup.md)
         - [defmt setup](./defmt_setup.md)
