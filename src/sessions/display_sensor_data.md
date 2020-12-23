@@ -45,7 +45,7 @@ use embedded_graphics::{
 };
 ```
 
-The first step is to write the text remains static, such as the title and the name of the figure displayed. The function takes `Display4in2` the display type as mutable argument, and returns it. 
+The first step is to write the text that remains static, such as the title and the name of the figure displayed. The function takes `Display4in2` the display type as mutable argument, and returns it. 
 
 Basic text with built-in fonts are added in a similar way as basic shapes. A String and the top left coordinate of where the text starts are needed. In our case we have the choice between 6 sizes of a simple bitmap font and color on or off for style. The font for the title is bigger then the font for the rest of the text.
 
