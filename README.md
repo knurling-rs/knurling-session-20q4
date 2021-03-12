@@ -7,7 +7,7 @@ This course will cover building a CO2 measuring device. We will show how to star
 
 ## Read it
 You can access a rendered version at
-> [**session20q4.knurling.ferrous-systems.com**](https://session20q4.knurling.ferrous-systems.com)
+> [**session20q4.ferrous-systems.com**](https://session20q4.ferrous-systems.com)
 
 To build from source just run *(assuming you have `mdbook` [installed])*:
 ``` console
