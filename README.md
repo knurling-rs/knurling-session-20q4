@@ -1,6 +1,6 @@
 # Knurling Session 2020 Q4
 
-This repo contains the source for the first knurling session.
+This repo contains the source for the first knurling session as well as the example code.
 
 ## About
 This course will cover building a CO2 measuring device. We will show how to start an embedded program from scratch, how to write a driver for the sensor, and how to read the sensor output in a terminal. We will build a visual indicator for air quality and an acoustic alarm. In the last part, we will add an ePaper display to the setup and talk bit about the embedded-graphics crate.
@@ -13,6 +13,9 @@ To build from source just run *(assuming you have `mdbook` [installed])*:
 ``` console
 $ mdbook serve
 ```
+
+## Example code
+Example code can be found in [`code/`](./code/).
 
 ## Contributing
 Please open an issue if you get stuck or find anything to improve this book!
