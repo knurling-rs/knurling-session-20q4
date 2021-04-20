@@ -6,7 +6,3 @@ curl -L https://github.com/rust-lang/mdBook/releases/download/v0.4.7/mdbook-v0.4
 
 # publish directory
 publish = "book/"
-
-
-[[headers]]
-for = "/*"
