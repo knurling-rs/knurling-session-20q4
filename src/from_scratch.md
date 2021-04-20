@@ -67,7 +67,7 @@ We've created a Cargo project template called [`app-template`] is based on the [
 [`cortex-m-quickstart`]: https://github.com/rust-embedded/cortex-m-quickstart
 [rust-embedded]: https://github.com/rust-embedded/
 
-❗️ Make sure you've installed `probe-run` and `cargo-generate` as advised in the [installation instructions](./installation.md).
+❗️ Make sure you've installed `probe-run` and `cargo-generate` as advised in the [installation instructions](./sessions/installation.md).
 
 The recommended way to use the `app-template` to set up your own project is through the [`cargo-generate`] tool.
 
