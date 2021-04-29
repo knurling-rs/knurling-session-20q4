@@ -2,7 +2,7 @@
 
 In this section, you will write your own methods. 
 
-An example of this implementation can be found here: [4_external_led_methods.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/4_external_led_methods.rs).
+An example of this implementation can be found here: [4_external_led_methods.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/4_external_led_methods.rs).
 
 We assume you used a common anode RGB LED. If you use a common cathode RGB LED, the settings `high` and `low` are the other way round. 
 

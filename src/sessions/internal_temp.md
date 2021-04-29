@@ -1,6 +1,6 @@
 # Internal Temperature Sensor
 
-An example of this implementation can be found here: [3_temperature.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/3_temperature.rs).
+An example of this implementation can be found here: [3_temperature.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/3_temperature.rs).
 
 ✅ Preparations: have the board and the timer peripheral initialized in your code.
 

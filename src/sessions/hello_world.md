@@ -2,7 +2,7 @@
 
 This is a step by step guide expand the `hello.rs` example in the [`knurling app template`](https://github.com/knurling-rs/app-template) from just logging `hello world` to blinking an onboard LED on the nrf52840-DK. 
 
-An example of this implementation can be found here: [1_hello_extended.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/1_hello_extended.rs).
+An example of this implementation can be found here: [1_hello_extended.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/1_hello_extended.rs).
 
 ## Project Setup
 

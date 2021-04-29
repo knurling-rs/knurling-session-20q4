@@ -13,7 +13,7 @@ Last week, [defmt v0.1.0 to crates.io][defmt-crates] was released on crates.io. 
 
 After making sure, the communication is set up correctly by reading and logging the version number of the firmware, we'll start making measurements. 
 
-An example of this implementation can be found here: [11_scd_30_measure.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/11_scd_30_measure.rs).
+An example of this implementation can be found here: [11_scd_30_measure.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/11_scd_30_measure.rs).
 
 ✅ Go to section 1.4.1 of the [Interface Description]. 
 

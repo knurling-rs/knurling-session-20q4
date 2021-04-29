@@ -9,7 +9,7 @@ You have learned the following:
 
 Build a program that indicates temperatures around your personal comfort temperature with different light colors. 
 
-An example of this implementation can be found here: [9_comfy_temp_indicator.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/9_comfy_temp_indicator.rs).
+An example of this implementation can be found here: [9_comfy_temp_indicator.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/9_comfy_temp_indicator.rs).
 
 What is the temperature where you feel most comfortable?
 Define a spectrum spanning 2 Degrees (°C) that you feel most comfortable at. Temperatures up to two degrees above and below that interval are acceptable, temperatures outside this range of six degrees are too hot or too cold. Assign a signal color for each zone. Feel free to adapt the ranges. 
