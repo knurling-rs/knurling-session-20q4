@@ -4,7 +4,7 @@
 
 The user experience is pretty straight forward: the program does one thing while the button is pressed, and another thing when the button is not pressed. This gets more complicated when pressing a button should only trigger a one-time event like switching the way temperature is displayed. 
 
-An example of this implementation can be found here: [8_temp_unit_convert_buttons.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/8_temp_unit_convert_buttons.rs).
+An example of this implementation can be found here: [8_temp_unit_convert_buttons.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/8_temp_unit_convert_buttons.rs).
 
 ✅  Start with the file from the last chapter. 
 
@@ -131,7 +131,7 @@ loop {
 
 While the program kind of does what we want, the user experience is quite horrible. Let's improve that. 
 
-An example of this implementation to this point can be found here: [7_temp_convert_button_noisy.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/7_temp_convert_button_noisy.rs).
+An example of this implementation to this point can be found here: [7_temp_convert_button_noisy.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/7_temp_convert_button_noisy.rs).
 
 A first step is to define the behavior we want to see a bit more detailed. Let's look at three components.
 

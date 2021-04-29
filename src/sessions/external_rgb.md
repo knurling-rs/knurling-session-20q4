@@ -57,7 +57,7 @@ The breadboard diagram focuses on appearance of the parts and how they are arran
 
 ## Code
 
-An example of this implementation can be found here: [2_hello_external_led.rs](https://github.com/knurling-rs/knurling-sessions-20q4/blob/main/src/bin/2_hello_external_led.rs).
+An example of this implementation can be found here: [2_hello_external_led.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/2_hello_external_led.rs).
 
 You can either work on the same file from the hello world example, or work on a copy of it. We assume, that you have access to the p0 pins. In the first example, we configured one pin. That one pin was special in the sense, that it only gives access to one of the onboard LED's. Now we need three [GPIO](../glossary.html#gpio) pins, one for red, one for blue one for green.
 
