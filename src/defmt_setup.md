@@ -69,6 +69,11 @@ For the nRF52840 chip you'll want to use the `thumbv7em-none-eabihf` target.
 +target = "thumbv7em-none-eabihf" # Cortex-M4F (with FPU)
 ~~~
 
+If you haven't done so already, install the `rust-std` component for the target above:
+~~~ console
+$ rustup target add thumbv7em-none-eabihf
+~~~
+
 4. Add a HAL as a dependency.
 
 For the nRF52840 you'll want to use the [`nrf52840-hal`].
