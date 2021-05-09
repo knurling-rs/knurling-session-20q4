@@ -27,7 +27,7 @@ let button_1 = Button::new(pins.p0_11.degrade());
 ```
 In order to have an effect, we first need to know the status of the button. Is the button pushed or not? Next, we have to connect an event with the button state. 
 
-✅ Inside the `impl Button` block, implement two instance methods, one that returns true, if the button is pressed:
+✅ Inside the `impl Button` block, implement an instance method that returns true if the button is pressed:
 
 ```rust
 pub fn is_pressed(&self) -> bool {
