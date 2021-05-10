@@ -101,9 +101,9 @@ loop {
     let converted_temp = current_unit.convert_temperature(temperature);
 
     match current_unit {
-        Unit::Fahrenheit => defmt::info!("{:f32} °F", converted_temp),
-        Unit::Kelvin => defmt::info!("{:f32} K", converted_temp),
-        Unit::Celsius => defmt::info!("{:f32} °C", converted_temp),
+        Unit::Fahrenheit => defmt::info!("=f32} °F", converted_temp),
+        Unit::Kelvin => defmt::info!("{=f32} K", converted_temp),
+        Unit::Celsius => defmt::info!("{=f32} °C", converted_temp),
     };
     if button_1.is_pressed() {
         // ...
@@ -240,7 +240,7 @@ loop {
     periodic_timer.start(1000u32);
 
     if (millis % 1000) == 0 {
-        defmt::info!("Tick (milliseconds): {:u64}", millis);
+        defmt::info!("Tick (milliseconds): {=u64}", millis);
         // measure temperature
         // display temperature
     };

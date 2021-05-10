@@ -51,7 +51,7 @@ If you use a different board, check the crate's docs on how to get access to all
 let mut timer = Timer::new(board.TIMER0);
 ```
 
-5. If we want to use the onboard LEDs, we need to find out how to access them. Check the datasheet of your board to find out which GPIO pins they are connected to. For the nrf52840-DK you'll find the information [here](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fug_nrf52840_dk%2FUG%2Fnrf52840_DK%2Fhw_buttons_leds.html).
+5. If we want to use the onboard LEDs, we need to find out how to access them. Check the datasheet of your board to find out which GPIO pins they are connected to. For the nrf52840-DK you'll find the information [here](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fug_nrf52840_dk%2FUG%2Fdk%2Fhw_buttons_leds.html).
 
 The onboard LEDs are part of the P0 Pins. LED1 is p0.13. To gain access this group of pins add this line:
 
