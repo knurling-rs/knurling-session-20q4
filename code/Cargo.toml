@@ -5,9 +5,6 @@ name = "knurling-session-20q4"
 edition = "2018"
 version = "0.1.0"
 
-[workspace]
-members = ["testsuite"]
-
 [dependencies]
 defmt = "0.1.0"
 defmt-rtt = "0.1.0"
