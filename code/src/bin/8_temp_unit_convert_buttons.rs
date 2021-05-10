@@ -102,15 +102,14 @@ fn main() -> ! {
 
         // Every 1000ms, print the current temperature reading
         if (millis % 1000) == 0 {
-            // TODO: Once the defmt crate is updated, update type syntax for the `info!` macro here
-            // and in the `match` below. For example: defmt::info!("Tick (milliseconds): {=u32}", millis as u32);
-            defmt::info!("Tick (milliseconds): {:?}", millis as u32);
+            defmt::info!("Tick (milliseconds): {=u32}", millis as u32);
+
             let temperature: f32 = temp.measure().to_num();
             let converted_temp = current_unit.convert_temperature(temperature);
             match current_unit {
-                Unit::Fahrenheit => defmt::info!("{:?} °F", converted_temp),
-                Unit::Kelvin => defmt::info!("{:?} K", converted_temp),
-                Unit::Celsius => defmt::info!("{:?} °C", converted_temp),
+                Unit::Fahrenheit => defmt::info!("{=f32} °F", converted_temp),
+                Unit::Kelvin => defmt::info!("{=f32} K", converted_temp),
+                Unit::Celsius => defmt::info!("{=f32} °C", converted_temp),
             };
         }
 

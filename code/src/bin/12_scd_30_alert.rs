@@ -37,16 +37,16 @@ fn main() -> ! {
     // buzzer pin
     let buzzer_pin = pins.p0_29.degrade();
     let mut buzzer = buzzer::Buzzer::init(buzzer_pin);
-    
+
     //simple buzz method, frequency and length is fixed
     buzzer.noise(&mut timer);
-    
+
     // buzzes in desired frequency in Hz and desired length in ms
     buzzer.noise_variable(&mut timer, 440_u32, 500_u32);
 
     // instanciate I2C
-    let scl = pins.p0_30.degrade();
-    let sda = pins.p0_31.degrade();
+    let scl = pins.p0_30.into_floating_input().degrade();
+    let sda = pins.p0_31.into_floating_input().degrade();
 
     let pins = twim::Pins { scl, sda };
     let i2c = Twim::new(board.TWIM0, pins, twim::Frequency::K100);
@@ -58,7 +58,7 @@ fn main() -> ! {
 
     let firmware_version = sensor.get_firmware_version().unwrap();
     defmt::info!(
-        "Firmware Version: {:u8}.{:u8}",
+        "Firmware Version: {=u8}.{=u8}",
         firmware_version[0],
         firmware_version[1]
     );
@@ -75,7 +75,7 @@ fn main() -> ! {
             break;
         } else {
             // blinks red as long as data is not ready
-           led_indicator.blink_red(&mut timer);
+            led_indicator.blink_red(&mut timer);
         }
     }
 
@@ -88,18 +88,19 @@ fn main() -> ! {
 
         alerts::check_levels(&co2, &mut buzzer, &mut led_indicator, &mut timer);
 
-        defmt::info!("
-            CO2 {:f32} ppm
-            Temperature {:f32} °C
-            Humidity {:f32} %
-          ",
+        defmt::info!(
+            "
+            CO2 {=f32} ppm
+            Temperature {=f32} °C
+            Humidity {=f32} %
+            ",
             co2,
             temp,
             humidity
         );
 
         // blink onboard LED with 2000ms delay as visual signal, that program is running
-        // delay leads to new measurment every 4 sec. 
+        // delay leads to new measurment every 4 sec.
         // length of interval is arbitrary
         timer.delay_ms(2000_u32);
         led_1.set_high().unwrap();
