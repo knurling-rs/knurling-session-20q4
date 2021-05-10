@@ -11,12 +11,7 @@ use knurling_session_20q4::{
 use nb::block;
 
 // access to board peripherals:
-use nrf52840_hal::{
-    self as hal,
-    gpio::{p0::Parts as P0Parts},
-    prelude::*,
-    Temp, Timer,
-};
+use nrf52840_hal::{self as hal, gpio::p0::Parts as P0Parts, prelude::*, Temp, Timer};
 
 use core::ops::Range;
 
@@ -65,7 +60,7 @@ fn main() -> ! {
         // print the current temperature reading
 
         if (millis % 1000) == 0 {
-            defmt::info!("Tick (milliseconds): {:u32}", millis as u32);
+            defmt::info!("Tick (milliseconds): {=u32}", millis as u32);
 
             let temperature: f32 = temp.measure().to_num();
 
@@ -83,9 +78,9 @@ fn main() -> ! {
 
             let converted_temp = current_unit.convert_temperature(&temperature);
             match current_unit {
-                Unit::Fahrenheit => defmt::info!("{:f32} °F", converted_temp),
-                Unit::Kelvin => defmt::info!("{:f32} K", converted_temp),
-                Unit::Celsius => defmt::info!("{:f32} °C", converted_temp),
+                Unit::Fahrenheit => defmt::info!("{=f32} °F", converted_temp),
+                Unit::Kelvin => defmt::info!("{=f32} K", converted_temp),
+                Unit::Celsius => defmt::info!("{=f32} °C", converted_temp),
             };
         };
 

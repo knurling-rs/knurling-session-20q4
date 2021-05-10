@@ -24,8 +24,8 @@ fn main() -> ! {
     let mut led_1 = pins.p0_13.into_push_pull_output(Level::Low);
 
     // instanciate I2C
-    let scl = pins.p0_30.degrade();
-    let sda = pins.p0_31.degrade();
+    let scl = pins.p0_30.into_floating_input().degrade();
+    let sda = pins.p0_31.into_floating_input().degrade();
 
     let pins = twim::Pins { scl, sda };
     let i2c = Twim::new(board.TWIM0, pins, twim::Frequency::K100);
@@ -33,7 +33,7 @@ fn main() -> ! {
 
     let firmware_version = sensor.get_firmware_version().unwrap();
     defmt::info!(
-        "Firmware Version: {:u8}.{:u8}",
+        "Firmware Version: {=u8}.{=u8}",
         firmware_version[0],
         firmware_version[1]
     );

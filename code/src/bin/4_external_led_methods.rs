@@ -23,7 +23,6 @@ pub struct LEDColor {
 }
 
 impl LEDColor {
-
     // static methods:
     // they don't need to be called by an instance.
     // they are used as constructors.
@@ -36,7 +35,7 @@ impl LEDColor {
             g: led_green.into_push_pull_output(Level::High),
         }
     }
-        
+
     // instance methods:
     // they are called by an instance.
     // they have a reference `self` as an argument.
@@ -63,7 +62,6 @@ impl LEDColor {
         self.r.set_high().unwrap();
         self.b.set_high().unwrap();
         self.g.set_low().unwrap();
-
     }
 
     pub fn yellow(&mut self) {
