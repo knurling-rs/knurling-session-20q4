@@ -66,7 +66,7 @@ impl Unit {
             Unit::Celsius => {
                 // return temperature as it is
             },
-        };
+        }
     }
 }
 ```
