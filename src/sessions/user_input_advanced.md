@@ -101,7 +101,7 @@ loop {
     let converted_temp = current_unit.convert_temperature(temperature);
 
     match current_unit {
-        Unit::Fahrenheit => defmt::info!("=f32} °F", converted_temp),
+        Unit::Fahrenheit => defmt::info!("{=f32} °F", converted_temp),
         Unit::Kelvin => defmt::info!("{=f32} K", converted_temp),
         Unit::Celsius => defmt::info!("{=f32} °C", converted_temp),
     };
