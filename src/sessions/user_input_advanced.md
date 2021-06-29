@@ -177,10 +177,11 @@ struct Button {
 }
 ```
 ✅  Add a method to the `impl Button` block that detects a rising edge in the signal by
-    * reading the current state of the button
-    * comparing the current state with the past state, which is saved in the button struct. 
-    * returns `true`, if button was pressed, but currently is not pressed. 
-    * updating the past state of the button. 
+
+* reading the current state of the button
+* comparing the current state with the past state, which is saved in the button struct. 
+* returns `true`, if button was pressed, but currently is not pressed. 
+* updating the past state of the button. 
 
 ```rust
 fn check_rising_edge(&mut self) -> bool {
@@ -199,7 +200,7 @@ fn check_rising_edge(&mut self) -> bool {
 }
 ```
 
-✅  Go to `fn main()`. Declare the button's pin as mutable. Substitute the `is_presses` method with `check_rising_edge()`.
+✅  Go to `fn main()`. Declare the button's pin as mutable. Substitute the `is_pressed` method with `check_rising_edge()`.
 
 ```rust
 let mut button_1 = Button::new(pins.p0_11.degrade()); 
