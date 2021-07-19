@@ -1,6 +1,6 @@
 # Hello, e-Paper Display!
 
-Before adding the e-Paper display to the sensor project, we'll try it out on its own. Start with a new file based on `hello_extended.rs`.
+Before adding the e-Paper display to the sensor project, we'll try it out on its own. Start with a new file based on [1_hello_extended.rs](https://github.com/knurling-rs/knurling-session-20q4/blob/main/code/src/bin/1_hello_extended.rs).
 
 # Wiring
 
