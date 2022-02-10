@@ -11,25 +11,48 @@ The DK needs to be connected to your PC with *1* micro-USB cables (make sure the
 You'll need a few more peripherals and parts - all in all:
 
 ### Bill of Materials
-- 1x [8X8 TRELLIS FEATHER M4 ENCLOSURE](https://www.digikey.de/product-detail/de/4372/1528-4372-ND/10481841/?itemSeq=346174008)
-- 4x [ADAFRUIT NEOTRELLIS RGB DRIVER](https://www.digikey.de/product-detail/de/3954/1528-2712-ND/9658070/?itemSeq=346174247)
-- 4x [SILICONE ELSTMR 4X4 BTN KEYPAD](https://www.digikey.de/product-detail/de/1611/1528-1559-ND/5823361/?itemSeq=346174310)
-- 1x [Stemma cable](https://www.digikey.de/products/en?keywords=1528-2751-ND)
-- 1x [nrf52840-DK](https://www.digikey.de/product-detail/de/nordic-semiconductor-asa/NRF52840-DK/1490-1072-ND/8593726)
+#### Block 1: Getting started with embedded Rust
 
-### Tools
-- soldering iron
-- solder
-- flux
-- some copper wire
-- pliers
-- tweezers
-- screwdriver
+![nrf52840-dk](../images/nrf52840-dk.png)
 
+* 1x nrf52840-DK (or other nrf52XXX boards)
+    * [Digikey](https://www.digikey.com/short/zf03q4)
+* 1x RGB-LED (or single colored LED(s) and/or on-board LEDs)
+    * [Digikey](https://www.digikey.com/short/zf03mq)
+* 3x 220 Ohm Resistors
+    * [Digikey](https://www.digikey.com/short/zf0398)
+* 1x Potentiometer
+    * [Digikey](https://www.digikey.com/short/zf0355)
+* 1x Breadboard
+    * [Digikey](https://www.digikey.com/short/zf03rh)
+* 1x Jumper wires (40 wires) - Pin to Pin
+    * [Digikey](https://www.digikey.com/short/zf03fw)
+* 1x Jumper wires (40 wires) - Pin to Receptacle
+    * [Digikey](https://www.digikey.com/short/zf0328)
+* 1x Jumper wires (40 wires) - Receptacle to Receptacle
+    * [Digikey](https://www.digikey.com/short/zf032z)
 
-## Required Software
-Make sure to [install the required software](./installation.md) so you can start coding!
+#### Block 2: Adding the CO2 Sensor
 
+![scd30](../images/scd30.png)
+
+**Note**: Soldering is required for this step to connect the headers of the Sensirion gas sensor. Alternatively, you may be able to use "Hook Probes", such as the ones offered by [Adafruit](https://www.adafruit.com/product/238), instead of soldering. These are also often available in bulk from websites such as Aliexpress.
+
+* 1x Sensirion SCD30 CO2 Sensor (or other air quality sensor)
+    * [Digikey](https://www.digikey.com/short/zf0q30)
+* 1x Pin Headers (40 piece)
+    * [Digikey](https://www.digikey.com/short/zf0qjc)
+* 1x Piezo buzzer
+    * [Digikey](https://www.digikey.com/short/zf0q5p)
+
+#### Block 3: Embedded Graphics
+
+![waveshare display](../images/waveshare_4_2.jpg)
+
+**Note**: Soldering is required for this step to connect the headers of the Waveshare display. Alternatively, you may be able to use "Hook Probes", such as the ones offered by [Adafruit](https://www.adafruit.com/product/238), instead of soldering. These are also often available in bulk from websites such as Aliexpress.
+
+* 1x Waveshare 4.2 inch b&w ePaper Display
+    * [Waveshare](https://www.waveshare.com/product/displays/e-paper/epaper-2/4.2inch-e-paper-module.htm)
 
 
 
